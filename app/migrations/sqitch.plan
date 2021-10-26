@@ -1,0 +1,7 @@
+%syntax-version=1.0.0
+%project=compostons
+
+init 2021-10-26T15:48:21Z Etudiant O'clock <student@teleporter> # create tables
+deploy 2021-10-26T15:49:26Z Etudiant O'clock <student@teleporter> # create tables
+data 2021-10-26T17:02:33Z Etudiant O'clock <student@teleporter> # add data
+catdata 2021-10-26T17:59:52Z Etudiant O'clock <student@teleporter> # add data for category
