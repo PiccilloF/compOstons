@@ -1,0 +1,6 @@
+
+// Dimension de la carte version mobile
+.leaflet-container {
+  width: 350px;
+  height: 500px;
+}
