@@ -26,26 +26,33 @@ const Map = () => {
     });
     // @ts-ignore
     const searchControl = new GeoSearchControl({
+      style: 'bar',
       provider: provider,
+      notFoundMessage: 'Désolé, l\'adresse saisie ne peut être trouvé',
+      searchLabel: 'Trouver un point de compost près de chez vous',
+      // showPopup: true,
+      // autoClose: true,
+      resultFormat: ({ result }) => (
+        result.label
+      ),
     });
-
+    console.log(searchControl);
     const map = useMap();
     useEffect(() => {
       map.addControl(searchControl);
       return () => map.removeControl(searchControl);
     }, []);
-
     return null;
   };
   return (
     <div className="app">
-      <MapContainer center={[51.505, -0.09]} zoom={17}>
+      <MapContainer center={[46.227638, 2.213749]} zoom={10}>
         <SearchField apiKey={apiKey} />
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        {/* <Marker position={[51.505, -0.09]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
@@ -69,7 +76,7 @@ const Map = () => {
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
-        </Marker>
+        </Marker> */}
       </MapContainer>
     </div>
   );
