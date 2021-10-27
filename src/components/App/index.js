@@ -1,4 +1,4 @@
-//Import des composants
+// Import des composants
 import Searchfield from 'src/components/Searchfield';
 // == Import
 import './styles.css';
@@ -6,7 +6,7 @@ import './styles.css';
 // == Composant
 const App = () => (
   <div className="app">
-    <Searchfield />
+    <Searchfield onFormSubmit={[]} />
   </div>
 );
 
