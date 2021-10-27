@@ -1,0 +1,11 @@
+# init environementals variables
+export SQITCH_USERNAME=sreviyxbtbsmff
+export SQITCH_PASSWORD=d4fddc23196af3d40b83eb81380c358f3c240c5f29452c3b5bbe5c77de1a651b
+
+
+# verify
+sqitch verify -t heroku-compostons
+
+
+unset SQITCH_USERNAME
+unset SQITCH_PASSWORD
