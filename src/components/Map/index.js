@@ -1,5 +1,5 @@
 // == Import
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import des composants react leaflet
 import {
   MapContainer,
@@ -17,6 +17,15 @@ import './styles.css';
 // le marker devra etre generé avec un .map en fonction de l'objet retourné par la bdd
 //
 const Map = () => {
+  // mes hook pour recuperer les coordonnées du résultat choisi par l'utilisateur
+  const [longitude, setLongitude] = useState();
+  const [latitude, setLatitude] = useState();
+
+  useEffect(() => {
+    console.log(`x :  ${longitude}`);
+    console.log(`y :  ${latitude}`);
+  }, [longitude, latitude]);
+
   const apiKey = 'pk.eyJ1IjoiZmFvc3RvcGF0YXRhIiwiYSI6ImNrdWl3NDliNzBkdGMyb3BlbHBpMDJzeG0ifQ.bxULerfmYNS2daX0IIzdvA';
   const SearchField = () => {
     const provider = new MapBoxProvider({
@@ -36,14 +45,19 @@ const Map = () => {
         result.label
       ),
     });
-    console.log(searchControl);
     const map = useMap();
     useEffect(() => {
       map.addControl(searchControl);
       return () => map.removeControl(searchControl);
     }, []);
+    map.on('geosearch/showlocation', (e) => {
+      console.log(e.location);
+      setLongitude(e.location.x);
+      setLatitude(e.location.y);
+    });
     return null;
   };
+
   return (
     <div className="app">
       <MapContainer center={[46.227638, 2.213749]} zoom={10}>
