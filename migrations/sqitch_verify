@@ -4,7 +4,7 @@ export SQITCH_PASSWORD=d4fddc23196af3d40b83eb81380c358f3c240c5f29452c3b5bbe5c77d
 
 
 # verify
-sqitch verify -t heroku-compostons
+sqitch verify data -t heroku-compostons
 
 
 unset SQITCH_USERNAME

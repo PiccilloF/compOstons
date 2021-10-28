@@ -1,4 +1,4 @@
--- Revert compostons:init from pg
+-- Revert compostons:data from pg
 
 BEGIN;
 
