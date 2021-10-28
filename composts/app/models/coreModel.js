@@ -4,7 +4,7 @@ const db = require('../database');
 // wedefine our core model 
 class CoreModel {
 
-    // for each "model extends CoreModel" we built an custom object whith this constructor (which is factorised)
+    // for each "[model] extends CoreModel" we built an custom object whith this constructor (which is factorised)
     constructor(data) {
         for (const prop in data) {
             this[prop] = data[prop];
