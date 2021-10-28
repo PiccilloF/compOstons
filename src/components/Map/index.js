@@ -16,52 +16,62 @@ import './styles.css';
 // ne pas toucher au tileLayer, mention obligatoire
 // le marker devra etre generé avec un .map en fonction de l'objet retourné par la bdd
 //
-const Map = () => {
-  // mes hook pour recuperer les coordonnées du résultat choisi par l'utilisateur
-  const [longitude, setLongitude] = useState();
-  const [latitude, setLatitude] = useState();
+
+// penser a passer la clé dans un .env ou équivalent react
+const apiKey = 'pk.eyJ1IjoiZmFvc3RvcGF0YXRhIiwiYSI6ImNrdWl3NDliNzBkdGMyb3BlbHBpMDJzeG0ifQ.bxULerfmYNS2daX0IIzdvA';
+
+// on sort le composant SearchFiel du Map et on lui passe une props pour save les coordonnées
+const SearchField = ({ onShowLocation }) => {
+  const provider = new MapBoxProvider({
+    params: {
+      access_token: apiKey,
+    },
+  });
+
+  const searchControl = new GeoSearchControl({
+    style: 'bar', // défini le format du champ de recherche
+    provider: provider,
+    notFoundMessage: 'Désolé, l\'adresse saisie ne peut être trouvé', // message en cas d'adresse fausse
+    searchLabel: 'Trouver un point de compost près de chez vous', // le placeholder
+    // showPopup: true,
+    // autoClose: true,
+  });
+  const map = useMap();
+  useEffect(() => {
+    map.addControl(searchControl);
+    return () => map.removeControl(searchControl);
+  }, []);
 
   useEffect(() => {
-    console.log(`x :  ${longitude}`);
-    console.log(`y :  ${latitude}`);
-  }, [longitude, latitude]);
-
-  const apiKey = 'pk.eyJ1IjoiZmFvc3RvcGF0YXRhIiwiYSI6ImNrdWl3NDliNzBkdGMyb3BlbHBpMDJzeG0ifQ.bxULerfmYNS2daX0IIzdvA';
-  const SearchField = () => {
-    const provider = new MapBoxProvider({
-      params: {
-        access_token: apiKey,
-      },
-    });
-    // @ts-ignore
-    const searchControl = new GeoSearchControl({
-      style: 'bar',
-      provider: provider,
-      notFoundMessage: 'Désolé, l\'adresse saisie ne peut être trouvé',
-      searchLabel: 'Trouver un point de compost près de chez vous',
-      // showPopup: true,
-      // autoClose: true,
-      resultFormat: ({ result }) => (
-        result.label
-      ),
-    });
-    const map = useMap();
-    useEffect(() => {
-      map.addControl(searchControl);
-      return () => map.removeControl(searchControl);
-    }, []);
     map.on('geosearch/showlocation', (e) => {
-      console.log(e.location);
-      setLongitude(e.location.x);
-      setLatitude(e.location.y);
+      onShowLocation(e);
     });
-    return null;
-  };
+  }, []);
+
+  return null;
+};
+
+const Map = () => {
+  // mes hook pour recuperer les coordonnées du résultat choisi par l'utilisateur
+  const [coords, setCoords] = useState({ x: null, y: null });
+  // const [longitude, setLongitude] = useState();
+  // const [latitude, setLatitude] = useState();
+
+  // le useEffect pour executer la requete à la base de données
+  useEffect(() => {
+    console.log(`x :  ${coords.x}`);
+    console.log(`y :  ${coords.y}`);
+  }, [coords]);
 
   return (
     <div className="app">
       <MapContainer center={[46.227638, 2.213749]} zoom={10}>
-        <SearchField apiKey={apiKey} />
+        <SearchField
+          apiKey={apiKey}
+          onShowLocation={(e) => {
+            setCoords({ x: e.location.x, y: e.location.y });
+          }}
+        />
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -98,3 +108,8 @@ const Map = () => {
 
 // == Export
 export default Map;
+
+// axios.post('http://localhost:/api/composts', {
+//   longitude,
+//   latitude,
+// });
