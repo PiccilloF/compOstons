@@ -33,6 +33,7 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
+
 // Je défini une valeur par défault pour la donnée 'type'.
 Field.defaultProps = {
   type: 'text',
