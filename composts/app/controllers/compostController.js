@@ -19,6 +19,7 @@ const compostController = {
 
     getOneCompost: async (req,res) => {
         try {
+            console.log(req.params.id)
             const compost = await Compost.findOne(req.params.id);
             res.json(compost)
         } catch (err) {
