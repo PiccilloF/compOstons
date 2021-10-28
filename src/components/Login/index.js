@@ -1,5 +1,7 @@
-// Import ReactDOM
-import ReactDOM from 'react-dom';
+// Import du gestionnaire de d'état
+import { useState } from 'react';
+// Import du composant Field
+import Field from 'src/components/Field';
 
 // Import PropTypes
 import PropTypes from 'prop-types';
@@ -16,35 +18,67 @@ import './style.scss';
 // child => un élément react dans ce cas
 // container => un élément du DOM, ici l'élément avec l'id root
 
-const Login = ({ isOpen, hide }) => {
-  const target = document.getElementById('root');
+const Login = ({ hide }) => {
+  // console.log('test composant login');
+
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+
+  const handleSubmit = () => {
+    console.log('je soumet le formulaire');
+  };
+
   return (
-    isOpen
-      ? ReactDOM.createPortal(
-        <div className="modal">
-          <div className="modal-container">
-            <div className="modal-header">
-              <h2>Connexion</h2>
-              <button
-                name="Fermeture"
-                type="button"
-                className="modal-close-button"
-                onClick={hide}
-              >
-                <span>&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">Contenu modale connexion ici</div>
+    <>
+      <div className="modal-header">
+        <h2>Connexion</h2>
+        <button
+          name="Fermeture"
+          type="button"
+          className="modal-close-button"
+          onClick={hide}
+        >
+          <span>&times;</span>
+        </button>
+      </div>
+      <div className="modal-body">
+        <form
+          className="connexion-form"
+          onSubmit={handleSubmit}
+        >
+          <div className="input-field">
+            <Field
+              name="Email"
+              placeholder="Votre adresse email"
+              type="email"
+              value={emailValue}
+              onChange={(event) => setEmailValue(event.target.value)}
+            />
+            <Field
+              name="password"
+              placeholder="Votre mot de passe"
+              type="password"
+              value={passwordValue}
+              onChange={(event) => setPasswordValue(event.target.value)}
+            />
           </div>
-        </div>,
-        target,
-      )
-      : null
+          <button
+            className="connexion-form__submit"
+            type="submit"
+          >
+            Connexion
+          </button>
+        </form>
+        <p>Pas de compte ?</p>
+        <button type="button">
+          S'inscrire
+        </button>
+      </div>
+    </>
   );
 };
 
 Login.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
   hide: PropTypes.func.isRequired,
 };
 
