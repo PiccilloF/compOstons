@@ -6,14 +6,14 @@ const router = Router();
 
 
 router
-    .get('/api', compostController.homePage)
-    .get('/api/composts', compostController.getAllComposts)
-    .get('/api/composts/:id(//d+)', compostController.getOneCompost);
+    .get('/', compostController.homePage)
+    .get('/composts', compostController.getAllComposts)
+    .get('/composts/:id(//d+)', compostController.getOneCompost);
 
 
 router
-    .get('/api/users', userController.getAllUsers)
-    .get('/api/users/:id(//d+)', userController.getOneUser);
+    .get('/users', userController.getAllUsers)
+    .get('/users/:id(//d+)', userController.getOneUser);
 
 
 module.exports = router;

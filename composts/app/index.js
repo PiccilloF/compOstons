@@ -7,7 +7,7 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.use('/api', router)
+app.use(router);
 
 app.listen(PORT, () => {
     console.log(`Ready to compost on http://localhost:${PORT}`);
