@@ -1,28 +1,25 @@
+/* eslint-disable arrow-body-style */
 // Import du gestionnaire de d'état
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 // Import du composant Field
 import Field from 'src/components/Field';
 
 // Import PropTypes
 import PropTypes from 'prop-types';
 
-// Import fichier scss
-import './style.scss';
-
-// Le composant Login est une Modale, qui doit s'afficher au click sur l'icône Login
-// Utilisation de ReactDOM.createPortal : https://fr.reactjs.org/docs/portals.html
-// Les portails fournissent une excellente solution
-// pour afficher des composants enfants dans un nœud DOM
-// qui existe en dehors de la hiérarchie DOM du composant parent.
-// ReactDOM.createPortal(child, container)
-// child => un élément react dans ce cas
-// container => un élément du DOM, ici l'élément avec l'id root
-
-const Login = ({ hide, setIsLogin }) => {
+const Inscription = ({ hide, setIsLogin }) => {
   // console.log('test composant login');
-
+  const [pseudoValue, setPseudoValue] = useState('');
+  const [zipCodeValue, setZipCodeValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+
+  useEffect(() => {
+    return () => {
+      setIsLogin(true);
+    };
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,7 +29,7 @@ const Login = ({ hide, setIsLogin }) => {
   return (
     <>
       <div className="modal-header">
-        <h2>Connexion</h2>
+        <h2>Inscription</h2>
         <button
           name="Fermeture"
           type="button"
@@ -44,10 +41,24 @@ const Login = ({ hide, setIsLogin }) => {
       </div>
       <div className="modal-body">
         <form
-          className="connexion-form"
+          className="inscription-form"
           onSubmit={handleSubmit}
         >
           <div className="input-field">
+            <Field
+              name="pseudo"
+              placeholder="Pseudo"
+              type="text"
+              value={pseudoValue}
+              onChange={(event) => setPseudoValue(event.target.value)}
+            />
+            <Field
+              name="zipcode"
+              placeholder="Code Postal"
+              type="text"
+              value={zipCodeValue}
+              onChange={(event) => setZipCodeValue(event.target.value)}
+            />
             <Field
               name="Email"
               placeholder="Votre adresse email"
@@ -64,27 +75,20 @@ const Login = ({ hide, setIsLogin }) => {
             />
           </div>
           <button
-            className="connexion-form__submit"
+            className="inscription-form__submit"
             type="submit"
           >
-            Connexion
+            Valider
           </button>
         </form>
-        <p>Pas de compte ?</p>
-        <button
-          type="button"
-          onClick={() => setIsLogin(false)}
-        >
-          S'inscrire
-        </button>
       </div>
     </>
   );
 };
 
-Login.propTypes = {
+Inscription.propTypes = {
   hide: PropTypes.func.isRequired,
   setIsLogin: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default Inscription;
