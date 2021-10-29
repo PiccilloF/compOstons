@@ -57,26 +57,26 @@ const Map = () => {
   // mes hook pour recuperer les coordonnées du résultat choisi par l'utilisateur
   const [coords, setCoords] = useState({ x: null, y: null });
   const [dataInfo, setDataInfo] = useState();
-  // const [longitude, setLongitude] = useState();
-  // const [latitude, setLatitude] = useState();
-
   // le useEffect pour executer la requete à la base de données
   useEffect(() => {
-    console.log(`x :  ${coords.x}`);
-    console.log(`y :  ${coords.y}`);
-    // penser a repasser la requete en post et de passer l'objet {coords} après le test
-    axios.get('https://compostons.herokuapp.com/composts')
-      .then((response) => {
-        setDataInfo(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (coords.x) {
+      console.log(`x :  ${coords.x}`);
+      console.log(`y :  ${coords.y}`);
+      // penser a repasser la requete en post et de passer l'objet {coords} après le test
+      axios.get('https://compostons.herokuapp.com/composts')
+        .then((response) => {
+          setDataInfo(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [coords]);
+
   console.log(dataInfo);
   return (
-    <div className="app">
-      <MapContainer center={[46.227638, 2.213749]} zoom={10}>
+    <div className="map">
+      <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5}>
         <SearchField
           apiKey={apiKey}
           onShowLocation={(e) => {
@@ -113,7 +113,7 @@ const Map = () => {
           </Popup>
         </Marker> */}
       </MapContainer>
-      {/* <List dataInfo={dataInfo} /> */}
+      <List dataInfo={dataInfo} />
     </div>
   );
 };

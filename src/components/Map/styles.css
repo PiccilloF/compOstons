@@ -1,5 +1,17 @@
+.map {
+  display:flex;
+  flex-wrap: wrap;
+  margin: 1em 1em;
+}
 
 .leaflet-container {
-  min-width:200px;
   height: 500px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (min-width:768px) {
+  .leaflet-container {
+    width: 50%;
+  }
 }

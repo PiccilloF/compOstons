@@ -12,8 +12,8 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header onClickLogin={toggle} />
-      <Modal isOpen={isOpen} hide={toggle} />
+      {/* <Header onClickLogin={toggle} />
+      <Modal isOpen={isOpen} hide={toggle} /> */}
       <Map />
     </div>
   );
