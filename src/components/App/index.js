@@ -5,7 +5,6 @@ import Header from 'src/components/Header';
 import Login from 'src/components/Login';
 import useModal from 'src/hooks/useModal';
 import './styles.css';
-
 // == Composant
 
 const App = () => {
