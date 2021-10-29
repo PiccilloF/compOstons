@@ -119,7 +119,3 @@ const Map = () => {
 // == Export
 export default Map;
 
-axios.post('http://localhost:/api/composts', {
-  longitude,
-  latitude,
-});
