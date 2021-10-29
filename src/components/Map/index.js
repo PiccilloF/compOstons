@@ -64,7 +64,7 @@ const Map = () => {
     console.log(`x :  ${coords.x}`);
     console.log(`y :  ${coords.y}`);
     // penser a repasser la requete en post et de passer l'objet {coords} après le test
-    axios.get('http://localhost:/api/composts')
+    axios.get('https://compostons.herokuapp.com/composts')
       .then((response) => {
         setDataInfo(response.data);
       })
