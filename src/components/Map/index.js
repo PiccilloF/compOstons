@@ -1,5 +1,6 @@
 // == Import
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 // import des composants react leaflet
 import {
   MapContainer,
@@ -54,6 +55,7 @@ const SearchField = ({ onShowLocation }) => {
 const Map = () => {
   // mes hook pour recuperer les coordonnées du résultat choisi par l'utilisateur
   const [coords, setCoords] = useState({ x: null, y: null });
+  const [dataInfo, setDataInfo] = useState();
   // const [longitude, setLongitude] = useState();
   // const [latitude, setLatitude] = useState();
 
@@ -61,8 +63,16 @@ const Map = () => {
   useEffect(() => {
     console.log(`x :  ${coords.x}`);
     console.log(`y :  ${coords.y}`);
+    // penser a repasser la requete en post et de passer l'objet {coords} après le test
+    axios.get('http://localhost:/api/composts')
+      .then((response) => {
+        setDataInfo(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [coords]);
-
+  console.log(dataInfo);
   return (
     <div className="app">
       <MapContainer center={[46.227638, 2.213749]} zoom={10}>
@@ -109,7 +119,7 @@ const Map = () => {
 // == Export
 export default Map;
 
-// axios.post('http://localhost:/api/composts', {
-//   longitude,
-//   latitude,
-// });
+axios.post('http://localhost:/api/composts', {
+  longitude,
+  latitude,
+});

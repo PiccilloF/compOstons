@@ -47,6 +47,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.6.0",
     "prop-types": "^15.7.2",
