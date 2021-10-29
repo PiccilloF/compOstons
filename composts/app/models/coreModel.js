@@ -40,7 +40,9 @@ class CoreModel {
         return new this(data);
     }
 
-
+    static async createOne(data) {
+        const query = `INSERT INTO ${this.tableName} `
+    }
     
 }
 
