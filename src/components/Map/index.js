@@ -10,6 +10,7 @@ import {
   Popup,
 } from 'react-leaflet';
 import { GeoSearchControl, MapBoxProvider } from 'leaflet-geosearch';
+import List from './List';
 
 import './styles.css';
 // == Composant
@@ -112,10 +113,10 @@ const Map = () => {
           </Popup>
         </Marker> */}
       </MapContainer>
+      {/* <List dataInfo={dataInfo} /> */}
     </div>
   );
 };
 
 // == Export
 export default Map;
-
