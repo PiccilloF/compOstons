@@ -1,12 +1,5 @@
 BEGIN;
-CREATE TABLE compost (
-  id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  category VARCHAR(16),
-  longitude Float NOT NULL,
-  latitude Float NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+
 CREATE TABLE user_compost (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   firstname VARCHAR(128),
@@ -16,7 +9,16 @@ CREATE TABLE user_compost (
   password VARCHAR(255) NOT NULL,
   role VARCHAR(56) NOT NULL,
   image VARCHAR(255),
-  compost_id INT NOT NULL REFERENCES "user_compost"("id") ON DELETE CASCADE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE compost (
+  id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  category VARCHAR(16),
+  longitude Float NOT NULL,
+  latitude Float NOT NULL,
+  user_id INT NOT NULL REFERENCES "user_compost"("id") ON DELETE CASCADE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -132,7 +134,7 @@ INSERT INTO
     "password",
     "role",
     "image",
-    "compost_id"
+   
   )
 VALUES
   (

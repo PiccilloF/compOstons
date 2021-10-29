@@ -3,11 +3,23 @@
 
 # GET https://compostons.herokuapp.com/composts
 
- POST http://localhost:3000/composts 
- content-type: application/json
+#  POST http://localhost:3000/composts 
+#  content-type: application/json
+
+#  {
+#      "category": "Green",
+#      "longitude": 1,
+#      "latitude": 46
+#  }
+
+# DELETE http://localhost:3000/users/15
+
+
+
+PUT http://localhost:3000/users/107/update
+content-type: application/json
 
  {
-     "category": "Green",
-     "longitude": 1,
-     "latitude": 46
- }
+    "category": "brown",
+    "longitude": 2
+}

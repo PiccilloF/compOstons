@@ -19,7 +19,43 @@ const userController = {
         } catch (err) {
             res.status(404).send(err);
         }
+    },
+
+    createOneUser: async (req, res) => {
+        try {
+
+            await User.create(req.body)
+            res.send('ok')
+            // voir pour redirect
+
+        } catch (err) {
+            res.status(404).send(err);
+        }
+
+    },
+
+    deleteOneUSer: async (req, res) => {
+        try {
+
+            const data = await User.delete(req.params.id)
+            res.send('user delete')
+
+
+        } catch (err) {
+            res.status(404).send(err);
+        }
+
+    },
+
+    updateUser: async (req, res) => {
+        try {
+
+
+        } catch (err) {
+            res.status(500).send(err)
+        }
     }
+
 }
 
 

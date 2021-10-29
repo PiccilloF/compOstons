@@ -8,17 +8,24 @@ const router = Router();
 router
     .get('/', compostController.homePage)
     .get('/composts', compostController.getAllComposts) 
-    .post('/composts', compostController.createOneCompost)
+    
 
 router
     .route('/composts/:id(\\d+)')
-    .get(compostController.getOneCompost)
+    .get(compostController.getOneCompost) 
+    .post(compostController.createOneCompost)   
+    .delete(compostController.deleteOneCompost)
    
-
-
 router
     .get('/users', userController.getAllUsers)
-    .get('/users/:id(\\d+)', userController.getOneUser);
+    .post('/users', userController.createOneUser)
+router
+    .route('/users/:id(\\d+)')
+    .get(userController.getOneUser)
+    .put(userController.updateUser)
+    .delete(userController.deleteOneUSer)
+
+router.put('/users/:id(\\d+)/update', compostController.updateCompost);
 
 
 module.exports = router;

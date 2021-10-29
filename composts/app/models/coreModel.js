@@ -10,15 +10,15 @@ class CoreModel {
             this[prop] = data[prop];
         }
     }
-// ==========================================
+    // ==========================================
     // we are building basics queries
 
 
     // fetch all with n arguments 
-    static async fetch(...args){
+    static async fetch(...args) {
         const { rows } = await db.query(...args);
 
-        if(rows.length === 0) {
+        if (rows.length === 0) {
             console.log("no data in your query ")
         }
 
@@ -40,7 +40,21 @@ class CoreModel {
         return new this(data);
     }
 
-   
+    static async delete(id) {
+        const query = {
+            text: `DELETE FROM ${this.tableName} WHERE id = $1`,
+            values: [id]
+        }
+        try {
+            // console.log('attention ça va delete')
+            await db.query(query);
+
+
+        } catch (err) {
+            console.error(err)
+        }
+
+    }
 }
 
 module.exports = CoreModel;
