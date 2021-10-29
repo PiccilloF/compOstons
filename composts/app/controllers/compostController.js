@@ -9,6 +9,7 @@ const compostController = {
     
     getAllComposts: async (_, res) => {
         try {
+            console.log('consolelog')
             const composts = await Compost.findAll();
             res.json(composts)
 
@@ -28,13 +29,17 @@ const compostController = {
 
     createOneCompost: async (req, res) => {
         try {
-            
+            console.log(req.body);
+            // const compost = await Compost.create(req.body);
+
 
         } catch (err) {
             res.status(404).send(err);
         }
 
-    }
+    }, 
+
+       
 
 
 }

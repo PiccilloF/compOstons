@@ -7,11 +7,13 @@ const router = Router();
 
 router
     .get('/', compostController.homePage)
-    .get('/composts', compostController.getAllComposts)
+    .get('/composts', compostController.getAllComposts) 
+    .post('/composts', compostController.createOneCompost)
+
 router
     .route('/composts/:id(\\d+)')
     .get(compostController.getOneCompost)
-    .post(composterController.createOneCompost)
+   
 
 
 router

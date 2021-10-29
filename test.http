@@ -1,5 +1,13 @@
 
-# GET http://localhost:3000/api/composts
+# GET http://localhost:4000/composts/8
 
+# GET https://compostons.herokuapp.com/composts
 
-GET http://localhost:3000/api/
+ POST https://compostons.herokuapp.com/composts
+ content-Type: application/json
+
+ {
+     "category": "Green",
+     "longitude": 1,
+     "latitude": 45
+ }
