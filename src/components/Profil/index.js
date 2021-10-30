@@ -111,7 +111,7 @@ export default function Profil() {
               onChange={(event) => setAdressValue(event.target.value)}
             />
             <Field
-              placeholder="Code postal"
+              placeholder="Code postale"
               name="zipcode"
               value={zipcodeValue}
               onChange={(event) => setZipcodeValue(event.target.value)}
