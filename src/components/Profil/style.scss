@@ -1,9 +1,51 @@
 .profil__container {
   max-width: 450px;
-  & .profil__user {
-    border:1px solid black;
+  padding: 1em;
+  & .profil-user {
+    display: flex;
+    justify-content: space-between;
+    border:1px solid rgb(170, 61, 61);
+    & .profil-user__fields {
+      display: flex;
+      flex-direction: column;
+      padding: 1em; 
+    }
+
+    & .profil-picture {
+      display: flex;
+      flex-direction: column;
+      margin: 1em;
+      & .profil-picture__container {
+        font-size:x-large;
+        margin-bottom: 1em;
+        width: 80px;
+        height: 80px;
+      }
+      
+    }
   }
-  & .profil__compost {
+  & .profil-compost {
+    display: flex;
+    justify-content: space-between;
     border:1px solid black;
+    padding: 1em;
+    & .checkbox-block {
+      display: flex;
+      flex-direction: column;
+    }
+    & .compost-inputs {
+      display: flex;
+      flex-direction: column;
+      padding: 1em;
+    }
+  }
+
+  .section-title {
+    text-align: left;
+    margin-bottom: 1em;
+  }
+
+  .field {
+    width:100%
   }
 }

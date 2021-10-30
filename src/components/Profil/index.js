@@ -12,10 +12,10 @@ import './style.scss';
 // C'est un formulaire.
 export default function Profil() {
   // Je défini l'état de mes inputs de type checkox.
-  const [isGreen, setIsGreen] = useState(true);
-  const [isBrown, setIsBrown] = useState(true);
-  const [isAll, setIsAll] = useState(true);
-
+  const [isGreen, setIsGreen] = useState(false);
+  const [isBrown, setIsBrown] = useState(false);
+  const [isAll, setIsAll] = useState(false);
+  const [availablity, setIsAvailablity] = useState(true);
   // Je défini l'état de mes inputs de type text.
   const [firstnameValue, setFirstnameValue] = useState('');
   const [lastnameValue, setlastnameValue] = useState('');
@@ -30,6 +30,7 @@ export default function Profil() {
       isGreen,
       isBrown,
       isAll,
+      availablity,
       firstnameValue,
       lastnameValue,
       aliasValue,
@@ -46,35 +47,41 @@ export default function Profil() {
         className="profil__form"
         onSubmit={handleSubmit}
       >
-        <div className="profil__user">
-          <p>Mes informations</p>
-          <Field
-            placeholder="Prénom"
-            name="fistname"
-            value={firstnameValue}
-            onChange={(event) => setFirstnameValue(event.target.value)}
-          />
-          <Field
-            placeholder="Nom"
-            name="lastname"
-            value={lastnameValue}
-            onChange={(event) => setlastnameValue(event.target.value)}
-          />
-          <Field
-            placeholder="Pseudo"
-            name="alias"
-            value={aliasValue}
-            onChange={(event) => setAliasValue(event.target.value)}
-          />
-          <button
-            type="submit"
-            id="delete-profil__button"
-          >supprimer se compte
-          </button>
+        <div className="profil-user">
+          <div className="profil-user__fields">
+            <p className="section-title">Mes informations</p>
+            <Field
+              placeholder="Prénom"
+              name="fistname"
+              value={firstnameValue}
+              onChange={(event) => setFirstnameValue(event.target.value)}
+            />
+            <Field
+              placeholder="Nom"
+              name="lastname"
+              value={lastnameValue}
+              onChange={(event) => setlastnameValue(event.target.value)}
+            />
+            <Field
+              placeholder="Pseudo"
+              name="alias"
+              value={aliasValue}
+              onChange={(event) => setAliasValue(event.target.value)}
+            />
+            <button
+              type="submit"
+              id="delete-profil__button"
+            >supprimer se compte
+            </button>
+          </div>
+          <div className="profil-picture">
+            <div className="profil-picture__container">mon image</div>
+            <button type="submit"> Mon avatar</button>
+          </div>
         </div>
-        <div className="profil__compost">
+        <div className="profil-compost">
           <div className="checkbox-block">
-            <p>Mon compost</p>
+            <p className="section-title">Mon compost</p>
             <Checkbox
               value={isGreen}
               compostType="type1"
@@ -90,8 +97,13 @@ export default function Profil() {
               compostType="type2"
               onChange={(event) => setIsAll(event.target.checked)}
             /> Tous déchets
+            <Checkbox
+              value={availablity}
+              compostType="availablity"
+              onChange={(event) => setIsAvailablity(!event.target.checked)}
+            /> Je ne reçois plus de compost en ce moment
           </div>
-          <div className="compost__inputs">
+          <div className="compost-inputs">
             <Field
               placeholder="Adresse"
               name="address"
@@ -112,7 +124,6 @@ export default function Profil() {
             />
           </div>
         </div>
-        <div className="profil__picture">image</div>
         <button
           id="register-profil__button"
           type="submit"
