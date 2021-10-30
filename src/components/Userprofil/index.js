@@ -1,29 +1,65 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import Field from './Field';
-import Checkbox from './Checkbox';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import axios from 'axios';
+
+// Import composants
+// import Field from './Field';
+// import Checkbox from './Checkbox';
 
 export default function Userprofil() {
+  const { register, handleSubmit } = useForm();
+  const [coordinatesValue, setCoordinatesValue] = useState('');
+
+  const onSubmit = (data) => {
+    console.log(data);
+    axios({
+      method: 'get',
+      url: (`https://api-adresse.data.gouv.fr/search/?q=${data.address}+${data.zipcode}+${data.city}}`),
+    })
+      .then((response) => {
+        const fulldatas = response.data.features;
+        const parsedDatas = fulldatas.map((item) => item.geometry);
+        const coordinates = parsedDatas.map((item) => item.coordinates);
+        setCoordinatesValue([coordinates[0][1], coordinates[0][0]]);
+      });
+  };
+
+  console.log(coordinatesValue);
+
   return (
     <div className="main-profil__container">
       <div className="user-profil">
         <p>Vos Informations</p>
         <form
           className="main-profil__form"
-          onSubmit={' '}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="user-infos">
-            <div className="input-fields">
-              <Field
+            <div className="user-input-group">
+              <label htmlFor="firstname">Prénom: </label>
+              <input
+                className="user-input__element"
+                type="text"
+                id="firstname"
                 name="firstname"
-                labelName="Prénom: "
+                {...register('firstname', { required: false, maxLength: 10 })}
               />
-              <Field
+              <label htmlFor="lastname">Nom: </label>
+              <input
+                className="user-input__element"
+                type="text"
+                id="lastname"
                 name="lastname"
-                labelName="Nom: "
+                {...register('lastname')}
               />
-              <Field
+              <label htmlFor="alias">Pseudo: </label>
+              <input
+                className="user-input__element"
+                type="text"
+                id="alias"
                 name="alias"
-                labelName="Pseudo: "
+                {...register('alias')}
               />
               <button
                 type="submit"
@@ -34,37 +70,65 @@ export default function Userprofil() {
                 <div className="profil-picture">mon image</div>
                 <input type="file" id="picture-input" />
               </div>
-              <div className="compost-infos">
-                <div className="compost-checkbox-block">
-                  <Checkbox
+              <div className="compostType-infos">
+                <div className="compostType-checkbox-group">
+                  <label htmlFor="greenType">Déchets verts</label>
+                  <input
+                    className="compostType-checkbox-element"
+                    type="checkbox"
                     name="greenType"
-                    labelName="Déchets verts"
+                    id="greenType"
+                    {...register('greentype')}
                   />
-                  <Checkbox
+                  <label htmlFor="greenType">Déchets bruns</label>
+                  <input
+                    className="compostType-checkbox-element"
+                    type="checkbox"
                     name="brownType"
-                    labelName="Déchets bruns"
+                    id="brownType"
+                    {...register('brownType')}
                   />
-                  <Checkbox
-                    name="kitchenType"
-                    labelName="Déchets ménagers"
+                  <label htmlFor="trashType">Déchets ménagers</label>
+                  <input
+                    className="compostType-checkbox-element"
+                    type="checkbox"
+                    name="trashType"
+                    id="trashType"
+                    {...register('trashType')}
                   />
-                  <Checkbox
-                    name="notAvailable"
-                    labelName="Je n'accepte pas de déchets en ce moment"
+                  <label htmlFor="availabity">Je n'accepte pas de déchets en ce moment</label>
+                  <input
+                    className="compostType-checkbox-element"
+                    type="checkbox"
+                    name="availbality"
+                    id="availbality"
+                    {...register('availbality')}
                   />
                 </div>
                 <div className="compost-inputs-block">
-                  <Field
+                  <label htmlFor="address">Adresse: </label>
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="address"
                     name="address"
-                    labelName="Addresse: "
+                    {...register('address')}
                   />
-                  <Field
+                  <label htmlFor="zipcode">Code postale: </label>
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="zipcode"
                     name="zipcode"
-                    labelName="Code postale: "
+                    {...register('zipcode')}
                   />
-                  <Field
+                  <label htmlFor="city">Ville: </label>
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="city"
                     name="city"
-                    labelName="Ville: "
+                    {...register('city')}
                   />
                 </div>
               </div>
