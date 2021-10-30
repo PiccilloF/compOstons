@@ -3,7 +3,8 @@
 import Header from 'src/components/Header';
 import Modal from 'src/components/Modal';
 import useModal from 'src/hooks/useModal';
-import Map from 'src/components/Map';
+// import Map from 'src/components/Map';
+import Profil from 'src/components/Profil';
 import './styles.css';
 // == Composant
 
@@ -14,7 +15,7 @@ const App = () => {
     <div className="app">
       <Header onClickLogin={toggle} />
       <Modal isOpen={isOpen} hide={toggle} />
-      <Map />
+      <Profil />
     </div>
   );
 };

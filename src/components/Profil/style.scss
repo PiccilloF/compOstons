@@ -1,0 +1,9 @@
+.profil__container {
+  max-width: 450px;
+  & .profil__user {
+    border:1px solid black;
+  }
+  & .profil__compost {
+    border:1px solid black;
+  }
+}
