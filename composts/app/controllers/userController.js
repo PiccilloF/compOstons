@@ -49,6 +49,8 @@ const userController = {
 
     updateUser: async (req, res) => {
         try {
+            console.log(req.body, req.params.id)
+            await User.update(req.body, req.params.id)
 
 
         } catch (err) {

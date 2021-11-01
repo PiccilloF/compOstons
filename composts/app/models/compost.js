@@ -23,11 +23,12 @@ class Compost extends CoreModel {
     }
 
     static async update(data, id) {
-        const oldCompost = await Compost.findOne(id);
+        const formerCompost = await Compost.findOne(id);
+        console.log(formerCompost)
 
-        const category = data.category || oldCompost.category;
-        const longitude = data.longitude || oldCompost.longitude;
-        const latitude = data.latitude || oldCompost.latitude;
+        const category = data.category || formerCompost.category;
+        const longitude = data.longitude || formerCompost.longitude;
+        const latitude = data.latitude || formerCompost.latitude;
 
         const query = {
             text: `UPDATE compost SET category = $1, longitude = $2, latitude = $3 WHERE id = $4;`,
@@ -37,7 +38,7 @@ class Compost extends CoreModel {
 
         try {
             await db.query(query);
-            console.log('user is up to date')
+            console.log('compost is up to date')
 
         } catch (err) {
             console.trace(err)

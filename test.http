@@ -16,10 +16,10 @@
 
 
 
-PUT http://localhost:3000/users/107/update
+PUT http://localhost:3000/users/107
 content-type: application/json
 
  {
-    "category": "brown",
-    "longitude": 2
+    "category": "Gilbert"
+    
 }
