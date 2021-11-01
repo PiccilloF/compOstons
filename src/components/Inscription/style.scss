@@ -18,15 +18,27 @@
     color: white;
 }
 
-.connexion-form {
-
-  border-bottom: 1px solid #adadad;
+.inscription-form {
 
   .input-field {
     display: flex;
     flex-direction: column;
     min-width: 300px;
     width: 450px;
+  }
+
+  .radio-field {
+    color: #33685e;
+    display: flex;
+    flex-direction: column;
+
+    &__text {
+      margin: 0.5rem 0;
+    }
+
+    &__box {
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__submit {
@@ -36,28 +48,13 @@
     padding: 0.5rem 0.75rem;
     border: none;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
-}
-
-.inscription {
-  margin-top: 1rem;
-  color: #33685e;
-}
-
-.inscription-button {
-  background-color: #4b9e8f;
-  font-size: 1rem;
-  color: white;
-  padding: 0.5rem 0.75rem;
-  border: none;
-  border-radius: 5px;
-  margin-top: 0.5rem;
 }
 
 
 /* @media screen and (max-width: 575px) {
-  .connexion-form {
+  .inscription-form {
     .input-field {
       min-width: 300px;
       width: 450px;
@@ -66,11 +63,23 @@
 } */
 
 @media screen and (min-width: 576px) {
-  .connexion-form {
-    &__submit {
+  .inscription-form {
+    .input-field {
+      width: 400px;
+    }
+  
+    .radio-field {
       position: absolute;
-      left: 350px;
-      bottom: 105px;
+      left: 259px;
+      bottom: 182px;
+
+      &__text {
+        margin: 0.5rem 0;
+      }
+  
+      &__box {
+        margin-bottom: 0.5rem;
+      }
     }
   }
 }
