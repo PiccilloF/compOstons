@@ -25,6 +25,8 @@
   .input-field {
     display: flex;
     flex-direction: column;
+    min-width: 300px;
+    width: 450px;
   }
 
   &__submit {
@@ -54,14 +56,14 @@
 }
 
 
-@media screen and (max-width: 575px) {
+/* @media screen and (max-width: 575px) {
   .connexion-form {
     .input-field {
       min-width: 300px;
       width: 450px;
     }
   }
-}
+} */
 
 @media screen and (min-width: 576px) {
   .connexion-form {

@@ -23,6 +23,8 @@
   .input-field {
     display: flex;
     flex-direction: column;
+    min-width: 300px;
+    width: 450px;
   }
 
   .radio-field {
@@ -51,14 +53,14 @@
 }
 
 
-@media screen and (max-width: 575px) {
+/* @media screen and (max-width: 575px) {
   .inscription-form {
     .input-field {
       min-width: 300px;
       width: 450px;
     }
   }
-}
+} */
 
 @media screen and (min-width: 576px) {
   .inscription-form {
