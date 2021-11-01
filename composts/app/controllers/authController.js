@@ -19,13 +19,14 @@ const authController = {
             
             if(req.body.mail.toString() === user.mail.toString() && req.body.password === user.password) {
 
-            req.session.username = user.username;
-            console.log(req.session.username)
-            
-            res.send({
-                user: req.session.username,
+            req.session = {
+                username: user.username,
+                id: user.id,
                 cookie: req.cookies
-            });
+            }
+            
+            
+            res.send(req.session);
 
         } else {
             
