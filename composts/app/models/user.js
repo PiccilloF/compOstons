@@ -57,11 +57,12 @@ class User extends CoreModel {
         }
     }
 
-    static async find(mail, res) {
+    static async find(mail) {
       
         try {
-           const user = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
-           
+           const data = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
+           return new User(data);
+  
 
         } catch (err) {
             console.trace(err)

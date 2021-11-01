@@ -16,9 +16,14 @@ const authController = {
 
         try {
             const user = await User.find(mail);
-            console.log(user)
-            if(req.body.mail.toString() === user.mail.toString() && req.body.password === user.mail) {
-            req.session.login = {
+            console.log('req.body.mail', typeof(req.body.mail.toString()))
+            console.log('user.mail',typeof(user.mail.toString()))
+            console.log('req.body.password', typeof(req.body.password))
+            console.log('user.password', typeof(user.password))
+            
+            if(req.body.mail.toString() === user.mail.toString() && req.body.password === user.password) {
+               
+                req.session.login = {
                 id: user.id,
                 firstname: user.firstname,
                 lastname: user.lastname,
@@ -30,6 +35,7 @@ const authController = {
             res.send("user logged")
 
         } else {
+            
             res.send('erreur de saisie login et/ou mail')
         }
 
