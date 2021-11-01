@@ -26,7 +26,7 @@ const authController = {
             }
             
             
-            res.send('ok')
+            res.json(req.session)
 
         } else {
             
