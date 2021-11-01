@@ -4,8 +4,8 @@ const fs = require ('fs');
 
 faker.locale = "fr";
 
-const users = [];
-const type = ['Null', 'Green', 'Brown', 'All']
+const composts = [];
+const type = ['Null', 'Vert', 'Marron', 'Tous types']
 
 let random = () => {
   return Math.floor(Math.random() * 4);
@@ -15,35 +15,34 @@ let random = () => {
 
 
 for (let i = 0; i < 100; i++) {
-    users.push({
-
-        // compost: type[random()],
-        fistname: faker.name.firstName(),
-        lastname: faker.name.lastName(),
-        username: faker.internet.userName(),
-        mail: faker.internet.email(),
-        password: faker.internet.password(),
-        role: faker.datatype.boolean(),
-        image: faker.image.image(),
-        compost_id: i + 1
-        // longitude: faker.address.longitude(-1,7),
-        // latitude: faker.address.latitude(43.8, 48)
-        
+    composts.push({        
+        // fistname: faker.name.firstName(),
+        // lastname: faker.name.lastName(),
+        // username: faker.internet.userName(),
+        // mail: faker.internet.email(),
+        // password: faker.internet.password(),
+        // role: faker.datatype.boolean(),
+        // image: faker.image.image(),
+        // compost_id: i + 1
+        compost: type[random()],
+        longitude: faker.address.longitude(-1,7),
+        latitude: faker.address.latitude(43.8, 48),
+        user_id: i +1        
     })
 
 }
 
-console.table(users)
+// console.table(users)
 
-// const compostJson = JSON.stringify(compost);
-// fs.writeFile('fakeCompost.json', compostJson, function(err, res){
-//   if(err) console.log(err)
-// })
-
-const usersJson = JSON.stringify(users);
-fs.writeFile('fakeUsers.json', usersJson, function(err, result){
+const compostJson = JSON.stringify(composts);
+fs.writeFile('fakeComposts.json', compostJson, function(err, res){
   if(err) console.log(err)
-});
+})
+
+// const usersJson = JSON.stringify(users);
+// fs.writeFile('fakeComposts.json', usersJson, function(err, result){
+//   if(err) console.log(err)
+// });
 
 
 // console.table(users);

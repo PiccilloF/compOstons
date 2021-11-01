@@ -25,7 +25,7 @@ const authController = {
                 cookie: req.cookies
             }
             
-            
+           
             res.send('user logged')
 
          } else {

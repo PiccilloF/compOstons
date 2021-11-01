@@ -1,4 +1,4 @@
-const Compost = require('../models/compost')
+const Compost = require('../models/compost');
 
 const compostController = {
 
@@ -6,17 +6,29 @@ const compostController = {
         res.send('Ready to compost !!')
     },
 
-
-    getAllComposts: async (_, res) => {
+    getCompostAndUsername: async (req,res) => {
         try {
-            console.log('consolelog')
-            const composts = await Compost.findAll();
-            res.json(composts)
-
+            const composts = await Compost.allCompostJoinUser();
+                        res.json(composts)
         } catch (err) {
-            res.status(500).send(err);
+            console.trace(err)
+            res.status(500).send("erreur de récupérations des données")
         }
+
+
     },
+
+
+    // getAllComposts: async (_, res) => {
+    //     try {
+            
+    //         const composts = await Compost.findAll();
+    //         res.json(composts)
+
+    //     } catch (err) {
+    //         res.status(500).send(err);
+    //     }
+    // },
 
     getOneCompost: async (req, res) => {
         try {

@@ -7,6 +7,7 @@ class Compost extends CoreModel {
     // define tableName for using it dynamically likje ${this.tableName}
     static tableName = 'compost';
 
+
     static async create(data, id) {
         const query = {
             text: `INSERT INTO compost ("category", "longitude", "latitude", "user_id") VALUES ($1, $2, $3, $4);`,
@@ -41,6 +42,20 @@ class Compost extends CoreModel {
             await db.query(query);
             console.log('compost is up to date')
 
+        } catch (err) {
+            console.trace(err)
+        }
+
+    }
+
+    static async allCompostJoinUser () {
+        const query = {
+            text: `SELECT compost.id, category, longitude, latitude, user_id, username FROM compost  JOIN user_compost ON compost.id = user_compost.id WHERE user_compost.role = 'true';`
+        }
+
+        try {
+           const data =  await db.query(query);
+           return new this(data);
         } catch (err) {
             console.trace(err)
         }
