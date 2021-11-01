@@ -23,6 +23,7 @@ class Compost extends CoreModel {
     }
 
     static async update(data, id) {
+        
         const formerCompost = await Compost.findOne(id);
         console.log(formerCompost)
 
