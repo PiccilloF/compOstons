@@ -2,129 +2,83 @@ BEGIN;
 
 CREATE TABLE user_compost (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  firstname VARCHAR(128),
-  lastname VARCHAR(128),
-  username VARCHAR(128),
-  mail VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  role VARCHAR(56) NOT NULL,
-  image VARCHAR(255),
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  firstname text,
+  lastname text,
+  username text,
+  mail text NOT aucun,
+  password text NOT aucun,
+  role text NOT aucun,
+  image text,
+  created_at TIMESTAMPTZ NOT aucun DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT aucun DEFAULT NOW()
 );
 
 CREATE TABLE compost (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  category VARCHAR(16),
-  longitude Float NOT NULL,
-  latitude Float NOT NULL,
-  user_id INT NOT NULL REFERENCES "user_compost"("id") ON DELETE CASCADE,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  category text,
+  longitude Float NOT aucun,
+  latitude Float NOT aucun,
+  user_id INT NOT aucun REFERENCES "user_compost"("id") ON DELETE CASCADE,
+  created_at TIMESTAMPTZ NOT aucun DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT aucun DEFAULT NOW()
 );
 INSERT INTO
   compost ("category", "longitude", "latitude", "user_id")
 VALUES
-  ('Green', -0.5294, 44.8910, 10),
-  ('Brown', 1.5068, 45.5988, 10),
-  ('Null', 4.5677, 44.0930, 10),
-  ('Null', 2.4311, 47.4957, 10),
-  ('Brown', 3.3766, 47.1335, 10),
-  ('All', 5.9855, 44.2942, 10),
-  ('Brown', 0.1913, 45.1239, 10),
-  ('Null', 6.6143, 46.8639, 10),
-  ('All', 4.5277, 47.9695, 10),
-  ('All', -0.7747, 45.9546, 10),
-  ('Brown', 1.8147, 45.9359, 10),
-  ('Null', -0.4702, 44.3908, 10),
-  ('All', 4.4120, 45.9781, 10),
-  ('Null', 1.1669, 44.9349, 10),
-  ('All', 0.5558, 45.1461, 10),
-  ('Brown', 3.0094, 46.1209, 10),
-  ('Null', 5.8984, 46.5214, 10),
-  ('Null', 1.5486, 45.9193, 10),
-  ('All', 3.9988, 44.7545, 10),
-  ('Null', -0.1596, 44.9392, 10),
-  ('Null', 4.0066, 46.0666, 10),
-  ('Brown', 3.2399, 47.6857, 10),
-  ('Green', 3.7522, 44.7273, 10),
-  ('Null', 6.1003, 47.3980, 10),
-  ('Null', 5.5231, 47.5899, 10),
-  ('Green', 3.4201, 45.7304, 10),
-  ('Brown', -0.4367, 44.2684, 10),
-  ('Brown', 1.6396, 45.7806, 10),
-  ('All', -0.3535, 46.5351, 10),
-  ('Green', 5.7192, 44.2129, 10),
-  ('Null', 1.0778, 44.9178, 10),
-  ('Green', 4.0871, 44.3365, 10),
-  ('Null', 5.6331, 47.1880, 10),
-  ('Brown', 1.1270, 45.2839, 10),
-  ('Green', 3.4558, 46.5690, 10),
-  ('Brown', 1.1823, 47.5221, 10),
-  ('Brown', 3.0171, 46.1103, 10),
-  ('Brown', 4.5199, 45.1702, 10),
-  ('Brown', 2.7659, 44.1301, 10),
-  ('Null', 3.8432, 44.9637, 10),
-  ('All', 5.8490, 45.7044, 10),
-  ('Green', 1.8650, 45.0403, 10),
-  ('Null', 3.3633, 44.1407, 10),
-  ('All', 2.0515, 44.4815, 10),
-  ('Brown', 1.1708, 46.1115, 10),
-  ('Brown', 6.7656, 45.5988, 10),
-  ('Green', -0.3158, 46.7930, 10),
-  ('All', 2.1349, 44.3531, 10),
-  ('All', 3.0156, 44.3044, 10),
-  ('Brown', -0.8885, 45.6899, 10),
-  ('Null', -0.9035, 44.3566, 10),
-  ('Brown', 6.5985, 47.1328, 10),
-  ('Brown', 4.1091, 47.5994, 10),
-  ('Green', 3.3081, 44.3823, 10),
-  ('Green', 2.8300, 44.2687, 10),
-  ('Brown', 0.5218, 45.1339, 10),
-  ('All', 5.5716, 46.8616, 10),
-  ('All', 1.7117, 45.3410, 10),
-  ('All', -0.7147, 44.6510, 10),
-  ('Null', 5.2512, 45.1087, 10),
-  ('Green', 0.0910, 44.5476, 10),
-  ('Null', 4.4997, 45.1843, 10),
-  ('Brown', 3.6535, 46.2534, 10),
-  ('Null', 3.2131, 45.9286, 10),
-  ('All', 3.1194, 46.6498, 10),
-  ('Green', 6.2596, 44.1717, 10),
-  ('All', 5.0489, 44.4536, 10),
-  ('Null', 4.4670, 46.7557, 10),
-  ('All', 6.6928, 44.2506, 10),
-  ('Green', 0.5764, 45.7721, 10),
-  ('Green', 3.2346, 45.6708, 10),
-  ('Brown', 6.1216, 45.7834, 10),
-  ('Null', 5.9388, 46.3837, 10),
-  ('All', -0.9507, 46.4917, 10),
-  ('Brown', 5.4464, 46.2531, 10),
-  ('Green', 3.6131, 46.7396, 10),
-  ('Green', 3.6909, 44.2664, 10),
-  ('Brown', 5.6838, 44.1143, 10),
-  ('Null', 4.7855, 43.8884, 10),
-  ('Brown', 5.3866, 47.9374, 10),
-  ('Brown', -0.0767, 47.9177, 10),
-  ('Brown', 0.0014, 47.7379, 10),
-  ('All', 4.3034, 43.8570, 10),
-  ('All', 1.5485, 47.5842, 10),
-  ('Brown', 2.3718, 44.5867, 10),
-  ('Green', -0.5843, 44.1782, 10),
-  ('Brown', 4.1598, 46.7595, 10),
-  ('Null', 4.5264, 45.7015, 10),
-  ('Brown', 2.3806, 45.1846, 10),
-  ('Green', 5.6174, 44.9869, 10),
-  ('Brown', 5.3107, 46.8211, 10),
-  ('Null', 4.0190, 47.7077, 10),
-  ('All', 2.8484, 47.9330, 10),
-  ('All', 5.9484, 44.2731, 10),
-  ('All', 0.9543, 44.5901, 10),
-  ('Green', 5.9116, 47.9696, 10),
-  ('Brown', 6.7464, 46.6165, 10),
-  ('Green', 5.3449, 47.3435, 10),
-  ('Null', 3.2585, 44.2503, 10),
-  ('Brown', 4.8974, 45.3169, 10);
+
+
+  ('vert', -0.5294, 44.8910, 2),
+  ('marron', 1.5068, 45.5988, 3),
+  ('aucun', 4.5677, 44.0930, 5),
+  ('aucun', 2.4311, 47.4957, 7),
+  ('marron', 3.3766, 47.1335, 11),
+  ('tous types', 5.9855, 44.2942, 12),
+  ('marron', 0.1913, 45.1239, 15),
+  ('aucun', 6.6143, 46.8639, 16),
+  ('tous types', 4.5277, 47.9695, 17),
+  ('tous types', -0.7747, 45.9546, 19),
+  ('marron', 1.8147, 45.9359, 20),
+  ('aucun', -0.4702, 44.3908, 21),
+  ('tous types', 4.4120, 45.9781, 22),
+  ('aucun', 1.1669, 44.9349, 24),
+  ('tous types', 0.5558, 45.1461, 25),
+  ('marron', 3.0094, 46.1209, 26),
+  ('aucun', 5.8984, 46.5214, 27),
+  ('aucun', 1.5486, 45.9193, 28),
+  ('tous types', 3.9988, 44.7545, 29),
+  ('aucun', -0.1596, 44.9392, 30),
+  ('aucun', 4.0066, 46.0666, 32),
+  ('marron', 3.2399, 47.6857, 33),
+  ('vert', 3.7522, 44.7273, 39),
+  ('aucun', 6.1003, 47.3980, 42),
+  ('aucun', 5.5231, 47.5899, 43),
+  ('vert', 3.4201, 45.7304, 46),
+  ('marron', -0.4367, 44.2684, 47),
+  ('marron', 1.6396, 45.7806, 48),
+  ('tous types', -0.3535, 46.5351, 49),
+  ('vert', 5.7192, 44.2129, 50),
+  ('aucun', 1.0778, 44.9178, 52),
+  ('vert', 4.0871, 44.3365, 59),
+  ('aucun', 5.6331, 47.1880, 61),
+  ('marron', 1.1270, 45.2839, 67),
+  ('vert', 3.4558, 46.5690, 68),
+  ('marron', 1.1823, 47.5221, 69),
+  ('marron', 3.0171, 46.1103, 70),
+  ('marron', 4.5199, 45.1702, 71),
+  ('marron', 2.7659, 44.1301, 75),
+  ('aucun', 3.8432, 44.9637, 76),
+  ('tous types', 5.8490, 45.7044, 77),
+  ('vert', 1.8650, 45.0403, 79),
+  ('aucun', 3.3633, 44.1407, 80),
+  ('tous types', 2.0515, 44.4815, 81),
+  ('marron', 1.1708, 46.1115, 83),
+  ('marron', 6.7656, 45.5988, 84),
+  ('vert', -0.3158, 46.7930, 85),
+  ('tous types', 2.1349, 44.3531, 93),
+  ('tous types', 3.0156, 44.3044, 98),
+  ('marron', -0.8885, 45.6899, 99),
+  ('aucun', -0.9035, 44.3566, 100)
+  
 INSERT INTO
   user_compost (
     "firstname",
@@ -143,9 +97,9 @@ VALUES
     'Pierrick73',
     'Childebert87@gmail.com',
     'CAwT4JCFa1fAGFU',
-    false,
-    'http://placeimg.com/640/480/food',
-    1
+    'chercheur',
+    'http://placeimg.com/640/480/food'
+    
   ),
   (
     'Médéric',
@@ -153,9 +107,9 @@ VALUES
     'Hélier.Baron24',
     'Amalthe.Perrot@yahoo.fr',
     'cDGM4ueSqm2jxzM',
-    true,
-    'http://placeimg.com/640/480/abstract',
-    2
+    'proposeur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Théodose',
@@ -163,9 +117,9 @@ VALUES
     'Cléandre_Perrin13',
     'Angilran6@gmail.com',
     'VMopjSNbqvBqi0z',
-    true,
-    'http://placeimg.com/640/480/people',
-    3
+    'proposeur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Aquilin',
@@ -173,9 +127,9 @@ VALUES
     'Chrysole_Schmitt',
     'Mence48@yahoo.fr',
     'C1y5O0lwXPcxZp6',
-    false,
-    'http://placeimg.com/640/480/business',
-    4
+    'chercheur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Yseult',
@@ -183,9 +137,9 @@ VALUES
     'Corentine42',
     'Garnier.Rodriguez@yahoo.fr',
     'uNm0RoLysD6eO7C',
-    true,
-    'http://placeimg.com/640/480/abstract',
-    5
+    'proposeur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Sophie',
@@ -193,9 +147,9 @@ VALUES
     'Mélisande.Huet39',
     'Fabrice_Picard@yahoo.fr',
     'jLxBaoc0_FKrjim',
-    false,
-    'http://placeimg.com/640/480/sports',
-    6
+    'chercheur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Caroline',
@@ -203,9 +157,9 @@ VALUES
     'Amaryllis98',
     'Basilisse_Roy66@gmail.com',
     'oGRVzjAn7__yR1L',
-    true,
-    'http://placeimg.com/640/480/people',
-    7
+    'proposeur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Aubry',
@@ -213,9 +167,9 @@ VALUES
     'Léa_Blanchard',
     'Serge.Berger35@gmail.com',
     '_GghvA8cc4cxcbw',
-    false,
-    'http://placeimg.com/640/480/cats',
-    8
+    'chercheur',
+    'http://placeimg.com/640/480/cats'
+    
   ),
   (
     'Anatolie',
@@ -223,9 +177,9 @@ VALUES
     'Lionel38',
     'meric.Aubry@hotmail.fr',
     'K1ZPqwUdyqvhToE',
-    false,
-    'http://placeimg.com/640/480/people',
-    9
+    'chercheur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Tanguy',
@@ -233,9 +187,9 @@ VALUES
     'Caroline_Martin',
     'Amiel22@hotmail.fr',
     'hZGGzyZK3fXwpI9',
-    false,
-    'http://placeimg.com/640/480/people',
-    10
+    'chercheur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Gautier',
@@ -243,9 +197,9 @@ VALUES
     'Antonine.Bourgeois70',
     'Marion36@hotmail.fr',
     'Nf_exsfOK9ZhNtb',
-    true,
-    'http://placeimg.com/640/480/city',
-    11
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Jonathan',
@@ -253,9 +207,9 @@ VALUES
     'Odile.Arnaud13',
     'Albrade_Robin@yahoo.fr',
     '48X_vj7Tpc5yBee',
-    true,
-    'http://placeimg.com/640/480/city',
-    12
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Adalard',
@@ -263,9 +217,9 @@ VALUES
     'Aubertine.Clement0',
     'Lionel60@hotmail.fr',
     'XpaJnJll7LbbJCj',
-    false,
-    'http://placeimg.com/640/480/cats',
-    13
+    'chercheur',
+    'http://placeimg.com/640/480/cats'
+    
   ),
   (
     'Athalie',
@@ -273,9 +227,9 @@ VALUES
     'Ludolphe16',
     'Girart.Muller14@hotmail.fr',
     'zYSffq0zKTr7FUr',
-    false,
-    'http://placeimg.com/640/480/business',
-    14
+    'chercheur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Agathe',
@@ -283,9 +237,9 @@ VALUES
     'Judicaël_Fournier46',
     'Rmi65@gmail.com',
     'RyhzZEgON8nqKtL',
-    true,
-    'http://placeimg.com/640/480/transport',
-    15
+    'proposeur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Eugénie',
@@ -293,9 +247,9 @@ VALUES
     'Léonard75',
     'Jourdain_Dufour@yahoo.fr',
     'aioKt_zYLm6fSTz',
-    true,
-    'http://placeimg.com/640/480/city',
-    16
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Aliénor',
@@ -303,9 +257,9 @@ VALUES
     'Anicet66',
     'Roger.Mathieu22@yahoo.fr',
     'FpkLlLqOaee92xc',
-    true,
-    'http://placeimg.com/640/480/animals',
-    17
+    'proposeur',
+    'http://placeimg.com/640/480/animals'
+    
   ),
   (
     'Olympe',
@@ -313,9 +267,9 @@ VALUES
     'Damien.Marie99',
     'Amarande73@yahoo.fr',
     'sMeDnHtRwOAzutB',
-    false,
-    'http://placeimg.com/640/480/food',
-    18
+    'chercheur',
+    'http://placeimg.com/640/480/food'
+    
   ),
   (
     'Césaire',
@@ -323,9 +277,9 @@ VALUES
     'Astrée.Paris',
     'Gisle25@hotmail.fr',
     'obyQQHjqRshWpl0',
-    true,
-    'http://placeimg.com/640/480/nature',
-    19
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Amante',
@@ -333,9 +287,9 @@ VALUES
     'Xénophon0',
     'Amiel_Mathieu78@yahoo.fr',
     'EYk3IGpuTVjWVaL',
-    true,
-    'http://placeimg.com/640/480/nightlife',
-    20
+    'proposeur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Anastase',
@@ -343,9 +297,9 @@ VALUES
     'Andrée.Giraud',
     'Abdonie97@gmail.com',
     'icU30K3nec95me6',
-    true,
-    'http://placeimg.com/640/480/animals',
-    21
+    'proposeur',
+    'http://placeimg.com/640/480/animals'
+    
   ),
   (
     'Alexanne',
@@ -353,9 +307,9 @@ VALUES
     'Jeanned’Arc_Royer',
     'Ren71@yahoo.fr',
     'MqB9B7L307PE29J',
-    true,
-    'http://placeimg.com/640/480/technics',
-    22
+    'proposeur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Élisabeth',
@@ -363,9 +317,9 @@ VALUES
     'Annibal.Francois65',
     'Nol.Bourgeois@gmail.com',
     'Ex78BF5U9Gsy63z',
-    false,
-    'http://placeimg.com/640/480/abstract',
-    23
+    'chercheur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Césaire',
@@ -373,9 +327,9 @@ VALUES
     'Oriande.Lucas1',
     'Mahaut.Philippe@gmail.com',
     '1yosbyOcgbW4kT2',
-    true,
-    'http://placeimg.com/640/480/city',
-    24
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Arsinoé',
@@ -383,9 +337,9 @@ VALUES
     'Marie46',
     'Jacinthe.Carpentier@hotmail.fr',
     'wV9RoNxDODLc9JF',
-    true,
-    'http://placeimg.com/640/480/technics',
-    25
+    'proposeur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Yoann',
@@ -393,9 +347,9 @@ VALUES
     'Olivier91',
     'Hermine.Picard@yahoo.fr',
     '9glEocB1ktKdh30',
-    true,
-    'http://placeimg.com/640/480/people',
-    26
+    'proposeur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Marcelin',
@@ -403,9 +357,9 @@ VALUES
     'Priscille.Petit68',
     'Jehanne.Roussel48@hotmail.fr',
     'AqZYH3who3Oozg2',
-    true,
-    'http://placeimg.com/640/480/city',
-    27
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Rachel',
@@ -413,9 +367,9 @@ VALUES
     'Dorian42',
     'Achaire67@gmail.com',
     'mtVHnLUTsyG4s4r',
-    true,
-    'http://placeimg.com/640/480/animals',
-    28
+    'proposeur',
+    'http://placeimg.com/640/480/animals'
+    
   ),
   (
     'Étienne',
@@ -423,9 +377,9 @@ VALUES
     'Émérance10',
     'Blanche.Berger@hotmail.fr',
     'QkPhrOs0yZ4gjFX',
-    true,
-    'http://placeimg.com/640/480/abstract',
-    29
+    'proposeur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Balthazar',
@@ -433,9 +387,9 @@ VALUES
     'Innocent51',
     'Lonne_Paul72@hotmail.fr',
     'pLt2gPjjFbkhlX_',
-    true,
-    'http://placeimg.com/640/480/business',
-    30
+    'proposeur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Laurent',
@@ -443,9 +397,9 @@ VALUES
     'Yvonne.Marchal',
     'Albane.Andre@hotmail.fr',
     'Ijuy0icXfT3eKSf',
-    false,
-    'http://placeimg.com/640/480/sports',
-    31
+    'chercheur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Tatiana',
@@ -453,9 +407,9 @@ VALUES
     'Léandre_Brunet19',
     'Anastasie.Benoit37@gmail.com',
     'QS0a2sk8uYiEAlR',
-    true,
-    'http://placeimg.com/640/480/nature',
-    32
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Aliette',
@@ -463,9 +417,9 @@ VALUES
     'Anémone.Perez',
     'Azale.Richard@yahoo.fr',
     'ye22LkWiDo7qrDS',
-    true,
-    'http://placeimg.com/640/480/nature',
-    33
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Janine',
@@ -473,9 +427,9 @@ VALUES
     'Félix.Marchand',
     'Maxence.Lambert30@hotmail.fr',
     'eWUKh3HMTWeIzWi',
-    false,
-    'http://placeimg.com/640/480/sports',
-    34
+    'chercheur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Armande',
@@ -483,9 +437,9 @@ VALUES
     'Joachim.Collet63',
     'Arthaud_Andre@gmail.com',
     'sMTv_wzW0gkafs8',
-    false,
-    'http://placeimg.com/640/480/nature',
-    35
+    'chercheur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Venance',
@@ -493,9 +447,9 @@ VALUES
     'Célestin.Fernandez',
     'Muriel.Garnier@gmail.com',
     '0GHMf3jWW_WkHbL',
-    false,
-    'http://placeimg.com/640/480/nightlife',
-    36
+    'chercheur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Mélanie',
@@ -503,9 +457,9 @@ VALUES
     'Clémentine_Adam',
     'Clara_Blanc@yahoo.fr',
     'RjCMgMpPYdGff1L',
-    false,
-    'http://placeimg.com/640/480/transport',
-    37
+    'chercheur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Josse',
@@ -513,9 +467,9 @@ VALUES
     'Armel.Fleury',
     'Loc.Barre95@gmail.com',
     'IxJhhkN35xkOYYc',
-    false,
-    'http://placeimg.com/640/480/business',
-    38
+    'chercheur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Mauricette',
@@ -523,9 +477,9 @@ VALUES
     'Charlotte_Lefebvre49',
     'Oury.Muller@gmail.com',
     'lTqA9ErfMBpYj1X',
-    true,
-    'http://placeimg.com/640/480/sports',
-    39
+    'proposeur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Francine',
@@ -533,9 +487,9 @@ VALUES
     'Luc98',
     'Bouchard.Jacquet34@yahoo.fr',
     '22CAnelTb5OvhcV',
-    false,
-    'http://placeimg.com/640/480/people',
-    40
+    'chercheur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Jocelyn',
@@ -543,9 +497,9 @@ VALUES
     'Cédric.Nguyen',
     'Carloman.Meunier@hotmail.fr',
     'V9xFWTALoLkwujU',
-    false,
-    'http://placeimg.com/640/480/city',
-    41
+    'chercheur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Gerbert',
@@ -553,9 +507,9 @@ VALUES
     'Martin50',
     'Adalbaude80@gmail.com',
     'lXTEfx41ojT8XQs',
-    true,
-    'http://placeimg.com/640/480/people',
-    42
+    'proposeur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Roch',
@@ -563,9 +517,9 @@ VALUES
     'Jérôme.Fernandez66',
     'Chrtien_Morin@yahoo.fr',
     'EwqlPar02Kuqw4f',
-    true,
-    'http://placeimg.com/640/480/city',
-    43
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Sidoine',
@@ -573,9 +527,9 @@ VALUES
     'Alexis.Benoit',
     'Armandine57@gmail.com',
     'tWk40jpG9FWZjuO',
-    false,
-    'http://placeimg.com/640/480/people',
-    44
+    'chercheur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Absalon',
@@ -583,9 +537,9 @@ VALUES
     'Artémis_Thomas98',
     'Janine.Rolland@gmail.com',
     's91emew3L2xMBZ2',
-    false,
-    'http://placeimg.com/640/480/transport',
-    45
+    'chercheur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Laurent',
@@ -593,9 +547,9 @@ VALUES
     'Camillien_Marie',
     'Albric.Masson@hotmail.fr',
     'QMeFCnfVp1SOluG',
-    true,
-    'http://placeimg.com/640/480/abstract',
-    46
+    'proposeur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Tiphaine',
@@ -603,9 +557,9 @@ VALUES
     'Ansbert_Fontaine',
     'Pacme96@yahoo.fr',
     'dr4_o2wzzdFaWig',
-    true,
-    'http://placeimg.com/640/480/cats',
-    47
+    'proposeur',
+    'http://placeimg.com/640/480/cats'
+    
   ),
   (
     'Gaud',
@@ -613,9 +567,9 @@ VALUES
     'Célestin_Brun45',
     'Armine_Julien@hotmail.fr',
     'iGwap9urzfANWa1',
-    true,
-    'http://placeimg.com/640/480/city',
-    48
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Paule',
@@ -623,9 +577,9 @@ VALUES
     'Aurélienne40',
     'Flavie_Noel@hotmail.fr',
     '2QiAgWEHKYtXhs6',
-    true,
-    'http://placeimg.com/640/480/technics',
-    49
+    'proposeur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Oger',
@@ -633,9 +587,9 @@ VALUES
     'Dorian4',
     'lise_Brun55@hotmail.fr',
     'UBlthKh6Tik4_nF',
-    true,
-    'http://placeimg.com/640/480/abstract',
-    50
+    'proposeur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Mélodie',
@@ -643,9 +597,9 @@ VALUES
     'Pénélope11',
     'Isabeau69@gmail.com',
     '13jrLG0Ppgn8uwm',
-    false,
-    'http://placeimg.com/640/480/technics',
-    51
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Ursule',
@@ -653,19 +607,19 @@ VALUES
     'Adegrine63',
     'Rosalie79@gmail.com',
     'X1g70FW_BzpBODu',
-    true,
-    'http://placeimg.com/640/480/nature',
-    52
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Antigone',
     'Morin',
     'Adalbéron.Rodriguez96',
-    'Asceline.Legall@hotmail.fr',
+    'Asceline.Legtous types@hotmail.fr',
     'jMJ3vLS2tTlkhAe',
-    false,
-    'http://placeimg.com/640/480/technics',
-    53
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Aube',
@@ -673,9 +627,9 @@ VALUES
     'Odette11',
     'Alas_Maillard24@gmail.com',
     'LD3BQW9ehQCZjnt',
-    false,
-    'http://placeimg.com/640/480/technics',
-    54
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Corinne',
@@ -683,9 +637,9 @@ VALUES
     'Gonthier6',
     'Elsa69@yahoo.fr',
     'efJjAYYmHp4EoI8',
-    false,
-    'http://placeimg.com/640/480/food',
-    55
+    'chercheur',
+    'http://placeimg.com/640/480/food'
+    
   ),
   (
     'Quentine',
@@ -693,9 +647,9 @@ VALUES
     'Félicité.Julien35',
     'lose90@yahoo.fr',
     '3zCRSwFbMpODJLG',
-    false,
-    'http://placeimg.com/640/480/animals',
-    56
+    'chercheur',
+    'http://placeimg.com/640/480/animals'
+    
   ),
   (
     'Hildebert',
@@ -703,9 +657,9 @@ VALUES
     'Emmelie54',
     'Alberte.Marie@hotmail.fr',
     'LDszktwaCAPRIIt',
-    false,
-    'http://placeimg.com/640/480/fashion',
-    57
+    'chercheur',
+    'http://placeimg.com/640/480/fashion'
+    
   ),
   (
     'Eustache',
@@ -713,9 +667,9 @@ VALUES
     'Jeanned’Arc81',
     'Arian_Rolland67@hotmail.fr',
     'yDIbZX2vXmUB2IK',
-    false,
-    'http://placeimg.com/640/480/cats',
-    58
+    'chercheur',
+    'http://placeimg.com/640/480/cats'
+    
   ),
   (
     'Arthème',
@@ -723,9 +677,9 @@ VALUES
     'Andrée.Berger81',
     'Laurence10@gmail.com',
     'qSJ1YO49N9F3IKM',
-    true,
-    'http://placeimg.com/640/480/sports',
-    59
+    'proposeur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Lazare',
@@ -733,9 +687,9 @@ VALUES
     'Michaël_Bernard58',
     'Gdon.Leclerc@gmail.com',
     'm633Zel0lyXLaCy',
-    false,
-    'http://placeimg.com/640/480/technics',
-    60
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Paul',
@@ -743,9 +697,9 @@ VALUES
     'Pascale95',
     'Acace34@gmail.com',
     'rqK6GyZ9I4ClMBs',
-    true,
-    'http://placeimg.com/640/480/business',
-    61
+    'proposeur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Hédelin',
@@ -753,9 +707,9 @@ VALUES
     'Guillaume.Dubois98',
     'Paulette_Pierre@hotmail.fr',
     'Gw8eM9id0KTkMM0',
-    false,
-    'http://placeimg.com/640/480/nightlife',
-    62
+    'chercheur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Renée',
@@ -763,9 +717,9 @@ VALUES
     'Annabelle.Vasseur71',
     'Firmin1@hotmail.fr',
     'cBnHXQc1sMlahkT',
-    false,
-    'http://placeimg.com/640/480/transport',
-    63
+    'chercheur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Noëlle',
@@ -773,9 +727,9 @@ VALUES
     'Constance.Gerard',
     'Orlane.Duval30@yahoo.fr',
     '6imQU1VuVofxJHq',
-    false,
-    'http://placeimg.com/640/480/city',
-    64
+    'chercheur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Trajan',
@@ -783,9 +737,9 @@ VALUES
     'Aloïs.Robin',
     'Octave.Remy47@gmail.com',
     'wMu0husq9WiWh_A',
-    false,
-    'http://placeimg.com/640/480/people',
-    65
+    'chercheur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Adélie',
@@ -793,9 +747,9 @@ VALUES
     'Alban87',
     'Hilaire_Berger@hotmail.fr',
     'A86joeJsUqKeTtk',
-    false,
-    'http://placeimg.com/640/480/transport',
-    66
+    'chercheur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Audeline',
@@ -803,9 +757,9 @@ VALUES
     'Aurélienne.Laine',
     'Raphal_Francois5@yahoo.fr',
     'RDgQ5lNU6kcCOL6',
-    true,
-    'http://placeimg.com/640/480/nature',
-    67
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Cécile',
@@ -813,9 +767,9 @@ VALUES
     'Norbert23',
     'Hildebert_Paris77@gmail.com',
     'E5flUQFcBgwQUUi',
-    true,
-    'http://placeimg.com/640/480/transport',
-    68
+    'proposeur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Carloman',
@@ -823,9 +777,9 @@ VALUES
     'Patrice_Leroux76',
     'Jason84@yahoo.fr',
     'RuJ2MrsnMqKLi0M',
-    true,
-    'http://placeimg.com/640/480/food',
-    69
+    'proposeur',
+    'http://placeimg.com/640/480/food'
+    
   ),
   (
     'Anastasie',
@@ -833,9 +787,9 @@ VALUES
     'Amandin_Marchal',
     'Audran.Lopez@yahoo.fr',
     '79eu9D7GxOwL3yH',
-    true,
-    'http://placeimg.com/640/480/nightlife',
-    70
+    'proposeur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Angilberte',
@@ -843,9 +797,9 @@ VALUES
     'Julie71',
     'Zo56@hotmail.fr',
     'S77pE8JqVk_Cm1j',
-    true,
-    'http://placeimg.com/640/480/nature',
-    71
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Clotilde',
@@ -853,9 +807,9 @@ VALUES
     'Jean30',
     'Maureen_Gaillard58@gmail.com',
     '6ts0H0ntg_E4TcZ',
-    false,
-    'http://placeimg.com/640/480/food',
-    72
+    'chercheur',
+    'http://placeimg.com/640/480/food'
+    
   ),
   (
     'Brieuc',
@@ -863,9 +817,9 @@ VALUES
     'Laure89',
     'Lorrain_Muller10@yahoo.fr',
     'Aj2p1erVFWnonES',
-    false,
-    'http://placeimg.com/640/480/animals',
-    73
+    'chercheur',
+    'http://placeimg.com/640/480/animals'
+    
   ),
   (
     'Briac',
@@ -873,9 +827,9 @@ VALUES
     'Auxane.Nicolas',
     'Aurore39@yahoo.fr',
     'Lcg1mtl7qWTi9jO',
-    false,
-    'http://placeimg.com/640/480/nightlife',
-    74
+    'chercheur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Pétronille',
@@ -883,9 +837,9 @@ VALUES
     'Jourdain31',
     'Arthaud.Denis@gmail.com',
     '6UUXSDOOuMa1OFf',
-    true,
-    'http://placeimg.com/640/480/fashion',
-    75
+    'proposeur',
+    'http://placeimg.com/640/480/fashion'
+    
   ),
   (
     'Épiphane',
@@ -893,19 +847,19 @@ VALUES
     'Valentine.Marchal',
     'Isidore_Morin@hotmail.fr',
     'JwfaglIR13Z4xgA',
-    true,
-    'http://placeimg.com/640/480/people',
-    76
+    'proposeur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Venance',
-    'Le gall',
+    'Le gtous types',
     'Auguste.Gonzalez',
     'Bernadette.Lecomte@gmail.com',
     'YUL5GnwbaUHt2kD',
-    true,
-    'http://placeimg.com/640/480/nature',
-    77
+    'proposeur',
+    'http://placeimg.com/640/480/nature'
+    
   ),
   (
     'Lionel',
@@ -913,9 +867,9 @@ VALUES
     'Philomène.Clement38',
     'Adeltrude11@yahoo.fr',
     'xLs1E9S975D1Hbw',
-    false,
-    'http://placeimg.com/640/480/business',
-    78
+    'chercheur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Michèle',
@@ -923,9 +877,9 @@ VALUES
     'Christian73',
     'Astrie_Breton14@gmail.com',
     'O0z8GIddK9PAkQY',
-    true,
-    'http://placeimg.com/640/480/business',
-    79
+    'proposeur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Frédéric',
@@ -933,9 +887,9 @@ VALUES
     'Abelin.Rey',
     'Arcade68@yahoo.fr',
     'ps0BT0wKA85VIBu',
-    true,
-    'http://placeimg.com/640/480/food',
-    80
+    'proposeur',
+    'http://placeimg.com/640/480/food'
+    
   ),
   (
     'Eustache',
@@ -943,19 +897,19 @@ VALUES
     'Éric_Joly18',
     'Paterne67@yahoo.fr',
     'ny7gXCxqhwUJ7oe',
-    true,
-    'http://placeimg.com/640/480/sports',
-    81
+    'proposeur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Herluin',
     'Guillot',
     'Lazare.Brunet',
-    'Adegrine.Legall68@gmail.com',
+    'Adegrine.Legtous types68@gmail.com',
     'I2SkCiSbp5HdUJf',
-    false,
-    'http://placeimg.com/640/480/transport',
-    82
+    'chercheur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Ozanne',
@@ -963,9 +917,9 @@ VALUES
     'Fortunée19',
     'Turold.Schmitt73@hotmail.fr',
     'uHOcCLXGmevD7kK',
-    true,
-    'http://placeimg.com/640/480/city',
-    83
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   ),
   (
     'Stanislas',
@@ -973,9 +927,9 @@ VALUES
     'Maureen.Marchand16',
     'Rosalie.Duval@hotmail.fr',
     'v92Czo814eiC9uM',
-    true,
-    'http://placeimg.com/640/480/transport',
-    84
+    'proposeur',
+    'http://placeimg.com/640/480/transport'
+    
   ),
   (
     'Artémis',
@@ -983,9 +937,9 @@ VALUES
     'Balthazar.Martinez',
     'Damien.Blanc@hotmail.fr',
     'bG_jLvmqj8bUYwp',
-    true,
-    'http://placeimg.com/640/480/business',
-    85
+    'proposeur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Alphonsine',
@@ -993,9 +947,9 @@ VALUES
     'Élzéar47',
     'Sverin.Richard82@hotmail.fr',
     'iBwIrfid69Zh9sX',
-    false,
-    'http://placeimg.com/640/480/people',
-    86
+    'chercheur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Laurane',
@@ -1003,9 +957,9 @@ VALUES
     'Audebert43',
     'Maureen_Garcia@yahoo.fr',
     'XjIh5CLoMZiHb79',
-    false,
-    'http://placeimg.com/640/480/sports',
-    87
+    'chercheur',
+    'http://placeimg.com/640/480/sports'
+    
   ),
   (
     'Joseph',
@@ -1013,9 +967,9 @@ VALUES
     'Fabien.Menard',
     'Mlodie.Barbier20@gmail.com',
     '_hCPy_dtX7rNbpU',
-    false,
-    'http://placeimg.com/640/480/technics',
-    88
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Émeline',
@@ -1023,9 +977,9 @@ VALUES
     'Alice18',
     'Parfait_Fournier@gmail.com',
     'iacH01NfNB04_Vc',
-    false,
-    'http://placeimg.com/640/480/abstract',
-    89
+    'chercheur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'René',
@@ -1033,9 +987,9 @@ VALUES
     'Fidèle76',
     'Swassane_Cousin48@hotmail.fr',
     '1dE1DAl_0bvzhcu',
-    false,
-    'http://placeimg.com/640/480/technics',
-    90
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Daniel',
@@ -1043,19 +997,19 @@ VALUES
     'Abigaïl1',
     'Claudien_Richard@gmail.com',
     '3COidV5Rtw04e4z',
-    false,
-    'http://placeimg.com/640/480/business',
-    91
+    'chercheur',
+    'http://placeimg.com/640/480/business'
+    
   ),
   (
     'Capucine',
-    'Le gall',
+    'Le gtous types',
     'Eudoxie.Giraud',
     'Olive.Noel@yahoo.fr',
     'tYjaFV3UwxzMTjp',
-    false,
-    'http://placeimg.com/640/480/nightlife',
-    92
+    'chercheur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Pierre',
@@ -1063,9 +1017,9 @@ VALUES
     'Axelle_Bourgeois',
     'Mireille48@yahoo.fr',
     'gaBvBM_1599936v',
-    true,
-    'http://placeimg.com/640/480/abstract',
-    93
+    'proposeur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Alverède',
@@ -1073,9 +1027,9 @@ VALUES
     'Gérard_Arnaud',
     'Eugnie22@hotmail.fr',
     '9GpGL5IWsLy3PsJ',
-    false,
-    'http://placeimg.com/640/480/abstract',
-    94
+    'chercheur',
+    'http://placeimg.com/640/480/abstract'
+    
   ),
   (
     'Reybaud',
@@ -1083,9 +1037,9 @@ VALUES
     'Longin24',
     'Henri_Picard@hotmail.fr',
     'GPIAUT5X4Ct92J3',
-    false,
-    'http://placeimg.com/640/480/technics',
-    95
+    'chercheur',
+    'http://placeimg.com/640/480/technics'
+    
   ),
   (
     'Xavière',
@@ -1093,9 +1047,9 @@ VALUES
     'Léon18',
     'Lonie.Blanchard@hotmail.fr',
     'DatZeFLLRBGtkn6',
-    false,
-    'http://placeimg.com/640/480/nightlife',
-    96
+    'chercheur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Nadine',
@@ -1103,9 +1057,9 @@ VALUES
     'Pie_Paris',
     'Ernestine.Simon89@gmail.com',
     'oV527FFBkRi2e1Z',
-    false,
-    'http://placeimg.com/640/480/nightlife',
-    97
+    'chercheur',
+    'http://placeimg.com/640/480/nightlife'
+    
   ),
   (
     'Jonathan',
@@ -1113,9 +1067,9 @@ VALUES
     'Ambre22',
     'Lonard_Meunier87@hotmail.fr',
     'UzN2Cyyw6r8_vPu',
-    true,
-    'http://placeimg.com/640/480/people',
-    98
+    'proposeur',
+    'http://placeimg.com/640/480/people'
+    
   ),
   (
     'Iris',
@@ -1123,9 +1077,9 @@ VALUES
     'Apolline_Fontaine80',
     'Aldric.Pierre@yahoo.fr',
     'ifmbd3ojmzezBbH',
-    true,
-    'http://placeimg.com/640/480/fashion',
-    99
+    'proposeur',
+    'http://placeimg.com/640/480/fashion'
+    
   ),
   (
     'Adonis',
@@ -1133,8 +1087,8 @@ VALUES
     'Cléry_Giraud',
     'Alexine_Lacroix9@yahoo.fr',
     'ubxrkv3j6bF72DS',
-    true,
-    'http://placeimg.com/640/480/city',
-    100
+    'proposeur',
+    'http://placeimg.com/640/480/city'
+    
   );
 COMMIT;

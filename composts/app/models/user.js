@@ -71,6 +71,12 @@ class User extends CoreModel {
         
     }
 
+
+    static async findProposeur() {
+        
+        const data = await db.query(`select id from user_compost where role = 'proposeur';`)
+        return new this(data)
+    }
 }
 
 module.exports = User;

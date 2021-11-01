@@ -50,12 +50,18 @@ const userController = {
     updateUser: async (req, res) => {
         try {
             console.log(req.body, req.params.id)
-            await User.update(req.body, req.params.id)
+            await User.update(req.body, req.params.id);
+            res.send('user updated')
 
 
         } catch (err) {
             res.status(500).send(err)
         }
+    },
+
+    findProposeur: async (req, res) => {
+        const data =await User.findProposeur();
+        res.send(data)
     }
 
 }
