@@ -2,13 +2,15 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import axios from 'axios';
+import { DevTool } from '@hookform/devtools';
+// import { ErrorMessage } from '@hookform/error-message';
 
 // Import composants
 // import Field from './Field';
 // import Checkbox from './Checkbox';
 
 export default function Userprofil() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
   const [coordinatesValue, setCoordinatesValue] = useState('');
 
   const onSubmit = (data) => {
@@ -43,7 +45,7 @@ export default function Userprofil() {
                 type="text"
                 id="firstname"
                 name="firstname"
-                {...register('firstname', { required: false, maxLength: 10 })}
+                {...register('firstname', { required: 'Veuillez saisir votre prénom' })}
               />
               <label htmlFor="lastname">Nom: </label>
               <input
@@ -120,7 +122,7 @@ export default function Userprofil() {
                     type="text"
                     id="zipcode"
                     name="zipcode"
-                    {...register('zipcode')}
+                    {...register('zipcode', { pattern: /^[0-9]+$/, maxLength: 5 })}
                   />
                   <label htmlFor="city">Ville: </label>
                   <input
@@ -141,6 +143,7 @@ export default function Userprofil() {
           </button>
         </form>
       </div>
+      <DevTool control={control} />
     </div>
   );
 }
