@@ -74,7 +74,7 @@ const Map = () => {
   }, [coords]);
   console.log(dataInfo);
   return (
-    <div className="app">
+    <div className="map">
       <MapContainer center={[46.227638, 2.213749]} zoom={10}>
         <SearchField
           apiKey={apiKey}

@@ -8,6 +8,9 @@ import Field from 'src/components/Field';
 // Import PropTypes
 import PropTypes from 'prop-types';
 
+// Import fichier scss
+import './style.scss';
+
 const Inscription = ({ hide, setIsLogin }) => {
   // console.log('test composant login');
   const [pseudoValue, setPseudoValue] = useState('');
@@ -74,11 +77,22 @@ const Inscription = ({ hide, setIsLogin }) => {
               onChange={(event) => setPasswordValue(event.target.value)}
             />
           </div>
+          <div className="radio-field">
+            <p className="radio-field__text">Je souhaite :</p>
+            <label htmlFor="offering">
+              <input type="radio" id="offering" name="inscription-choice" value="offering" className="radio-field__box" />
+              Proposer mon compost
+            </label>
+            <label htmlFor="searching">
+              <input type="radio" id="searching" name="inscription-choice" value="searching" className="radio-field__box" />
+              Trouver un compost
+            </label>
+          </div>
           <button
             className="inscription-form__submit"
             type="submit"
           >
-            Valider
+            S'inscrire
           </button>
         </form>
       </div>

@@ -70,8 +70,9 @@ const Login = ({ hide, setIsLogin }) => {
             Connexion
           </button>
         </form>
-        <p>Pas de compte ?</p>
+        <p className="inscription">Pas encore inscrit ?</p>
         <button
+          className="inscription-button"
           type="button"
           onClick={() => setIsLogin(false)}
         >
