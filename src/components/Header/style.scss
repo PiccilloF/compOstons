@@ -1,6 +1,4 @@
 .header {
-  border: 1px solid #33685e;
-
   &-top {
     display: flex;
     justify-content: space-between;
@@ -8,17 +6,10 @@
     .header_title {
       display: flex;
       align-items: center;
-      margin: 1.5rem;
-  
-      &_logo {
-        width: 70px;
-      }
   
       &_text {
         font-weight: bold;
-        font-size: 1.5rem;
         color: #33685e;
-        padding: 0.7rem;
       }
     }
 
@@ -26,7 +17,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 500px;
     
       .nav {
     
@@ -34,7 +24,6 @@
           background-color: #33685e;
           font-size: 1rem;
           color: white;
-          padding: 0.5rem 0.75rem;
           border: none;
           border-radius: 5px;
           margin-right: 1rem;
@@ -43,7 +32,6 @@
     
       .login {
         &_icon {
-          font-size: 2.5rem;
           cursor: pointer;
           color: #33685e;
           margin-right: 1.5rem;
@@ -54,8 +42,129 @@
 
   &-bottom {
     text-align: left;
-    margin-left: 7em;
     font-style: italic;
     color: #33685e;
   }
 }
+
+@media screen and (max-width: 575px) {
+  .header {
+    &-top {
+      
+      .header_title {
+        margin: 1em;
+    
+        &_logo {
+          width: 40px;
+        }
+    
+        &_text {
+          padding: 0.2rem;
+        }
+      }
+
+      .nav-login {
+
+        .nav {
+          a:nth-of-type(1) {
+            display: none;
+          }
+
+          &_button {
+            padding: 0.5rem;
+          }
+        }
+      
+        .login {
+          &_icon {
+            font-size: 2.3rem;
+          }
+        }
+      }
+    }
+
+    &-bottom {
+      margin: 0 1em;
+    }
+  }
+};
+
+@media screen and (min-width: 576px) and (max-width: 1199px) {
+  .header {
+    &-top {
+  
+      .header_title {
+        margin: 1rem;
+    
+        &_logo {
+          width: 50px;
+        }
+    
+        &_text {
+          font-size: 1.2rem;
+          padding: 0.5rem;
+        }
+      }
+  
+      .nav-login {
+      
+        .nav {      
+          &_button {
+            padding: 0.5rem;
+          }
+        }
+      
+        .login {
+          &_icon {
+            font-size: 2.4rem;
+          }
+        }
+      }
+    }
+  
+    &-bottom {
+      margin-left: 1.5em;
+    }
+  }
+};
+
+
+@media screen and (min-width: 1200px) {
+  .header {
+    &-top {
+  
+      .header_title {
+        margin: 1.5rem 1.5rem 0 1.5rem;
+    
+        &_logo {
+          width: 70px;
+        }
+    
+        &_text {
+          font-size: 1.5rem;
+          padding: 0.7rem;
+        }
+      }
+  
+      .nav-login {
+        width: 500px;
+      
+        .nav {      
+          &_button {
+            padding: 0.5rem 0.75rem;
+          }
+        }
+      
+        .login {
+          &_icon {
+            font-size: 2.5rem;
+          }
+        }
+      }
+    }
+  
+    &-bottom {
+      margin-left: 7em;
+    }
+  }
+};

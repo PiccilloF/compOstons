@@ -76,7 +76,11 @@ const Map = () => {
   console.log(dataInfo);
   return (
     <div className="map">
+<<<<<<< HEAD
       <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5}>
+=======
+      <MapContainer center={[46.227638, 2.213749]} zoom={10}>
+>>>>>>> origin/homePage
         <SearchField
           apiKey={apiKey}
           onShowLocation={(e) => {
