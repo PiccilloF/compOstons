@@ -5,10 +5,7 @@ const User = require('../models/user')
 const authController = {
 
     login: async (req, res) => {
-
-
         const mail = req.body.mail;
-
 
         if (!req.body.mail || !req.body.password) {
             res.send("veuillez renseigner tous les champs")
@@ -32,7 +29,7 @@ const authController = {
                 image: user.image
             };
 
-            res.send("user logged")
+            res.send(user)
 
         } else {
             
