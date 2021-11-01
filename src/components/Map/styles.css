@@ -14,4 +14,7 @@
   .leaflet-container {
     width: 50%;
   }
+  .map {
+    flex-wrap: nowrap;
+  }
 }
