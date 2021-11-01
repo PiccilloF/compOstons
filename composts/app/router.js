@@ -1,12 +1,15 @@
 const { Router } = require('express');
 const compostController = require('./controllers/compostController');
 const userController = require('./controllers/userController');
+const authController = require('./controllers/authController');
 
 const router = Router();
 
 
 router
     .get('/', compostController.homePage)
+    .get('/login', authController.showLogin)
+    .post('/login', authController.login)
     .get('/composts', compostController.getAllComposts) 
     
 
