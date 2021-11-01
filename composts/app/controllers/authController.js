@@ -26,9 +26,9 @@ const authController = {
             }
             
             
-            res.json(req.session)
+            res.send('user logged')
 
-        } else {
+         } else {
             
             res.status(500).send('erreur de saisie login et/ou mail');
         }
