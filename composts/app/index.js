@@ -25,7 +25,7 @@ app.use(session({
 }))
 
 
-console.log(session.cookie)
+console.log(session.session)
 const PORT = process.env.PORT || 5000;
 
 

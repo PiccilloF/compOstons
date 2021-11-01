@@ -8,7 +8,7 @@ const router = Router();
 
 router
     .get('/', compostController.homePage)
-    .get('/login', authController.showLogin)
+    
     .post('/login', authController.login)
     .get('/composts', compostController.getAllComposts) 
     
