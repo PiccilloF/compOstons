@@ -30,7 +30,7 @@ class User extends CoreModel {
     static async update(data, id) {
         // we recover data in database
         const formerUser = await User.findOne(id);
-       
+
         // if we have a new value we record it in the variable otherwise we let the actual data
         const firstname = data.firstname || formerUser.firstname;
         const lastname = data.lastname || formerUser.lastname;
@@ -56,6 +56,20 @@ class User extends CoreModel {
             console.trace(err)
         }
     }
+
+    static async find(mail, res) {
+      
+        try {
+           const user = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
+           
+
+        } catch (err) {
+            console.trace(err)
+        }
+        
+        
+    }
+
 }
 
 module.exports = User;

@@ -41,6 +41,8 @@ class CoreModel {
         return new this(data);
     }
 
+    
+
     static async delete(id) {
         const query = {
             text: `DELETE FROM ${this.tableName} WHERE id = $1`,

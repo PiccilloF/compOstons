@@ -28,6 +28,7 @@ const compostController = {
     },
 
     createOneCompost: async (req, res) => {
+        
         try {
             
             await Compost.create(req.body, req.params.id);

@@ -7,9 +7,10 @@ const cookieParser = require('cookie-parser');
 const session = require("express-session");
 
 
-app.use(cors('*'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors('*'));
 app.use(cookieParser());
 app.use(session({
 
@@ -23,7 +24,7 @@ app.use(session({
 }))
 
 
-console.log(session)
+// console.log(session)
 const PORT = process.env.PORT || 5000;
 
 

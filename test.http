@@ -1,25 +1,46 @@
+# GET http://localhost:3000/login
 
 # GET http://localhost:3000/composts/8
 
+POST http://localhost:3000/login
+content-type: application/json
+
+ {
+    "mail": "Alexine_Lacroix9@yahoo.fr",
+    "password": "ubxrkv3j6bF72DS"     
+    
+ }
+
+#  
+
 # GET https://compostons.herokuapp.com/composts
 
-#  POST http://localhost:3000/composts 
+#  POST http://localhost:3000/users/25
 #  content-type: application/json
 
 #  {
 #      "category": "Green",
-#      "longitude": 1,
-#      "latitude": 46
+#      "longitude": "4"
+    
 #  }
 
 # DELETE http://localhost:3000/users/15
 
 
 
-PUT http://localhost:3000/users/107
-content-type: application/json
+# PUT http://localhost:3000/users/107/update
+# content-type: application/json
 
- {
-    "category": "Gilbert"
+#  {
+#     "category": "Brown"
     
-}
+# }
+
+
+# PUT http://localhost:3000/users/100
+# content-type: application/json
+
+#  {
+#     "lastname": "Test"
+    
+# }
