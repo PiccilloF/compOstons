@@ -8,7 +8,7 @@ const session = require("express-session");
 
 
 app.use(cors({
-    origin: ['https://compostons.herokuapp.com/', 'https://compostons-project.surge.sh']
+    origin: '*'
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +25,7 @@ app.use(session({
 }))
 
 
-console.log(session.session)
+console.log(session)
 const PORT = process.env.PORT || 5000;
 
 
