@@ -18,6 +18,7 @@ import './style.scss';
 const Modal = ({ isOpen, hide }) => {
   const [isLogin, setIsLogin] = useState(true);
   const target = document.getElementById('root');
+
   return (
     isOpen
       ? ReactDOM.createPortal(

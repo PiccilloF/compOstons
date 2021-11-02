@@ -1,6 +1,10 @@
 // Import du gestionnaire de d'état
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
+
+// Context
+import { UserContext } from 'src/context/userContext';
+
 // Import du composant Field
 import Field from 'src/components/Field';
 
@@ -21,6 +25,7 @@ import './style.scss';
 
 const Login = ({ hide, setIsLogin }) => {
   // console.log('test composant login');
+  const [state, dispatch] = useContext(UserContext);
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -34,7 +39,11 @@ const Login = ({ hide, setIsLogin }) => {
     })
       .then((response) => {
         console.log(response.data);
-
+        dispatch({
+          type: 'LOGIN',
+          payload: response.data.login,
+        });
+        hide();
       })
       .catch((error) => {
         console.log(error);

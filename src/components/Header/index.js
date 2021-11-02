@@ -3,6 +3,10 @@
 
 // Import composant Link de react-router-dom
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+
+// Context
+import { UserContext } from 'src/context/userContext';
 
 // Import composant Modal
 import Modal from 'src/components/Modal';
@@ -22,7 +26,9 @@ import './style.scss';
 
 const Header = () => {
   const { isOpen, toggle } = useModal();
-  console.log('test composant header');
+
+  const [state] = useContext(UserContext);
+  const { isLogged, userName } = state;
 
   return (
     <>
@@ -34,6 +40,15 @@ const Header = () => {
               <h1 className="header_title_text">CompOstons</h1>
             </div>
           </Link>
+          {
+            isLogged
+              ? (
+                <div>
+                  <p>Bonjour {userName}</p>
+                </div>
+              )
+              : null
+          }
           <div className="nav-login">
             <nav className="nav">
               <Link to="/">
@@ -47,13 +62,27 @@ const Header = () => {
                 </button>
               </Link>
             </nav>
-            <div className="login">
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                className="login_icon"
-                onClick={toggle}
-              />
-            </div>
+            {
+              isLogged
+                ? (
+                  <div className="login">
+                    <FontAwesomeIcon
+                      icon={faUserCircle}
+                      className="login_icon"
+                      onClick={() => console.log('click sur login en header connecté')}
+                    />
+                  </div>
+                )
+                : (
+                  <div className="login">
+                    <FontAwesomeIcon
+                      icon={faUserCircle}
+                      className="login_icon"
+                      onClick={toggle}
+                    />
+                  </div>
+                )
+            }
           </div>
         </div>
         <div className="header-bottom">
