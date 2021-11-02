@@ -16,8 +16,8 @@ const authController = {
             const user = await User.find(req.body.mail);
                        
 
-            if (user.mail) {
-                console.log(user)
+            if (user.mail || user.username) {
+                // console.log(user)
                 res.status(400).send("user already exists")
                 return;
             }
@@ -29,8 +29,16 @@ const authController = {
 
             req.body.password = await bcrypt.hash(req.body.password, saltRounds);
 
-            await User.create(req.body);
-            res.status(201).send('utilisateur créé en base');
+            const newUser = await User.create(req.body);
+
+            // we check if database doesn't return error
+            console.log(error)
+            // if (newUser) {
+            //     res.status(201).send('utilisateur créé en base');
+            // } 
+            // res.status(400).send("le mail n'est pas valide")
+
+            
         } catch (err) {
             res.status(500).send(err);
             console.log(err);
