@@ -1,9 +1,11 @@
 /* eslint-disable arrow-body-style */
+
 // Import des composants
 import Header from 'src/components/Header';
 // import Modal from 'src/components/Modal';
 // import useModal from 'src/hooks/useModal';
 import Map from 'src/components/Map';
+
 
 import './styles.css';
 

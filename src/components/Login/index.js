@@ -27,12 +27,14 @@ const Login = ({ hide, setIsLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     axios.post('https://compostons.herokuapp.com/login', {
       mail: emailValue,
       password: passwordValue,
     })
       .then((response) => {
         console.log(response.data);
+
       })
       .catch((error) => {
         console.log(error);
