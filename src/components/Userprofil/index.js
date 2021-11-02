@@ -1,13 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+// Gérer les champs controllés des formulaires via un hook dédié, évite de regénrer un rendu
+// lors de la saisie.
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+// Import du openStreetMapProvider pour gérer l'autocomplétion et la recherche de l"adresse.
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+// Import d'axios pour gérer les requêtes.
 import axios from 'axios';
+// Immport du devTool de useForm hook, installé dans les devs depedencies.
 import { DevTool } from '@hookform/devtools';
-// import { ErrorMessage } from '@hookform/error-message';
 
-// Import composants
-// import Field from './Field';
-// import Checkbox from './Checkbox';
+// import { ErrorMessage } from '@hookform/error-message';
 
 export default function Userprofil() {
   const { register, handleSubmit, control } = useForm();
@@ -64,7 +67,8 @@ export default function Userprofil() {
                 {...register('alias')}
               />
               <button
-                type="submit"
+                type="button"
+                onClick={() => console.log('je supprime mon compte')}
                 id="delete-profil__button"
               >supprimer ce compte
               </button>
@@ -77,34 +81,38 @@ export default function Userprofil() {
                   <label htmlFor="greenType">Déchets verts</label>
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="greenType"
-                    id="greenType"
-                    {...register('greentype')}
+                    type="radio"
+                    name="compostType"
+                    id="vert"
+                    value="vert"
+                    {...register('compostType')}
                   />
                   <label htmlFor="greenType">Déchets bruns</label>
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="brownType"
-                    id="brownType"
-                    {...register('brownType')}
+                    type="radio"
+                    name="compostType"
+                    id="marron"
+                    value="marron"
+                    {...register('compostType')}
                   />
-                  <label htmlFor="trashType">Déchets ménagers</label>
+                  <label htmlFor="trashType">Tous types de déchets compostables</label>
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="trashType"
-                    id="trashType"
-                    {...register('trashType')}
+                    type="radio"
+                    name="compostType"
+                    id="tous types"
+                    value="tous types"
+                    {...register('compostType')}
                   />
                   <label htmlFor="availability">Je n'accepte pas de déchets en ce moment</label>
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="availability"
-                    id="availability"
-                    {...register('availability')}
+                    type="radio"
+                    name="compostType"
+                    id="aucun"
+                    value="aucun"
+                    {...register('compostType')}
                   />
                 </div>
                 <div className="compost-inputs-block">
