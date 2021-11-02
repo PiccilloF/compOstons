@@ -22,7 +22,7 @@ const authController = {
                 req.session.login = {
                     username: user.username,
                     id: user.id,
-                    
+                   
                 }
 
                 console.log(req.session)
