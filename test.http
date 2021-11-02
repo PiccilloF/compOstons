@@ -16,6 +16,15 @@ content-type: application/json
     
  }
 
+#  POST http://localhost:3000/login
+# content-type: application/json
+
+#  {
+#     "mail": "michel.blanc@yahoo.fr",
+#     "password": "jaimeecompost"    
+    
+#  }
+
  
 
 # GET https://compostons.herokuapp.com/composts

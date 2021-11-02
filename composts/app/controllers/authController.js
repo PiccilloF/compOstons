@@ -1,5 +1,7 @@
 const User = require('../models/user');
-const session = require("express-session");
+// const session = require("express-session"); usefull
+const bcrypt = require('bcrypt');
+const saltRounds = 6;
 
 
 
@@ -8,46 +10,66 @@ const authController = {
 
     register: async (req, res) => {
 
-        // check if password = password confirmation 
-        if(req.body.password !== req.body.confirmedPassword) {
-            res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques")
-        } else {
-            
+        try {
+
+            // check if user already exists 
+            const user = await User.find(req.body.mail);
+                       
+
+            if (user.mail) {
+                console.log(user)
+                res.status(400).send("user already exists")
+                return;
+            }
+            // check if password = password confirmation 
+            if (req.body.password !== req.body.confirmedPassword) {
+                res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques");
+                return;
+            }
+
+            req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+
             await User.create(req.body);
-            res.status(201).send('utilisateur créé en base')
+            res.status(201).send('utilisateur créé en base');
+        } catch (err) {
+            res.status(500).send(err);
+            console.log(err);
         }
-
-
     },
 
     login: async (req, res) => {
         const mail = req.body.mail;
 
         if (!req.body.mail || !req.body.password) {
-            res.send("veuillez renseigner tous les champs")
+            return res.send("veuillez renseigner tous les champs")
         }
 
         try {
             const user = await User.find(mail);
+            
+
+            // compare clear password with encrypted password
+            const clearPassword = await bcrypt.compare(req.body.password, user.password);
 
 
-            if (req.body.mail.toString() === user.mail.toString() && req.body.password === user.password) {
-
-                req.session.login = {
-                    username: user.username,
-                    id: user.id,
-
-                }
-                res.send(req.session)
-
-
-            } else {
-
-                res.status(500).send('erreur de saisie login et/ou mail');
+            if (!clearPassword) {
+                res.status(400).send("erreur lors de la saisie du mot de passe ");
+                return;
             }
 
+            req.session.login = {
+                username: user.username,
+                id: user.id,
+
+            }
+            res.send(req.session)
+
+
+
         } catch (err) {
-            console.log(err)
+            
+            console.log(err);
+            res.status(400).send("erreur lors de la saisie de votre email et/ou mot de passe")
         }
 
 
