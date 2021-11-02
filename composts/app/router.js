@@ -9,6 +9,7 @@ const router = Router();
 router
     .get('/', compostController.homePage)    
     .get('/test', userController.findProposeur)
+    .post('/register', authController.register)
     .post('/login', authController.login)
     .delete('/logout', authController.logout)
     .get('/composts', compostController.getCompostAndUsername) 

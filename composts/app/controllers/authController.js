@@ -6,6 +6,20 @@ const session = require("express-session");
 
 const authController = {
 
+    register: async (req, res) => {
+
+        // check if password = password confirmation 
+        if(req.body.password !== req.body.confirmedPassword) {
+            res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques")
+        } else {
+            
+            await User.create(req.body);
+            res.status(201).send('utilisateur créé en base')
+        }
+
+
+    },
+
     login: async (req, res) => {
         const mail = req.body.mail;
 
@@ -22,13 +36,10 @@ const authController = {
                 req.session.login = {
                     username: user.username,
                     id: user.id,
-                   
-                }
 
-                console.log(req.session)
-                console.log(req.headers.cookie)
+                }
                 res.send(req.session)
-                
+
 
             } else {
 
@@ -49,14 +60,14 @@ const authController = {
             if (err) {
                 res.status(400).send("Error while logout")
             } else {
-                 req.headers.cookie = null;
-                 req.session.login = null;
-                 res.send("User is now logout");
-                
-               
+                req.headers.cookie = null;
+                req.session.login = null;
+                res.send("User is now logout");
+
+
             }
         })
-        
+
 
 
     }

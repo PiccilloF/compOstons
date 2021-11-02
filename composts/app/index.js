@@ -14,7 +14,7 @@ app.use(cors('*'));
 
 app.use(session({
 
-    secret: 'jecompostetonmotdepasse', //string used for signing cookie
+    secret: 'jecompostetonmotdepasse', //string used for signing session
     resave: true,//autosave at the end of the request
     saveUninitialized: true, // save all sessions - even empties
     cookie: {

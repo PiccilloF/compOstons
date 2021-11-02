@@ -22,10 +22,13 @@ const userController = {
     },
 
     createOneUser: async (req, res) => {
+
+        
+
         try {
 
-            await User.create(req.body)
-            res.send('ok')
+            const user = await User.create(req.body)
+            res.json(user)
             // voir pour redirect
 
         } catch (err) {

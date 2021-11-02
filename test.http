@@ -1,19 +1,22 @@
 # GET http://localhost:3000/
 
-DELETE http://localhost:3000/logout
+# DELETE http://localhost:3000/logout
 
-# GET http://localhost:3000/composts/8
+#  GET http://localhost:3000/composts
 
-POST http://localhost:3000/login
+POST http://localhost:3000/register
 content-type: application/json
 
  {
-    "mail": "Alexine_Lacroix9@yahoo.fr",
-    "password": "ubxrkv3j6bF72DS"     
+    "username": "MichelB",
+    "mail": "michel.blanc@yahoo.fr",
+    "password": "jaimelecompost",
+    "confirmedPassword": "jaimelecompost",
+    "role": "proposeur"     
     
  }
 
-#  
+ 
 
 # GET https://compostons.herokuapp.com/composts
 

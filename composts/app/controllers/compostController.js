@@ -45,8 +45,8 @@ const compostController = {
         
         try {
             
-            await Compost.create(req.body, req.params.id);
-            res.send('ok');
+            const compost = await Compost.create(req.body, req.params.id);
+            res.json(compost);
             // voir pour redirect
 
         } catch (err) {
@@ -71,7 +71,8 @@ const compostController = {
     updateCompost: async (req, res) => {
         try {
             
-            await Compost.update(req.body, req.params.id)
+            const compost = await Compost.update(req.body, req.params.id);
+            res.json(compost);
 
 
         } catch (err) {
