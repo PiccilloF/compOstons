@@ -27,7 +27,7 @@ const authController = {
 
                 console.log(req.session)
                 console.log(req.headers.cookie)
-                res.send('user logged')
+                res.send(req.session)
                 
 
             } else {
