@@ -98,13 +98,13 @@ export default function Userprofil() {
                     id="trashType"
                     {...register('trashType')}
                   />
-                  <label htmlFor="availabity">Je n'accepte pas de déchets en ce moment</label>
+                  <label htmlFor="availability">Je n'accepte pas de déchets en ce moment</label>
                   <input
                     className="compostType-checkbox-element"
                     type="checkbox"
-                    name="availbality"
-                    id="availbality"
-                    {...register('availbality')}
+                    name="availability"
+                    id="availability"
+                    {...register('availability')}
                   />
                 </div>
                 <div className="compost-inputs-block">
