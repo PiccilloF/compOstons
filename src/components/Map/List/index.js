@@ -20,7 +20,7 @@ const List = ({ dataInfo }) => {
     <div className="list">
       {!dataInfo && (
         <h1 className="list-title">
-          Saisisez une adresse pour trouver les points de compost les plus proches
+          Saisissez une adresse pour trouver les points de compost les plus proches
         </h1>
       )}
       {dataInfo && (
@@ -32,26 +32,26 @@ const List = ({ dataInfo }) => {
             {dataInfo.map((dataMarker) => {
               // en fonction de la donnée dans category je veux pouvoir faire
               // varier le message afficher dans ma card et son style
-              let messageAvailablity = null;
+              let messageAvailability = null;
               switch (dataMarker.category) {
-                case 'Brown':
-                  messageAvailablity = 'Accepte les dechets de type brun';
+                case 'marron':
+                  messageAvailability = 'Accepte les dechets de type brun';
                   break;
-                case 'Green':
-                  messageAvailablity = 'Accepte les dechets de type vert';
+                case 'vert':
+                  messageAvailability = 'Accepte les dechets de type vert';
                   break;
-                case 'All':
-                  messageAvailablity = 'Accepte tous types de dechets compostable';
+                case 'tous types':
+                  messageAvailability = 'Accepte tous types de dechets compostable';
                   break;
                 default:
-                  messageAvailablity = 'N\'accepte pas de dechets pour le moment';
+                  messageAvailability = 'N\'accepte pas de dechets pour le moment';
                   break;
               }
               return (
                 <Card
                   key={dataMarker.id}
                   pseudo={dataMarker.username}
-                  message={messageAvailablity}
+                  message={messageAvailability}
                   userId={dataMarker.user_id}
                 />
               );

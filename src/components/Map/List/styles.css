@@ -10,7 +10,6 @@
   max-height: 500px;
   width: 100%;
   border-radius: 10px;
-  background-color: brown;
 }
 
 @media (min-width:768px) {

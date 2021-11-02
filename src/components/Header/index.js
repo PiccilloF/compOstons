@@ -57,7 +57,7 @@ const Header = () => {
           </div>
         </div>
         <div className="header-bottom">
-          <p>Rien ne se perd, rien ne crée, (presque) tout se compost !</p>
+          <p>Rien ne se perd, rien ne se crée, (presque) tout se compost !</p>
         </div>
       </header>
       <Modal isOpen={isOpen} hide={toggle} />

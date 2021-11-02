@@ -1,5 +1,6 @@
 // Import du gestionnaire de d'état
 import { useState } from 'react';
+import axios from 'axios';
 // Import du composant Field
 import Field from 'src/components/Field';
 
@@ -26,7 +27,16 @@ const Login = ({ hide, setIsLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('je soumet le formulaire');
+    axios.post('https://compostons.herokuapp.com/login', {
+      mail: emailValue,
+      password: passwordValue,
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
