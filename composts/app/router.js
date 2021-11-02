@@ -10,6 +10,7 @@ router
     .get('/', compostController.homePage)    
     .get('/test', userController.findProposeur)
     .post('/login', authController.login)
+    .delete('/logout', authController.logout)
     .get('/composts', compostController.getCompostAndUsername) 
     
 

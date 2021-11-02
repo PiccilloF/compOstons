@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('./router');
 const app = express();
 const cors = require('cors')
-const cookieParser = require('cookie-parser');
+
 const session = require("express-session");
 
 
@@ -11,7 +11,7 @@ const session = require("express-session");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors('*'));
-app.use(cookieParser());
+
 app.use(session({
 
     secret: 'jecompostetonmotdepasse', //string used for signing cookie
@@ -20,11 +20,11 @@ app.use(session({
     cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000
     }
-
+    
 }))
 
 
-// console.log(session)
+
 const PORT = process.env.PORT || 5000;
 
 

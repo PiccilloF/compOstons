@@ -2,14 +2,16 @@ const Compost = require('../models/compost');
 
 const compostController = {
 
-    homePage: (_, res) => {
+    homePage: (req , res) => {
+        console.log(req.headers.cookie)
+        console.log(req.session)
         res.send('Ready to compost !!')
     },
 
     getCompostAndUsername: async (req,res) => {
         try {
             const composts = await Compost.allCompostJoinUser();
-                        res.json(composts.rows)
+            res.json(composts.rows)
         } catch (err) {
             console.trace(err)
             res.status(500).send("erreur de récupérations des données")

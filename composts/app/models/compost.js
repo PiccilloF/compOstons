@@ -50,7 +50,7 @@ class Compost extends CoreModel {
 
     static async allCompostJoinUser () {
         const query = {
-            text: `SELECT compost.id, category, longitude, latitude, user_id, username FROM compost  JOIN user_compost ON compost.id = user_compost.id WHERE user_compost.role = 'true';`
+            text: `SELECT compost.id, category, longitude, latitude, user_id, username FROM compost  JOIN user_compost ON compost.id = user_compost.id WHERE user_compost.role = 'proposeur';`
         }
 
         try {
