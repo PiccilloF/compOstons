@@ -1,0 +1,20 @@
+.list {
+  padding: 1em;
+}
+.list-title {
+  font-size: 1.2em;
+
+}
+
+.list-marker {
+  max-height: 500px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (min-width:768px) {
+  .list {
+    width: 50%;
+  }
+}
+
