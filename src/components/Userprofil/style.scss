@@ -1,6 +1,60 @@
+.main-profil__container {
+  display: flex;
+  justify-content: center;
+
+  & .profil-picture__container {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0.5em;
+    margin: 1em;
+    background-color: darkmagenta;
+  }
+} 
+.user-profil {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    width: 100%;
+    background-color: yellowgreen;
+    border: 1px solid black;
+  
+  & .infos-container {
+    display: flex;
+      & .user-infos {
+        position: relative;
+        margin: 1rem;
+        background-color: cadetblue;
+        width:50%;
+        border: 1px solid black;
+         
+        & .user-input-group{
+            display: flex;
+            flex-direction: column;
+            & .user-input__element {
+              font-style: italic;
+              border: 1px solid violet
+            }  
+          }
+      }
+        
+      & .compostType-infos {
+          width: 50%;
+          background-color: darkgray;
+          border: 1px solid black;
+            & .compostType-checkbox-group {
+              border: 1px solid black;
+            }
+      }
+  }
+
+}
+
 .field {
   width: 50%;
   padding: 0.5em;
   margin-bottom: 1em;
   border-radius: 5px;
+
+  
 }
