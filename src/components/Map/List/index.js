@@ -12,7 +12,7 @@ const List = ({ dataInfo }) => {
       title = '1 point de compostage trouvé';
     }
     else if (length > 1) {
-      title = `${length} points de compostage trouvé`;
+      title = `${length} points de compostage trouvés`;
     }
     return title;
   };

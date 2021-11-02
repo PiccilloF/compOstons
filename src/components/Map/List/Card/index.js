@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const Card = ({ pseudo, message, userId }) => (
+const Card = ({ pseudo, message, userId, toggle}) => (
   <div className="list-card">
     <p>
       {pseudo}
@@ -9,9 +9,9 @@ const Card = ({ pseudo, message, userId }) => (
     <p>
       {message}
     </p>
-    <a>Envoyer un message à {pseudo} </a>
-    {/* refaire le a pour ouverture de
-    la modale du formulaire de mise en relation */}
+    <button name={userId} type="button" className="button-linking" onClick={toggle}>Envoyer un message à {pseudo}</button>
+    {/* au click sur ce bouton je veux executer une fonction qui va
+    executer mon toggle et lui passer une value de l'event */}
   </div>
 );
 
