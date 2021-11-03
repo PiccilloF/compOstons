@@ -3,25 +3,30 @@
 // lors de la saisie.
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+
 // Import du openStreetMapProvider pour gérer l'autocomplétion et la recherche de l"adresse.
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
+
 // Import d'axios pour gérer les requêtes.
 import axios from 'axios';
+
 // Immport du devTool de useForm hook, installé dans les devs depedencies.
 import { DevTool } from '@hookform/devtools';
 
-import './style.scss';
+// import composants
+import Resultlist from 'src/components/Userprofil/Resultlist';
 
-// import { ErrorMessage } from '@hookform/error-message';
+import './style.scss';
 
 export default function Userprofil() {
   const { register, handleSubmit, control } = useForm();
   const [coordinatesValue, setCoordinatesValue] = useState('');
   const [adressInfo, setAdressInfo] = useState([]);
 
-  const provider = new OpenStreetMapProvider();
+  // j'instancie une nouvelle classe de OpenStreetMapProvider
+  /* const provider = new OpenStreetMapProvider();
 
-  // test geoControl
+  // test geoControl pour le champ unique de recherche avec autocomplétion.
   const searchInput = async (value) => {
     try {
       const results = await provider.search({ query: value });
@@ -30,27 +35,36 @@ export default function Userprofil() {
     catch (error) {
       console.error(error);
     }
-  };
+  }; */
 
+  /* // Organisation des résultats de la recherche de l'adresse via le searchInput avec
+  // OpenStreetMapProvider.
   const listResults = adressInfo.map((item) => item.label);
   const shortList = listResults.slice(5);
-  console.log(shortList);
+  console.log(shortList[0]); */
 
+  // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
+  // en latitude et longitude de l'adresse saisie.
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const apiGouvSearch = (value) => {
+    console.log(value);
     axios({
       method: 'get',
-      url: (`https://api-adresse.data.gouv.fr/search/?q=${data.address}+${data.zipcode}+${data.city}}`),
+      url: (`https://api-adresse.data.gouv.fr/search/?q=${value}&autocomplete=1`),
     })
       .then((response) => {
-        const fulldatas = response.data.features;
-        const parsedDatas = fulldatas.map((item) => item.geometry);
-        const coordinates = parsedDatas.map((item) => item.coordinates);
-        setCoordinatesValue([coordinates[0][1], coordinates[0][0]]);
+        const datas = response.data.features;
+        const properties = datas.map((item) => item.properties.label);
+        setAdressInfo(properties);
       });
   };
 
-  console.log(coordinatesValue);
+  const handleClick = () => {
+    console.log('je clique sur l\'élément');
+  };
 
   return (
     <div className="main-profil__container">
@@ -165,7 +179,13 @@ export default function Userprofil() {
                   /> */}
                 <input
                   type="text"
-                  onChange={(event) => searchInput(event.target.value)}
+                  onChange={(event) => apiGouvSearch(event.target.value)}
+                />
+              </div>
+              <div className="result-list">
+                <Resultlist
+                  addressResults={adressInfo}
+                  onClick={handleClick}
                 />
               </div>
             </div>
