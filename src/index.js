@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // == Import : local
+// Context
+import { UserContextProvider } from 'src/context/userContext';
 // Composants
 import App from 'src/components/App';
 
@@ -11,9 +13,11 @@ import App from 'src/components/App';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 
 const rootReactElement = (
-  <Router>
-    <App />
-  </Router>
+  <UserContextProvider>
+    <Router>
+      <App />
+    </Router>
+  </UserContextProvider>
 );
 
 // 2. La cible du DOM (là où la structure doit prendre vie dans le DOM)
