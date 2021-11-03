@@ -1,15 +1,14 @@
-// Import PropTypes
-// import PropTypes from 'prop-types';
-
 // Import composant Link de react-router-dom
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+
+import { useContext, useState } from 'react';
 
 // Context
 import { UserContext } from 'src/context/userContext';
 
-// Import composant Modal
+// Import composant Modal et UserZone
 import Modal from 'src/components/Modal';
+import UserZone from 'src/components/Header/UserZone';
 
 // Import hook personnel useModal
 import useModal from 'src/hooks/useModal';
@@ -28,7 +27,9 @@ const Header = () => {
   const { isOpen, toggle } = useModal();
 
   const [state] = useContext(UserContext);
-  const { isLogged, userName } = state;
+  const { isLogged, username } = state;
+
+  const [isShowing, setIsShowing] = useState(false);
 
   return (
     <>
@@ -41,13 +42,11 @@ const Header = () => {
             </div>
           </Link>
           {
-            isLogged
-              ? (
-                <div>
-                  <p>Bonjour {userName}</p>
-                </div>
-              )
-              : null
+            isLogged && (
+              <div className="hello-user-container">
+                <p className="hello-user-text">ヽ(^-^)丿 Bonjour {username} ! \(^-^)/</p>
+              </div>
+            )
           }
           <div className="nav-login">
             <nav className="nav">
@@ -69,8 +68,9 @@ const Header = () => {
                     <FontAwesomeIcon
                       icon={faUserCircle}
                       className="login_icon"
-                      onClick={() => console.log('click sur login en header connecté')}
+                      onClick={() => setIsShowing(!isShowing)}
                     />
+                    {isShowing && <UserZone setIsShowing={setIsShowing} />}
                   </div>
                 )
                 : (
@@ -93,9 +93,5 @@ const Header = () => {
     </>
   );
 };
-
-/* Header.propTypes = {
-  onClickLogin: PropTypes.func.isRequired,
-}; */
 
 export default Header;

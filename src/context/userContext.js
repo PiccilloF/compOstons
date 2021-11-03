@@ -5,8 +5,15 @@ export const UserContext = createContext();
 
 const initialState = {
   isLogged: false,
-  id: '',
-  userName: '',
+  id: 0,
+  username: '',
+  mail: '',
+  firstname: '',
+  lastname: '',
+  role: '',
+  image: '',
+  created_at: '',
+  updated_at: '',
 };
 
 const userReducer = (state, action) => {
@@ -14,9 +21,8 @@ const userReducer = (state, action) => {
     case 'LOGIN':
       return {
         ...state,
-        id: action.payload.id,
-        userName: action.payload.username,
         isLogged: true,
+        ...action.payload,
       };
     case 'LOGOUT':
       return {

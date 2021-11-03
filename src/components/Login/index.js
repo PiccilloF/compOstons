@@ -38,10 +38,10 @@ const Login = ({ hide, setIsLogin }) => {
       password: passwordValue,
     })
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         dispatch({
           type: 'LOGIN',
-          payload: response.data.login,
+          payload: response.data,
         });
         hide();
       })
