@@ -35,8 +35,7 @@ class CoreModel {
         return data.map(element => new this(element));
     }
 
-    static async findOne(id) {
-        console.log(this);
+    static async findOne(id) {        
         const data = await CoreModel.fetchOne(`SELECT * FROM ${this.tableName} WHERE id = $1`, [id]);
         return new this(data);
     }

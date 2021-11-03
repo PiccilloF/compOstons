@@ -9,8 +9,12 @@ const authController = {
     register: async (req, res) => {
 
         try {
+            // Check if all needed infos are send 
+            if(!req.body.username || !req.body.password || !req.body.confirmedPassword || !req.body.role ) {
+                res.send('tous les champs obligatoires doivent êtes complétés')
+            }
 
-            // check if user already exists 
+            // check if user already exists - if null return an error in console "no data in your query"
             const user = await User.find(req.body.mail);
 
 
@@ -28,18 +32,19 @@ const authController = {
             req.body.password = await bcrypt.hash(req.body.password, saltRounds);
 
             const newUser = await User.create(req.body);
-
-            // we check if database doesn't return error
-
-            if (newUser) {
-                res.status(201).send('utilisateur créé en base');
+            if(newUser) {
+               delete newUser.password;
+            res.status(201).json(newUser)
+            } else {
+                res.status(400).send('error while registreing newUser, check body values')
             }
-            res.status(400).send("le mail n'est pas valide");
+            
+           
 
 
         } catch (err) {
             res.status(500).send(err);
-            console.log(err);
+            
         }
     },
 
