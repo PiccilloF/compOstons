@@ -2,19 +2,19 @@
 
 # DELETE http://localhost:3000/logout
 
-#  GET http://localhost:3000/composts
+ GET http://localhost:3000/composts
 
-POST http://localhost:3000/register
-content-type: application/json
+# POST http://localhost:3000/register
+# content-type: application/json
 
- {
-    "username": "MichelB",
-    "mail": "michel.blanc@yahoo.fr",
-    "password": "jaimelecompost",
-    "confirmedPassword": "jaimelecompost",
-    "role": "proposeur"     
+#  {
+#     "username": "Michel",
+#     "mail": "michel.blancyahoo.fr",
+#     "password": "jaimelecompost",
+#     "confirmedPassword": "jaimelecompost",
+#     "role": "proposeur"     
     
- }
+#  }
 
 #  POST http://localhost:3000/login
 # content-type: application/json
@@ -42,11 +42,11 @@ content-type: application/json
 
 
 
-# PUT http://localhost:3000/users/107/update
+# PUT http://localhost:3000/users/51/update
 # content-type: application/json
 
 #  {
-#     "category": "Brown"
+#     "category": "Green"
     
 # }
 

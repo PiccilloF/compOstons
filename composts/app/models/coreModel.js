@@ -49,6 +49,7 @@ class CoreModel {
         try {
             // console.log('attention ça va delete')
             await db.query(query);
+            
 
         } catch (err) {
             console.error(err)

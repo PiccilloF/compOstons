@@ -26,20 +26,19 @@ class Compost extends CoreModel {
         
         const formerCompost = await Compost.findOne(id);
         
+        
         // if a new data is sended, update variable else you let the old one.
         const category = data.category || formerCompost.category;
         const longitude = data.longitude || formerCompost.longitude;
         const latitude = data.latitude || formerCompost.latitude;
-
-        const query = {
-            text: `UPDATE compost SET category = $1, longitude = $2, latitude = $3 WHERE id = $4;`,
-            values: [category, longitude, latitude, id]
-        }
+        
+        const dataUpdated = {category, longitude, latitude};
         
         try {
-            await db.query(query);
-            res.send('user updated');
-            // need new user datas ??  
+            // function postgresql to update data
+            await db.query(`SELECT update_compost($1,$2)`, [dataUpdated, id]);
+            return ('user updated')
+            
 
         } catch (err) {
             console.trace(err);
@@ -47,13 +46,10 @@ class Compost extends CoreModel {
     }
 
     static async allCompostJoinUser () {
-        const query = {
-            text: `SELECT compost.id, category, longitude, latitude, user_id, username FROM compost  JOIN user_compost ON compost.id = user_compost.id WHERE user_compost.role = 'proposeur';`
-        }
-
         try {
-           const data =  await db.query(query);
-           return new this(data);
+            // function postgresql to update data - lighter code / making each row an instance of Compost;
+           return (await db.query(`SELECT * FROM porposeur`)).rows.map(row => new this(row));
+     
         } catch (err) {
             console.trace(err)
         }

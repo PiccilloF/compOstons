@@ -43,7 +43,6 @@ const userController = {
 
     updateUser: async (req, res) => {
         try {
-            console.log(req.body, req.params.id);
             await User.update(req.body, req.params.id);
             res.send('user updated');
 

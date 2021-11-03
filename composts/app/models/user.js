@@ -39,16 +39,11 @@ class User extends CoreModel {
         const role = data.role || formerUser.role;
         const image = data.image || formerUser.image;
 
-        const query = {
-            text: `UPDATE user_compost SET firstname = $1, lastname = $2, username = $3, mail = $4, password = $5, role = $6, image = $7 WHERE id = $8;`,
-            values: [firstname, lastname, username, mail, password, role, image, id]
-        }
-
-        console.log(query)
-
+       const dataUpdated = {firstname, lastname, username, mail, password, role, image};
 
         try {
-            await db.query(query);
+             // function postgresql to update data
+            await db.query(`SELECT update_user($1, $2)`, [dataUpdated, id]);
             console.log('user is up to date')
 
         } catch (err) {
@@ -65,17 +60,16 @@ class User extends CoreModel {
 
         } catch (err) {
             console.trace(err)
-        }
-        
+        }        
         
     }
 
 
-    static async findProposeur() {
+    // static async findProposeur() {
         
-        const data = await db.query(`select id from user_compost where role = 'proposeur';`)
-        return new this(data)
-    }
+    //     const data = await db.query(`select id from user_compost where role = 'proposeur';`)
+    //     return new this(data)
+    // }
 }
 
 module.exports = User;
