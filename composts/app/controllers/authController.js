@@ -4,8 +4,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 6;
 
 
-
-
 const authController = {
 
     register: async (req, res) => {
@@ -14,7 +12,7 @@ const authController = {
 
             // check if user already exists 
             const user = await User.find(req.body.mail);
-                       
+
 
             if (user.mail || user.username) {
                 // console.log(user)
@@ -32,13 +30,13 @@ const authController = {
             const newUser = await User.create(req.body);
 
             // we check if database doesn't return error
-            console.log(error)
-            // if (newUser) {
-            //     res.status(201).send('utilisateur créé en base');
-            // } 
-            // res.status(400).send("le mail n'est pas valide")
 
-            
+            if (newUser) {
+                res.status(201).send('utilisateur créé en base');
+            }
+            res.status(400).send("le mail n'est pas valide");
+
+
         } catch (err) {
             res.status(500).send(err);
             console.log(err);
@@ -54,38 +52,26 @@ const authController = {
 
         try {
             const user = await User.find(mail);
-            
 
             // compare clear password with encrypted password
             const clearPassword = await bcrypt.compare(req.body.password, user.password);
-
 
             if (!clearPassword) {
                 res.status(400).send("erreur lors de la saisie du mot de passe ");
                 return;
             }
-
-            req.session.login = {
-                username: user.username,
-                id: user.id,
-
-            }
-            res.send(req.session)
-
-
+            delete user.password;
+            res.send(user);
 
         } catch (err) {
-            
+
             console.log(err);
-            res.status(400).send("erreur lors de la saisie de votre email et/ou mot de passe")
+            res.status(400).send("erreur lors de la saisie de votre email et/ou mot de passe");
         }
-
-
-
     },
 
     logout: (req, res) => {
-        console.log(req.session.login)
+        // when logout, we suprress the user session
         req.session.destroy(err => {
             if (err) {
                 res.status(400).send("Error while logout")
@@ -93,15 +79,10 @@ const authController = {
                 req.headers.cookie = null;
                 req.session.login = null;
                 res.send("User is now logout");
-
-
             }
         })
-
-
-
     }
-}
+};
 
 
 module.exports = authController;

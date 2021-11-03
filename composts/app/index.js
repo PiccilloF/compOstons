@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = require('./router');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
 
 const session = require("express-session");
 
@@ -10,8 +10,10 @@ const session = require("express-session");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// allow all origin cors for now - to do : allow only specific ones
 app.use(cors('*'));
 
+// creation of a session
 app.use(session({
 
     secret: 'jecompostetonmotdepasse', //string used for signing session
@@ -21,7 +23,7 @@ app.use(session({
         maxAge: 7 * 24 * 60 * 60 * 1000
     }
     
-}))
+}));
 
 
 
@@ -32,4 +34,4 @@ app.use(router);
 
 app.listen(PORT, () => {
     console.log(`Ready to compost on ${PORT}`);
-})
+});

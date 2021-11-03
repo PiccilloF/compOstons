@@ -1,7 +1,7 @@
-// we use database 
+// we call the database 
 const db = require('../database');
 
-// wedefine our core model 
+// we define our core model 
 class CoreModel {
 
     // for each "[model] extends CoreModel" we built an custom object whith this constructor (which is factorised)
@@ -41,8 +41,6 @@ class CoreModel {
         return new this(data);
     }
 
-    
-
     static async delete(id) {
         const query = {
             text: `DELETE FROM ${this.tableName} WHERE id = $1`,
@@ -52,12 +50,10 @@ class CoreModel {
             // console.log('attention ça va delete')
             await db.query(query);
 
-
         } catch (err) {
             console.error(err)
         }
-
     }
-}
+};
 
 module.exports = CoreModel;
