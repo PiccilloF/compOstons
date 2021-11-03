@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 export default function Listelement({ result, handleClick }) {
   return (
-    <div className="result-element">
-      <li
+    <div className="result_element">
+      <input
+        type="search"
         onClick={handleClick}
-      >
-        {result}
-      </li>
+        value={result}
+      />
     </div>
   );
 }

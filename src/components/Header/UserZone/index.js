@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const UserZone = ({ setIsShowing }) => {
-  console.log('test composant userzone');
   const [state, dispatch] = useContext(UserContext);
 
   const handleLogoutButton = () => {
@@ -31,7 +30,7 @@ const UserZone = ({ setIsShowing }) => {
         <span>&times;</span>
       </button>
 
-      <Link to="#">
+      <Link to="/profil">
         <button
           name="Profil"
           type="button"

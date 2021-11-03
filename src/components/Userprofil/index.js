@@ -20,8 +20,9 @@ import './style.scss';
 
 export default function Userprofil() {
   const { register, handleSubmit, control } = useForm();
-  const [coordinatesValue, setCoordinatesValue] = useState('');
-  const [adressInfo, setAdressInfo] = useState([]);
+  const [coordinatesValue, setCoordinatesValue] = useState([]);
+  const [addressInfo, setAddressInfo] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState('');
 
   // j'instancie une nouvelle classe de OpenStreetMapProvider
   /* const provider = new OpenStreetMapProvider();
@@ -57,14 +58,22 @@ export default function Userprofil() {
     })
       .then((response) => {
         const datas = response.data.features;
-        const properties = datas.map((item) => item.properties.label);
-        setAdressInfo(properties);
+        const properties = datas.map((item) => item.properties);
+        const coordinates = datas.map((item) => item.geometry.coordinates);
+        setAddressInfo(properties);
+        // setCoordinatesValue(coordinates);
+        // console.log(datas);
+        console.log(properties);
+        console.log(coordinates);
       });
   };
 
-  const handleClick = () => {
-    console.log('je clique sur l\'élément');
-  };
+  // Je retarde la requête à l'api pour limté les appels à celle-ci
+  function searchDelay(value) {
+    setTimeout(() => {
+      apiGouvSearch(value);
+    }, 2000);
+  }
 
   return (
     <div className="main-profil__container">
@@ -81,30 +90,33 @@ export default function Userprofil() {
           <div className="infos-container">
             <div className="user-infos">
               <div className="user-input-group">
-                <label htmlFor="firstname">Prénom: </label>
-                <input
-                  className="user-input__element"
-                  type="text"
-                  id="firstname"
-                  name="firstname"
-                  {...register('firstname', { required: 'Veuillez saisir votre prénom' })}
-                />
-                <label htmlFor="lastname">Nom: </label>
-                <input
-                  className="user-input__element"
-                  type="text"
-                  id="lastname"
-                  name="lastname"
-                  {...register('lastname')}
-                />
-                <label htmlFor="alias">Pseudo: </label>
-                <input
-                  className="user-input__element"
-                  type="text"
-                  id="alias"
-                  name="alias"
-                  {...register('alias')}
-                />
+                <label htmlFor="firstname">Prénom:
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    {...register('firstname', { required: 'Veuillez saisir votre prénom' })}
+                  />
+                </label>
+                <label htmlFor="lastname">Nom:
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    {...register('lastname')}
+                  />
+                </label>
+                <label htmlFor="username">Pseudo:
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="username"
+                    name="username"
+                    {...register('username')}
+                  />
+                </label>
                 <button
                   type="button"
                   onClick={() => console.log('je supprime mon compte')}
@@ -115,42 +127,47 @@ export default function Userprofil() {
             </div>
             <div className="compostType-infos">
               <div className="compostType-checkbox-group">
-                <label htmlFor="greenType">Déchets verts</label>
-                <input
-                  className="compostType-checkbox-element"
-                  type="radio"
-                  name="compostType"
-                  id="vert"
-                  value="vert"
-                  {...register('compostType')}
-                />
-                <label htmlFor="greenType">Déchets bruns</label>
-                <input
-                  className="compostType-checkbox-element"
-                  type="radio"
-                  name="compostType"
-                  id="marron"
-                  value="marron"
-                  {...register('compostType')}
-                />
-                <label htmlFor="trashType">Tous types de déchets compostables</label>
-                <input
-                  className="compostType-checkbox-element"
-                  type="radio"
-                  name="compostType"
-                  id="tous types"
-                  value="tous types"
-                  {...register('compostType')}
-                />
-                <label htmlFor="availability">Je n'accepte pas de déchets en ce moment</label>
-                <input
-                  className="compostType-checkbox-element"
-                  type="radio"
-                  name="compostType"
-                  id="aucun"
-                  value="aucun"
-                  {...register('compostType')}
-                />
+                <label htmlFor="greenType">Déchets verts
+                  <input
+                    className="compostType-checkbox-element"
+                    type="radio"
+                    name="compostType"
+                    id="vert"
+                    value="vert"
+                    {...register('compostType')}
+                  />
+                </label>
+                <label htmlFor="greenType">Déchets bruns
+                  <input
+                    className="compostType-checkbox-element"
+                    type="radio"
+                    name="compostType"
+                    id="marron"
+                    value="marron"
+                    {...register('compostType')}
+                  />
+                </label>
+                <label htmlFor="trashType">Tous types de déchets compostables
+                  <input
+                    className="compostType-checkbox-element"
+                    type="radio"
+                    name="compostType"
+                    id="tous types"
+                    value="tous types"
+                    {...register('compostType')}
+                  />
+                </label>
+                <label htmlFor="availability">Je n'accepte pas de déchets en ce moment
+                  <input
+                    className="compostType-checkbox-element"
+                    type="radio"
+                    name="compostType"
+                    id="aucun"
+                    value="aucun"
+                    {...register('compostType')}
+                  />
+                </label>
+
               </div>
               <div className="compost-inputs-block">
                 {/* <label htmlFor="address">Adresse: </label>
@@ -177,16 +194,18 @@ export default function Userprofil() {
                     name="city"
                     {...register('city')}
                   /> */}
-                <input
-                  type="text"
-                  onChange={(event) => apiGouvSearch(event.target.value)}
-                />
-              </div>
-              <div className="result-list">
-                <Resultlist
-                  addressResults={adressInfo}
-                  onClick={handleClick}
-                />
+                <div className="search-container">
+                  <input
+                    type="text"
+                    onChange={(event) => searchDelay(event.target.value)}
+                  />
+                  <div className="result-list">
+                    <Resultlist
+                      addressResults={addressInfo}
+                      onClick={(event) => setSelectedAddress(event.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

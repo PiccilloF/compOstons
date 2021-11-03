@@ -4,10 +4,11 @@
 
   & .profil-picture__container {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    width: 20%;
     padding: 0.5em;
     margin: 1em;
-    background-color: darkmagenta;
+    background-color:  #847640 ;
   }
 } 
 .user-profil {
@@ -16,22 +17,30 @@
   flex-direction: column;
   justify-content: center;
     width: 100%;
-    background-color: yellowgreen;
+    background-color: #87030E;
     border: 1px solid black;
   
   & .infos-container {
     display: flex;
+    justify-content: center;
       & .user-infos {
-        position: relative;
-        margin: 1rem;
-        background-color: cadetblue;
-        width:50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 1rem;
+        margin: 1em;
+        background-color: #B593FA;
+        width:30%;
         border: 1px solid black;
          
         & .user-input-group{
             display: flex;
             flex-direction: column;
+            align-items: center;
             & .user-input__element {
+              padding: 0.3em;
+              margin: 0.5em;
+              width: 80%;
               font-style: italic;
               border: 1px solid violet
             }  
@@ -39,10 +48,13 @@
       }
         
       & .compostType-infos {
-          width: 50%;
-          background-color: darkgray;
+          display: flex;
+          width: 40%;
+          background-color: #F74C3F;
           border: 1px solid black;
             & .compostType-checkbox-group {
+              display: flex;
+              flex-direction: column;
               border: 1px solid black;
             }
       }
