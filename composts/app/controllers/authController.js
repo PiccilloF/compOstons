@@ -25,11 +25,12 @@ const authController = {
                 return;
             }
             // check if password = password confirmation 
-            if (req.body.password !== req.body.confirmedPassword) {
-                res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques");
-                return;
-            }
+            // if (req.body.password !== req.body.confirmedPassword) {
+            //     res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques");
+            //     return;
+            // }
             console.log('ok3')
+            console.log(`req.body : ${req.body}`)
             console.log(req.body.password)
             const newPassword = bcrypt.hashSync(req.body.password, saltRounds);
             req.body.password = newPassword;
