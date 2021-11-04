@@ -11,7 +11,9 @@ const session = require("express-session");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // allow all origin cors for now - to do : allow only specific ones
-app.use(cors('*'));
+app.use(cors({
+    origin: 'http://localhost:8080'
+}));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080', 'https://compostons.herokuapp.com');
