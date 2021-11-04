@@ -10,16 +10,17 @@ const authController = {
 
         try {
             // Check if all needed infos are send 
-            if(!req.body.username || !req.body.password || !req.body.role ) {
-                res.status(500).send('tous les champs obligatoires doivent êtes complétés')
-            }
+            // if(!req.body.username || !req.body.password || !req.body.role ) {
+            //     res.status(500).send('tous les champs obligatoires doivent êtes complétés')
+            // }
 
             // check if user already exists - if null return an error in console "no data in your query"
             const user = await User.find(req.body.mail);
+            console.log('ok1')
 
 
             if (user.mail || user.username) {
-                // console.log(user)
+                console.log('ok2')
                 res.status(400).send("user already exists")
                 return;
             }
@@ -28,11 +29,12 @@ const authController = {
                 res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques");
                 return;
             }
-
+            console.log('ok3')
             req.body.password = await bcrypt.hash(req.body.password, saltRounds);
 
             const newUser = await User.create(req.body);
             if(newUser) {
+                console.log('ok4')
                 // deleting password from user's object
                delete newUser.password;
             res.status(201).json(newUser)
@@ -42,7 +44,7 @@ const authController = {
 
 
         } catch (err) {
-            console.log("ça pète ici")
+            console.trace(err)
             res.status(500).send(err);
             
         }
