@@ -1,8 +1,10 @@
 @use 'reset';
 @use 'vars';
 
+
 body {
   font-family: sans-serif;
+  // background-image: vars.$bg-img;
 }
 
 /* 

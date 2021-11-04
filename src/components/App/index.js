@@ -5,9 +5,9 @@ import Header from 'src/components/Header';
 // import Modal from 'src/components/Modal';
 // import useModal from 'src/hooks/useModal';
 import Map from 'src/components/Map';
-import Userprofil from 'src/components/Userprofil';
+// import Userprofil from 'src/components/Userprofil';
 
-
+// import background from 'src/assets/background.webp';
 import './styles.css';
 
 // == Composant
@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Userprofil />
+      <Map />
     </div>
   );
 };
