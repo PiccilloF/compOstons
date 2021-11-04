@@ -1,33 +1,88 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+// Gérer les champs controllés des formulaires via un hook dédié, évite de regénrer un rendu
+// lors de la saisie.
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import axios from 'axios';
-import { DevTool } from '@hookform/devtools';
-// import { ErrorMessage } from '@hookform/error-message';
+import { useState, useContext } from 'react';
 
-// Import composants
-// import Field from './Field';
-// import Checkbox from './Checkbox';
+// Context
+import { UserContext } from 'src/context/userContext';
+
+/* Import du openStreetMapProvider pour gérer l'autocomplétion et la recherche de l"adresse.
+import { OpenStreetMapProvider } from 'leaflet-geosearch'; */
+
+// Import d'axios pour gérer les requêtes.
+import axios from 'axios';
+
+// Immport du devTool de useForm hook, installé dans les devs depedencies.
+import { DevTool } from '@hookform/devtools';
+
+// import composants
+import Resultlist from 'src/components/Userprofil/Resultlist';
+
+import './style.scss';
 
 export default function Userprofil() {
   const { register, handleSubmit, control } = useForm();
-  const [coordinatesValue, setCoordinatesValue] = useState('');
+  const [coordinatesValue, setCoordinatesValue] = useState([]);
+  const [addressInfo, setAddressInfo] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState('');
 
+  const [state, dispatch] = useContext(UserContext);
+  const { username, id } = state;
+  console.log(username, id);
+
+  // j'instancie une nouvelle classe de OpenStreetMapProvider
+  /* const provider = new OpenStreetMapProvider();
+
+  // test geoControl pour le champ unique de recherche avec autocomplétion.
+  const searchInput = async (value) => {
+    try {
+      const results = await provider.search({ query: value });
+      setAdressInfo(results);
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }; */
+
+  /* // Organisation des résultats de la recherche de l'adresse via le searchInput avec
+  // OpenStreetMapProvider.
+  const listResults = adressInfo.map((item) => item.label);
+  const shortList = listResults.slice(5);
+  console.log(shortList[0]); */
+
+  // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
+  // en latitude et longitude de l'adresse saisie.
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const apiGouvSearch = (value) => {
+    console.log(value);
     axios({
       method: 'get',
-      url: (`https://api-adresse.data.gouv.fr/search/?q=${data.address}+${data.zipcode}+${data.city}}`),
+      url: (`https://api-adresse.data.gouv.fr/search/?q=${value}&autocomplete=1`),
     })
       .then((response) => {
-        const fulldatas = response.data.features;
-        const parsedDatas = fulldatas.map((item) => item.geometry);
-        const coordinates = parsedDatas.map((item) => item.coordinates);
-        setCoordinatesValue([coordinates[0][1], coordinates[0][0]]);
+        const datas = response.data.features;
+        const properties = datas.map((item) => item.properties);
+        const coordinates = datas.map((item) => item.geometry.coordinates);
+        setAddressInfo(properties);
+        // setCoordinatesValue(coordinates);
+        // console.log(datas);
+        console.log(properties);
+        console.log(coordinates);
       });
   };
 
-  console.log(coordinatesValue);
+  console.log(selectedAddress);
+
+  // Je retarde la requête à l'api pour limiter les appels à celle-ci
+  function searchDelay(value) {
+    setTimeout(() => {
+      apiGouvSearch(value);
+    }, 2000);
+  }
 
   return (
     <div className="main-profil__container">
@@ -37,78 +92,94 @@ export default function Userprofil() {
           className="main-profil__form"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="user-infos">
-            <div className="user-input-group">
-              <label htmlFor="firstname">Prénom: </label>
-              <input
-                className="user-input__element"
-                type="text"
-                id="firstname"
-                name="firstname"
-                {...register('firstname', { required: 'Veuillez saisir votre prénom' })}
-              />
-              <label htmlFor="lastname">Nom: </label>
-              <input
-                className="user-input__element"
-                type="text"
-                id="lastname"
-                name="lastname"
-                {...register('lastname')}
-              />
-              <label htmlFor="alias">Pseudo: </label>
-              <input
-                className="user-input__element"
-                type="text"
-                id="alias"
-                name="alias"
-                {...register('alias')}
-              />
-              <button
-                type="submit"
-                id="delete-profil__button"
-              >supprimer ce compte
-              </button>
-              <div className="profil-picture__container">
-                <div className="profil-picture">mon image</div>
-                <input type="file" id="picture-input" />
+          <div className="profil-picture__container">
+            <div className="profil-picture">mon image</div>
+            <input type="file" id="picture-input" />
+          </div>
+          <div className="infos-container">
+            <div className="user-infos">
+              <div className="user-input-group">
+                <label htmlFor="firstname">Prénom:
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    {...register('firstname', { required: 'Veuillez saisir votre prénom' })}
+                  />
+                </label>
+                <label htmlFor="lastname">Nom:
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    {...register('lastname')}
+                  />
+                </label>
+                <label htmlFor="username">Pseudo:
+                  <input
+                    className="user-input__element"
+                    type="text"
+                    id="username"
+                    name="username"
+                    {...register('username')}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => console.log('je supprime mon compte')}
+                  id="delete-profil__button"
+                >supprimer ce compte
+                </button>
               </div>
-              <div className="compostType-infos">
-                <div className="compostType-checkbox-group">
-                  <label htmlFor="greenType">Déchets verts</label>
+            </div>
+            <div className="compostType-infos">
+              <div className="compostType-checkbox-group">
+                <label htmlFor="greenType">Déchets verts
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="greenType"
-                    id="greenType"
-                    {...register('greentype')}
+                    type="radio"
+                    name="compostType"
+                    id="vert"
+                    value="vert"
+                    {...register('compostType')}
                   />
-                  <label htmlFor="greenType">Déchets bruns</label>
+                </label>
+                <label htmlFor="greenType">Déchets bruns
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="brownType"
-                    id="brownType"
-                    {...register('brownType')}
+                    type="radio"
+                    name="compostType"
+                    id="marron"
+                    value="marron"
+                    {...register('compostType')}
                   />
-                  <label htmlFor="trashType">Déchets ménagers</label>
+                </label>
+                <label htmlFor="trashType">Tous types de déchets compostables
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="trashType"
-                    id="trashType"
-                    {...register('trashType')}
+                    type="radio"
+                    name="compostType"
+                    id="tous types"
+                    value="tous types"
+                    {...register('compostType')}
                   />
-                  <label htmlFor="availability">Je n'accepte pas de déchets en ce moment</label>
+                </label>
+                <label htmlFor="availability">Je n'accepte pas de déchets en ce moment
                   <input
                     className="compostType-checkbox-element"
-                    type="checkbox"
-                    name="availability"
-                    id="availability"
-                    {...register('availability')}
+                    type="radio"
+                    name="compostType"
+                    id="aucun"
+                    value="aucun"
+                    {...register('compostType')}
                   />
-                </div>
-                <div className="compost-inputs-block">
-                  <label htmlFor="address">Adresse: </label>
+                </label>
+
+              </div>
+              <div className="compost-inputs-block">
+                {/* <label htmlFor="address">Adresse: </label>
                   <input
                     className="user-input__element"
                     type="text"
@@ -131,11 +202,23 @@ export default function Userprofil() {
                     id="city"
                     name="city"
                     {...register('city')}
+                  /> */}
+                <div className="search-container">
+                  <input
+                    type="text"
+                    onChange={(event) => searchDelay(event.target.value)}
                   />
+                  <div className="result-list">
+                    <Resultlist
+                      addressResults={addressInfo}
+                      onClick={(event) => setSelectedAddress(event.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
           <button
             id="register-profil__button"
             type="submit"

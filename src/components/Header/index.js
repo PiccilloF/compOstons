@@ -1,11 +1,14 @@
-// Import PropTypes
-// import PropTypes from 'prop-types';
-
 // Import composant Link de react-router-dom
 import { Link } from 'react-router-dom';
 
-// Import composant Modal
+import { useContext, useState } from 'react';
+
+// Context
+import { UserContext } from 'src/context/userContext';
+
+// Import composant Modal et UserZone
 import Modal from 'src/components/Modal';
+import UserZone from 'src/components/Header/UserZone';
 
 // Import hook personnel useModal
 import useModal from 'src/hooks/useModal';
@@ -22,7 +25,11 @@ import './style.scss';
 
 const Header = () => {
   const { isOpen, toggle } = useModal();
-  console.log('test composant header');
+
+  const [state] = useContext(UserContext);
+  const { isLogged, username } = state;
+
+  const [isShowing, setIsShowing] = useState(false);
 
   return (
     <>
@@ -34,6 +41,13 @@ const Header = () => {
               <h1 className="header_title_text">CompOstons</h1>
             </div>
           </Link>
+          {
+            isLogged && (
+              <div className="hello-user-container">
+                <p className="hello-user-text">ヽ(^-^)丿 Bonjour {username} ! \(^-^)/</p>
+              </div>
+            )
+          }
           <div className="nav-login">
             <nav className="nav">
               <Link to="/">
@@ -47,13 +61,28 @@ const Header = () => {
                 </button>
               </Link>
             </nav>
-            <div className="login">
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                className="login_icon"
-                onClick={toggle}
-              />
-            </div>
+            {
+              isLogged
+                ? (
+                  <div className="login">
+                    <FontAwesomeIcon
+                      icon={faUserCircle}
+                      className="login_icon"
+                      onClick={() => setIsShowing(!isShowing)}
+                    />
+                    {isShowing && <UserZone setIsShowing={setIsShowing} />}
+                  </div>
+                )
+                : (
+                  <div className="login">
+                    <FontAwesomeIcon
+                      icon={faUserCircle}
+                      className="login_icon"
+                      onClick={toggle}
+                    />
+                  </div>
+                )
+            }
           </div>
         </div>
         <div className="header-bottom">
@@ -64,9 +93,5 @@ const Header = () => {
     </>
   );
 };
-
-/* Header.propTypes = {
-  onClickLogin: PropTypes.func.isRequired,
-}; */
 
 export default Header;
