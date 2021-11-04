@@ -211,7 +211,7 @@ export default function Userprofil() {
                   <div className="result-list">
                     <Resultlist
                       addressResults={addressInfo}
-                      onClick={(event) => setSelectedAddress(event.target.value)}
+                      onChange={(event) => setSelectedAddress(event.target.value)}
                     />
                   </div>
                 </div>

@@ -5,7 +5,7 @@ export default function Listelement({ result, handleClick }) {
     <div className="result_element">
       <input
         type="search"
-        onClick={handleClick}
+        onChange={handleClick}
         value={result}
       />
     </div>

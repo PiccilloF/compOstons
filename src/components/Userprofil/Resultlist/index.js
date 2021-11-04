@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 import Listelement from './Listelement';
 
-export default function Resultlist({ addressResults, onClick }) {
+export default function Resultlist({ addressResults, onChange }) {
   const jsxResults = addressResults.map((item) => (
     <Listelement
       key={item.id}
       result={item.label}
-      handleClick={onClick}
+      handleClick={onChange}
     />
   ));
   return (
@@ -19,7 +19,7 @@ export default function Resultlist({ addressResults, onClick }) {
 
 Resultlist.propTypes = {
   addressResults: PropTypes.arrayOf(PropTypes.object),
-  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 Resultlist.defaultProps = {
