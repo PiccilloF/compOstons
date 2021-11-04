@@ -85,7 +85,7 @@ const authController = {
                 res.status(400).send("Error while logout")
             } else {
                 req.headers.cookie = null;
-                req.session.login = null;
+                // req.session.login = null;
                 res.send("User is now logout");
             }
         })

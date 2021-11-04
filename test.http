@@ -16,22 +16,22 @@
         
 #  }
 
- POST http://localhost:4000/users/174/mail
-content-type: application/json
-
- {
-    "mail": "coucou c'est nous"
-        
- }
-
-#  POST http://localhost:3000/login
+#  POST http://localhost:4000/users/174/mail
 # content-type: application/json
 
 #  {
-#     "mail": "michel.blanc@yahoo.fr",
-#     "password": "jaimeecompost"    
-    
+#     "mail": "coucou c'est nous"
+        
 #  }
+
+ POST http://localhost:4000/login
+content-type: application/json
+
+ {
+    "mail": "michel.blanc@yahoo.fr",
+    "password": "jaimelecompost"    
+    
+ }
 
  
 
