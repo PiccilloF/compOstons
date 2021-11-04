@@ -6,8 +6,8 @@ const cors = require('cors');
 
 const session = require("express-session");
 
-// allow all origin cors for now - to do : allow only specific ones
-app.use(cors('*'));
+// // allow all origin cors for now - to do : allow only specific ones
+// app.use(cors('*'));
 
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
