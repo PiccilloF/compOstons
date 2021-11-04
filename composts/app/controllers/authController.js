@@ -38,12 +38,11 @@ const authController = {
             res.status(201).json(newUser)
             } else {
                 res.status(400).send('error while registreing newUser, check body values')
-            }
-            
-           
+            }          
 
 
         } catch (err) {
+            console.log("ça pète ici")
             res.status(500).send(err);
             
         }
