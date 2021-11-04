@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import useModal from 'src/hooks/useModal';
+import Modal from 'src/components/Map/Modal';
 import Card from './Card';
+
 import './styles.css';
 
 const List = ({ dataInfo }) => {
-// si pas de coordonnées dans le hook alors on renvoi une phase
-// pour inviter l'utilisateur a se co
+  const { isOpen, toggle } = useModal();
+  const [pointOwner, setPointOwner] = useState({ pseudo: 'toto', userId: 123 });
+  // si pas de coordonnées dans le hook alors on renvoi une phase
+  // pour inviter l'utilisateur a se co
   const counterTitle = (length) => {
     let title = 'Aucun point de compostage trouvé';
 
@@ -12,7 +18,7 @@ const List = ({ dataInfo }) => {
       title = '1 point de compostage trouvé';
     }
     else if (length > 1) {
-      title = `${length} points de compostage trouvé`;
+      title = `${length} points de compostage trouvés`;
     }
     return title;
   };
@@ -53,10 +59,13 @@ const List = ({ dataInfo }) => {
                   pseudo={dataMarker.username}
                   message={messageAvailability}
                   userId={dataMarker.user_id}
+                  toggle={toggle}
+                  setOwnerPoint={setPointOwner}
                 />
               );
             })}
           </div>
+          <Modal isOpen={isOpen} hide={toggle} pointOwner={pointOwner} />
         </>
       )}
     </div>
