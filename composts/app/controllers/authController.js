@@ -33,6 +33,7 @@ const authController = {
 
             const newUser = await User.create(req.body);
             if(newUser) {
+                // deleting password from user's object
                delete newUser.password;
             res.status(201).json(newUser)
             } else {

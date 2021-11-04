@@ -5,6 +5,9 @@ const userController = {
     getAllUsers: async (_, res) => {
         try {
             const users = await User.findAll();
+            for (let user of users) {
+                delete user.password
+            };
             res.json(users);
 
         } catch (err) {
@@ -13,6 +16,7 @@ const userController = {
     },
 
     getOneUser: async (req, res) => {
+        
         try {
             const user = await User.findOne(req.params.id);
             res.json(user);

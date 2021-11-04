@@ -9,8 +9,9 @@ class User extends CoreModel {
 
     static async create(data) {                
         try {
-            // function postgres to create new user
+            // function postgres to create new user -  returning new user id
             const idNewUser = (await db.query(`SELECT create_user($1) AS id`, [data])).rows[0].id;
+            // returning all datas from new user
             return await User.findOne(idNewUser);             
             
         } catch (err) {
