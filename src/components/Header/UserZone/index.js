@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import axios from 'axios';
+
 // Context
 import { UserContext } from 'src/context/userContext';
 // Import PropTypes
@@ -10,11 +12,21 @@ import { Link } from 'react-router-dom';
 
 const UserZone = ({ setIsShowing }) => {
   const [state, dispatch] = useContext(UserContext);
+  const { id } = state;
 
   const handleLogoutButton = () => {
+    axios.delete(`https://compostons.herokuapp.com/users/${id}/logout`)
+      .then((response) => {
+        console.log('response :', response);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+
     dispatch({
       type: 'LOGOUT',
     });
+
     setIsShowing(false);
   };
 

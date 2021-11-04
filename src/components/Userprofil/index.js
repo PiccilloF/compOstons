@@ -2,10 +2,13 @@
 // Gérer les champs controllés des formulaires via un hook dédié, évite de regénrer un rendu
 // lors de la saisie.
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
-// Import du openStreetMapProvider pour gérer l'autocomplétion et la recherche de l"adresse.
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
+// Context
+import { UserContext } from 'src/context/userContext';
+
+/* Import du openStreetMapProvider pour gérer l'autocomplétion et la recherche de l"adresse.
+import { OpenStreetMapProvider } from 'leaflet-geosearch'; */
 
 // Import d'axios pour gérer les requêtes.
 import axios from 'axios';
@@ -23,6 +26,10 @@ export default function Userprofil() {
   const [coordinatesValue, setCoordinatesValue] = useState([]);
   const [addressInfo, setAddressInfo] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState('');
+
+  const [state, dispatch] = useContext(UserContext);
+  const { username, id } = state;
+  console.log(username, id);
 
   // j'instancie une nouvelle classe de OpenStreetMapProvider
   /* const provider = new OpenStreetMapProvider();
@@ -68,7 +75,9 @@ export default function Userprofil() {
       });
   };
 
-  // Je retarde la requête à l'api pour limté les appels à celle-ci
+  console.log(selectedAddress);
+
+  // Je retarde la requête à l'api pour limiter les appels à celle-ci
   function searchDelay(value) {
     setTimeout(() => {
       apiGouvSearch(value);

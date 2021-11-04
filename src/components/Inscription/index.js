@@ -27,13 +27,11 @@ const Inscription = ({ hide, setIsLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    axios({
-      method: 'post',
-      url: ('https://compostons.herokuapp.com/register'),
+    console.log('inscription');
+    axios.post('https://compostons.herokuapp.com/register', {
       mail: emailValue,
       password: passwordValue,
-      confirmedPassword: passwordValue,
+      // confirmedPassword: passwordValue,
       username: pseudoValue,
       role: radioValue,
     })
