@@ -10,8 +10,8 @@ const authController = {
 
         try {
             // Check if all needed infos are send 
-            if(!req.body.username || !req.body.password || !req.body.confirmedPassword || !req.body.role ) {
-                res.send('tous les champs obligatoires doivent êtes complétés')
+            if(!req.body.username || !req.body.password || !req.body.role ) {
+                res.status(500).send('tous les champs obligatoires doivent êtes complétés')
             }
 
             // check if user already exists - if null return an error in console "no data in your query"
