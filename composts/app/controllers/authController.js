@@ -30,7 +30,9 @@ const authController = {
                 return;
             }
             console.log('ok3')
-            req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+            const newPassword = await bcrypt.hash(req.body.password, saltRounds);
+            req.body.password = newPassword;
+            console.log(`${req.body.password}`)
 
             const newUser = await User.create(req.body);
             if(newUser) {
