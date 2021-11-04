@@ -2,10 +2,9 @@
 
 // Import des composants
 import Header from 'src/components/Header';
-// import Modal from 'src/components/Modal';
-// import useModal from 'src/hooks/useModal';
 import Map from 'src/components/Map';
-// import Userprofil from 'src/components/Userprofil';
+import Userprofil from 'src/components/Userprofil';
+import Dashboard from '../Dashboard';
 
 // import background from 'src/assets/background.webp';
 import './styles.css';
@@ -17,7 +16,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Map />
+      <Dashboard />
     </div>
   );
 };

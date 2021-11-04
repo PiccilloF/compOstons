@@ -23,33 +23,14 @@ import './style.scss';
 
 export default function Userprofil() {
   const { register, handleSubmit, control } = useForm();
+
   const [coordinatesValue, setCoordinatesValue] = useState([]);
   const [addressInfo, setAddressInfo] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState('');
 
   const [state, dispatch] = useContext(UserContext);
   const { username, id } = state;
-  console.log(username, id);
-
-  // j'instancie une nouvelle classe de OpenStreetMapProvider
-  /* const provider = new OpenStreetMapProvider();
-
-  // test geoControl pour le champ unique de recherche avec autocomplétion.
-  const searchInput = async (value) => {
-    try {
-      const results = await provider.search({ query: value });
-      setAdressInfo(results);
-    }
-    catch (error) {
-      console.error(error);
-    }
-  }; */
-
-  /* // Organisation des résultats de la recherche de l'adresse via le searchInput avec
-  // OpenStreetMapProvider.
-  const listResults = adressInfo.map((item) => item.label);
-  const shortList = listResults.slice(5);
-  console.log(shortList[0]); */
+  // console.log(username, id);
 
   // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
   // en latitude et longitude de l'adresse saisie.
@@ -75,7 +56,7 @@ export default function Userprofil() {
       });
   };
 
-  console.log(selectedAddress);
+  // console.log(selectedAddress);
 
   // Je retarde la requête à l'api pour limiter les appels à celle-ci
   function searchDelay(value) {
@@ -179,30 +160,6 @@ export default function Userprofil() {
 
               </div>
               <div className="compost-inputs-block">
-                {/* <label htmlFor="address">Adresse: </label>
-                  <input
-                    className="user-input__element"
-                    type="text"
-                    id="address"
-                    name="address"
-                    {...register('address')}
-                  />
-                  <label htmlFor="zipcode">Code postale: </label>
-                  <input
-                    className="user-input__element"
-                    type="text"
-                    id="zipcode"
-                    name="zipcode"
-                    {...register('zipcode', { pattern: /^[0-9]+$/, maxLength: 5 })}
-                  />
-                  <label htmlFor="city">Ville: </label>
-                  <input
-                    className="user-input__element"
-                    type="text"
-                    id="city"
-                    name="city"
-                    {...register('city')}
-                  /> */}
                 <div className="search-container">
                   <input
                     type="text"
