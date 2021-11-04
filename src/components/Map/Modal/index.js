@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Linking from 'src/components/Linking';
 import './styles.scss';
 
-const Modal = ({ isOpen, hide }) => {
+const Modal = ({ isOpen, hide, pointOwner }) => {
   const target = document.getElementById('root');
   return (
     isOpen
@@ -17,7 +17,7 @@ const Modal = ({ isOpen, hide }) => {
         <div className="modal-overlay">
           <div className="modal-wrapper">
             <div className="modal">
-              <Linking hide={hide} />
+              <Linking hide={hide} pointOwner={pointOwner} />
             </div>
           </div>
         </div>,
@@ -30,6 +30,7 @@ const Modal = ({ isOpen, hide }) => {
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   hide: PropTypes.func.isRequired,
+  pointOwner: PropTypes.object,
 };
 
 export default Modal;
