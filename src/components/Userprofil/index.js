@@ -51,12 +51,40 @@ export default function Userprofil() {
   const shortList = listResults.slice(5);
   console.log(shortList[0]); */
 
-  // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
-  // en latitude et longitude de l'adresse saisie.
+  // Soumission pour la mise à jour des infos de profil
+  // Requête vers la route update
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.firstname);
+    // event.preventDefault();
+    axios.put(`https://compostons.herokuapp.com/users/${id}/update`, {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      username: data.username,
+      composType: data.composType,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+
+    // deuxième requête compost ?
+    /* axios.put(`https://compostons.herokuapp.com/users/${id}/update`, {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      username: data.username,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      }); */
   };
 
+  // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
+  // en latitude et longitude de l'adresse saisie.
   const apiGouvSearch = (value) => {
     console.log(value);
     axios({
