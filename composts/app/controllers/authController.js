@@ -30,7 +30,8 @@ const authController = {
                 return;
             }
             console.log('ok3')
-            const newPassword = await bcrypt.hash(req.body.password, saltRounds);
+            console.log(req.body.password)
+            const newPassword = bcrypt.hashSync(req.body.password, saltRounds);
             req.body.password = newPassword;
             console.log(`${req.body.password}`)
 
