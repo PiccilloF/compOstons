@@ -2,6 +2,7 @@ const { Router } = require('express');
 const compostController = require('./controllers/compostController');
 const userController = require('./controllers/userController');
 const authController  = require('./controllers/authController');
+const mailController  = require('./controllers/mailController');
 
 const router = Router();
 
@@ -22,14 +23,16 @@ router
 
 router
     .get('/users', userController.getAllUsers)
-    .post('/users', userController.createOneUser);
+    // .post('/users', userController.createOneUser);
 router
     .route('/users/:id(\\d+)')
     .get(userController.getOneUser)
-    .post(compostController.createOneCompost)
+    .post(compostController.createOneCompost)    
     .put(userController.updateUser)
     .delete(userController.deleteOneUSer);
 
+router.delete('/users/:id(\\d+)/logout', authController.logout);
+router.post('/users/:id(\\d+)/mail', mailController.sendMail);
 router.put('/users/:id(\\d+)/update', compostController.updateCompost);
 
 

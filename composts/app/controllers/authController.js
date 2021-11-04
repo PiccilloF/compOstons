@@ -15,8 +15,7 @@ const authController = {
             // }
 
             // check if user already exists - if null return an error in console "no data in your query"
-            const user = await User.find(req.body.mail);
-            console.log('ok1')
+            const user = await User.find(req.body.mail);          
 
 
             if (user.mail || user.username) {
@@ -29,12 +28,10 @@ const authController = {
             //     res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques");
             //     return;
             // }
-            console.log('ok3')
-            console.log(`req.body : ${req.body}`)
-            console.log(req.body.password)
+            
             const newPassword = bcrypt.hashSync(req.body.password, saltRounds);
             req.body.password = newPassword;
-            console.log(`${req.body.password}`)
+            
 
             const newUser = await User.create(req.body);
             if(newUser) {

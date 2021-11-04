@@ -13,6 +13,13 @@ app.use(express.urlencoded({ extended: true }));
 // allow all origin cors for now - to do : allow only specific ones
 app.use(cors('*'));
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X_Token, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+})
+
 // creation of a session
 app.use(session({
 
@@ -22,7 +29,7 @@ app.use(session({
     cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000
     }
-    
+
 }));
 
 
