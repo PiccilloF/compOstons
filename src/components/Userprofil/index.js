@@ -30,6 +30,7 @@ const schema = yup.object().shape({
 });
 
 export default function Userprofil() {
+
   // méthodes du hook useform react
   const {
     register,
@@ -46,6 +47,9 @@ export default function Userprofil() {
   const [selectedAddress, setSelectedAddress] = useState('');
   // Limport des variables globales d'état.
   const [state, dispatch] = useContext(UserContext);
+
+  // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
+  // en latitude et longitude de l'adresse saisie.
   const { username, id, firstname, lastname } = state;
 
   // Soumission pour la mise à jour des infos de profil
@@ -100,6 +104,7 @@ export default function Userprofil() {
         console.log(coordinates[0][1], coordinates[0][0]);
       });
   };
+
   // Je retarde la requête à l'api pour limiter les appels à celle-ci
   function searchDelay(value) {
     setTimeout(() => {
@@ -215,6 +220,7 @@ export default function Userprofil() {
                 >supprimer ce compost
                 </button>
               </div>
+              <div className="compost-inputs-block">
               <div className="search-container">
                 <input
                   type="text"

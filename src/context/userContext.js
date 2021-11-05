@@ -10,6 +10,8 @@ const initialState = {
   mail: '',
   firstname: '',
   lastname: '',
+  address: '',
+  compostType: '',
   role: '',
   image: '',
   created_at: '',

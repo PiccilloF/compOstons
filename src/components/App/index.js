@@ -6,6 +6,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from 'src/components/Header';
 import Map from 'src/components/Map';
 import Userprofil from 'src/components/Userprofil';
+import Dashboard from 'src/components/Dashboard';
+
 
 import './styles.css';
 
