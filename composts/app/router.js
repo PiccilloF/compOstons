@@ -3,17 +3,17 @@ const compostController = require('./controllers/compostController');
 const userController = require('./controllers/userController');
 const authController  = require('./controllers/authController');
 const mailController  = require('./controllers/mailController');
-const multer = require('multer');
+// const multer = require('multer');
 
-const storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback(error, './public/images')
-    },
-    filename: (req, file, callback) => {
-        callback(error, 'test' + path.extname(file.originalname) )
-    }
+// const storage = multer.diskStorage({
+//     destination: (req, file, callback) => {
+//         callback(error, './public/images')
+//     },
+//     filename: (req, file, callback) => {
+//         callback(error, 'test' + path.extname(file.originalname) )
+//     }
 
-})
+// })
 const upload = multer({storage : storage});
 
 
