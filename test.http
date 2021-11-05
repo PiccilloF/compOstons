@@ -1,10 +1,10 @@
 # GET https://compostons.herokuapp.com/
-POST http://localhost:4000/test
-content-type: application/image/png
+# POST http://localhost:4000/test
+# content-type: application/text/html
 
-{
-    "image": "https://m.media-amazon.com/images/I/71IcQqjPDiL._AC_SL1500_.jpg"
-}
+# {
+#     "image": "https://m.media-amazon.com/images/I/71IcQqjPDiL._AC_SL1500_.jpg"
+# }
 
 # DELETE http://localhost:4000/users/123/logout
 
@@ -22,21 +22,24 @@ content-type: application/image/png
         
 #  }
 
-#  POST http://localhost:4000/users/174/mail
-# content-type: application/json
+ POST http://localhost:4000/users/174/mail
+content-type: application/json
 
-#  {
-#     "mail": "coucou c'est nous"
+ {
+    "ownerId": "123",
+    "mail": "florian.vallois17@gmail.com",
+    "text": "coucou c'est nous",
+    "html": "coucou c'est nous"
+
         
-#  }
+ }
 
-#  POST https://compostons.herokuapp.com/login
+# POST http://localhost:4000/login
 # content-type: application/json
 
 #  {
 #     "mail": "michel.blanc@yahoo.fr",
-#     "password": "jaimelecompost"    
-    
+#     "password": "jaimelecompost"
 #  }
 
  
@@ -56,11 +59,11 @@ content-type: application/image/png
 
 
 
-# PUT https://compostons.herokuapp.com/users/
+# PUT http://localhost:4000/users/100
 # content-type: application/json
 
 #  {
-#     "category": "Green"
+#     "address": "10 rue du pleutre"   
     
 # }
 

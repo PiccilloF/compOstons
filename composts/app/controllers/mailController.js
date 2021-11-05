@@ -16,8 +16,9 @@ const mailController = {
                 },
             });
 
+            console.log(req.body)
             const mailOwner = await User.findOne(req.body.ownerId);
-            console.log(mailOwner);
+            console.log(mailOwner.mail);
 
             // send mail with defined transport object
             let info = await transporter.sendMail({
