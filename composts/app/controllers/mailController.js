@@ -15,14 +15,16 @@ const mailController = {
                 },
             });
 
+            console.log(req.body);
+
             // send mail with defined transport object
             let info = await transporter.sendMail({
                 from: '"Compostons" <compostons-noreply@gmail.com>', // sender address
-                to: "loicfort@free.fr", // list of receivers
+                to: req.body.to, // list of receivers
                 subject: "Un utilisateur Compostons souhaite rentrer en relation avec vous", // Subject line
-                replyTo:'',
-                text: "On échange? ", // plain text body
-                html: `<b>${req.body.mail}</b>`, // html body
+                replyTo: req.body.replyTo,
+                text: req.body.text, // plain text body
+                html: `<b>${req.body.html}</b>`, // html body
             });
 
             console.log("Message sent: %s", info.messageId);
