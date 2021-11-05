@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const User = require("../models/user");
 
 
 const mailController = {
@@ -15,12 +16,13 @@ const mailController = {
                 },
             });
 
-            console.log(req.body);
+            const mailOwner = await User.findOne(req.body.ownerId);
+            console.log(mailOwner);
 
             // send mail with defined transport object
             let info = await transporter.sendMail({
                 from: '"Compostons" <compostons-noreply@gmail.com>', // sender address
-                to: req.body.to, // list of receivers
+                to: mailOwner.mail, // list of receivers
                 subject: "Un utilisateur Compostons souhaite rentrer en relation avec vous", // Subject line
                 replyTo: req.body.replyTo,
                 text: req.body.text, // plain text body
