@@ -20,6 +20,7 @@ export default function Field({
       className="field"
       value={value}
       onChange={onChange}
+      required
     />
   );
 }

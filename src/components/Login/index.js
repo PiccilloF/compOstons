@@ -73,6 +73,7 @@ const Login = ({ hide, setIsLogin }) => {
               name="Email"
               placeholder="Votre adresse email"
               type="email"
+              required
               value={emailValue}
               onChange={(event) => setEmailValue(event.target.value)}
             />
@@ -80,6 +81,7 @@ const Login = ({ hide, setIsLogin }) => {
               name="password"
               placeholder="Votre mot de passe"
               type="password"
+              required
               value={passwordValue}
               onChange={(event) => setPasswordValue(event.target.value)}
             />
