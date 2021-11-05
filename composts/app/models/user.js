@@ -1,5 +1,6 @@
 const CoreModel = require('./coreModel');
 const db = require('../database');
+const Compost = require('./compost');
 
 
 class User extends CoreModel {
@@ -24,6 +25,8 @@ class User extends CoreModel {
     static async update(data, id) {
         // we recover data in database
         const formerUser = await User.findOne(id);
+        const formerCompost = await Compost.find(id)
+        
 
         // if we have a new value we record it in the variable otherwise we let the actual data
         const firstname = data.firstname || formerUser.firstname;
@@ -33,13 +36,17 @@ class User extends CoreModel {
         const password = data.password || formerUser.password;
         const role = data.role || formerUser.role;
         const image = data.image || formerUser.image;
+        const longitude = data.longitude || formerCompost.longitude;
+        const latitude = data.latitude || formerCompost.latitude;
+        const category = data.category || formerCompost.category;
+        const address = data.address || formerCompost.address;
 
-       const dataUpdated = {firstname, lastname, username, mail, password, role, image};
+       const dataUpdated = {firstname, lastname, username, mail, password, role, image, longitude, latitude, category, address};
 
         try {
              // function postgresql to update data
-            const user = await db.query(`SELECT update_user($1, $2)`, [dataUpdated, id]);
-            return new User(data);
+            return await db.query(`SELECT update_info($1, $2)`, [dataUpdated, id]);
+            
             
 
         } catch (err) {
@@ -47,25 +54,30 @@ class User extends CoreModel {
         }
     }
 
-    static async find(mail) {
+   
+    // static async find(mail) {
       
-        try {
-           const data = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
-           return new User(data);
+    //     try {
+    //        const data = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
+    //        return new User(data);
   
 
-        } catch (err) {
-            console.trace(err)
-        }        
+    //     } catch (err) {
+    //         console.trace(err)
+    //     }        
         
-    }
-
-
-    // static async findProposeur() {
-        
-    //     const data = await db.query(`select id from user_compost where role = 'proposeur';`)
-    //     return new this(data)
     // }
+
+    static async compostAndUserinfo(id) {
+        try {
+            return (await db.query(`SELECT * FROM compost_and_userinfo WHERE id = $1`, [id])).rows[0];
+        } catch (err) {
+            console.trace(error)
+        }
+    }
+    
+
+    
 }
 
 module.exports = User;

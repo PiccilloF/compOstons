@@ -18,6 +18,7 @@ CREATE TABLE compost (
   category text,
   longitude Float NOT NULL,
   latitude Float NOT NULL,
+  address Text,
   user_id INT NOT NULL REFERENCES "user_compost"("id") ON DELETE CASCADE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

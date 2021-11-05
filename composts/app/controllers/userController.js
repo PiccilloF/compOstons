@@ -45,10 +45,11 @@ const userController = {
         };
     },
 
-    updateUser: async (req, res) => {
+    updateInfo: async (req, res) => {
         try {
-            const user = await User.update(req.body, req.params.id);
-            res.json(user);
+            await User.update(req.body, req.params.id);
+            const user = await User.compostAndUserinfo(req.params.id);
+            res.status(201).json(user);
 
         } catch (err) {
             res.status(500).send(err);

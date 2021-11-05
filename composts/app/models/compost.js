@@ -22,29 +22,7 @@ class Compost extends CoreModel {
 
     }
 
-    static async update(data, id) {
-        
-        const formerCompost = await Compost.findOne(id);
-        
-        
-        // if a new data is sended, update variable else you let the old one.
-        const category = data.category || formerCompost.category;
-        const longitude = data.longitude || formerCompost.longitude;
-        const latitude = data.latitude || formerCompost.latitude;
-        
-        const dataUpdated = {category, longitude, latitude};
-        
-        try {
-            // function postgresql to update data
-            await db.query(`SELECT update_compost($1,$2)`, [dataUpdated, id]);
-            return ('user updated')
-            
-
-        } catch (err) {
-            console.trace(err);
-        }
-    }
-
+    
     static async allCompostJoinUser () {
         try {
             // function postgresql to update data - lighter code / making each row an instance of Compost;
@@ -54,7 +32,23 @@ class Compost extends CoreModel {
             console.trace(err)
         }
     }
+
+    static async find(user_id) {
+      
+        try {
+           const data = await CoreModel.fetchOne(`Select * FROM compost WHERE user_id = $1`, [user_id]);
+           return new Compost(data);
+           
+  
+
+        } catch (err) {
+            console.trace(err)
+        }        
+        
+    }
 }
+
+
 
 module.exports = Compost;
 
