@@ -38,7 +38,7 @@ const userController = {
     deleteOneUSer: async (req, res) => {
         try {
             const data = await User.delete(req.params.id);
-            res.send('user delete');
+            res.json(data);
 
         } catch (err) {
             res.status(404).send(err);
@@ -47,8 +47,8 @@ const userController = {
 
     updateUser: async (req, res) => {
         try {
-            await User.update(req.body, req.params.id);
-            res.send('user updated');
+            const user = await User.update(req.body, req.params.id);
+            res.json(user);
 
         } catch (err) {
             res.status(500).send(err);

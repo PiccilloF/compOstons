@@ -3,23 +3,32 @@ const compostController = require('./controllers/compostController');
 const userController = require('./controllers/userController');
 const authController  = require('./controllers/authController');
 const mailController  = require('./controllers/mailController');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(error, './public/images')
+    },
+    filename: (req, file, callback) => {
+        callback(error, 'test' + path.extname(file.originalname) )
+    }
+
+})
+const upload = multer({storage : storage});
+
 
 const router = Router();
 
-// router.all('/', function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//     next()
-//   });
 
 
 router
     .get('/', compostController.homePage)
     // .get('/test', userController.findProposeur)
-    .post('/register', authController.register)
+    .post('/register',authController.register)
     .post('/login', authController.login)
     .delete('/logout', authController.logout)
-    .get('/composts', compostController.getCompostAndUsername);
+    .get('/composts', compostController.getCompostAndUsername)
+    .post('/test', upload.single('image'), authController.uploadImage);
 
 
 router

@@ -29,9 +29,9 @@ const authController = {
             //     return;
             // }
             
-            const newPassword = bcrypt.hashSync(req.body.password, saltRounds);
-            req.body.password = newPassword;
-            
+            // change req.body.password with encrypted password
+            req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
+                        
 
             const newUser = await User.create(req.body);
             if(newUser) {
@@ -89,6 +89,15 @@ const authController = {
                 res.send("User is now logout");
             }
         })
+    },
+
+    uploadImage: (req, res) => {
+        try {
+            console.log("file uploaded")
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 };
 

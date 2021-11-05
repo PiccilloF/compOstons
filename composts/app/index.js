@@ -4,18 +4,21 @@ const router = require('./router');
 const app = express();
 const cors = require('cors');
 
+
+
 const session = require("express-session");
 
-// allow all origin cors for now - to do : allow only specific ones
-// app.use(cors('*'));
+// gestion of CORS Policy // refacto
+        // app.use((req, res, next) => {
+        //     res.setHeader('Access-Control-Allow-Origin', '*');
+        //     res.setHeader('Access-Control-Allow-Credentials', 'true');
+        //     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+        //     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+        //     next();
+        // });
+app.use(cors({origin: '*'}))
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-});
+app.use(express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
