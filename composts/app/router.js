@@ -14,7 +14,7 @@ const mailController  = require('./controllers/mailController');
 //     }
 
 // })
-const upload = multer({storage : storage});
+// const upload = multer({storage : storage});
 
 
 const router = Router();
