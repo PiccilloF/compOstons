@@ -55,18 +55,18 @@ class User extends CoreModel {
     }
 
    
-    // static async find(mail) {
+    static async find(mail) {
       
-    //     try {
-    //        const data = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
-    //        return new User(data);
+        try {
+           const data = await CoreModel.fetchOne(`Select * FROM user_compost WHERE mail = $1`, [mail]);
+           return new User(data);
   
 
-    //     } catch (err) {
-    //         console.trace(err)
-    //     }        
+        } catch (err) {
+            console.trace(err)
+        }        
         
-    // }
+    }
 
     static async compostAndUserinfo(id) {
         try {

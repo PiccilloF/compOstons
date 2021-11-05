@@ -40,7 +40,7 @@ const authController = {
                delete newUser.password;
             res.status(201).json(newUser)
             } else {
-                res.status(400).send('error while registreing newUser, check body values')
+                res.status(400).send('error while registering newUser, check body values')
             }          
 
 
