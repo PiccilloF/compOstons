@@ -43,12 +43,12 @@ router
     .route('/users/:id(\\d+)')
     .get(userController.getOneUser)
     .post(compostController.createOneCompost)    
-    .put(userController.updateUser)
+    .put(userController.updateInfo)
     .delete(userController.deleteOneUSer);
 
 router.delete('/users/:id(\\d+)/logout', authController.logout);
 router.post('/users/:id(\\d+)/mail', mailController.sendMail);
-router.put('/users/:id(\\d+)/update', compostController.updateCompost);
+// router.put('/users/:id(\\d+)/update', compostController.updateCompost);
 
 
 module.exports = router;

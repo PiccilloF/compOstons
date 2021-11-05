@@ -58,15 +58,15 @@ const compostController = {
         }
     },
 
-    updateCompost: async (req, res) => {
-        try {
-            const compost = await Compost.update(req.body, req.params.id);
-            res.json(compost);
+    // updateCompost: async (req, res) => {
+    //     try {
+    //         const compost = await Compost.update(req.body, req.params.id);
+    //         res.json(compost);
 
-        } catch (err) {
-            console.trace(err);
-        };
-    }
+    //     } catch (err) {
+    //         console.trace(err);
+    //     };
+    // }
 };
 
 
