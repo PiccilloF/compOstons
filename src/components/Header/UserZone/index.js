@@ -47,6 +47,7 @@ const UserZone = ({ setIsShowing }) => {
           name="Profil"
           type="button"
           className="userzone-profil-button"
+          onClick={() => setIsShowing(false)}
         >
           Mon profil
         </button>

@@ -30,7 +30,6 @@ const schema = yup.object().shape({
 });
 
 export default function Userprofil() {
-
   // méthodes du hook useform react
   const {
     register,
@@ -50,7 +49,9 @@ export default function Userprofil() {
 
   // A la soumission du formulaire, appel à l'api du gouvernement pour récupérer les coordonnées
   // en latitude et longitude de l'adresse saisie.
-  const { username, id, firstname, lastname } = state;
+  const {
+    username, id, firstname, lastname,
+  } = state;
 
   // Soumission pour la mise à jour des infos de profil
   // Requête vers la route update
@@ -221,26 +222,27 @@ export default function Userprofil() {
                 </button>
               </div>
               <div className="compost-inputs-block">
-              <div className="search-container">
-                <input
-                  type="text"
-                  onChange={(event) => searchDelay(event.target.value)}
-                />
-                <div className="result-list">
-                  <Resultlist
-                    addressResults={addressInfo}
-                    onClick={(event) => setSelectedAddress(event.target.value)}
+                <div className="search-container">
+                  <input
+                    type="text"
+                    onChange={(event) => searchDelay(event.target.value)}
                   />
+                  <div className="result-list">
+                    <Resultlist
+                      addressResults={addressInfo}
+                      onClick={(event) => setSelectedAddress(event.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <button
-            id="register-profil__button"
-            type="submit"
-          >sauvegarder
-          </button>
+            <button
+              id="register-profil__button"
+              type="submit"
+            >sauvegarder
+            </button>
+          </div>
         </form>
       </div>
       <DevTool control={control} />

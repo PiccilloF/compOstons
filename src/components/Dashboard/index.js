@@ -6,6 +6,7 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable padded-blocks */
 
+import { useHistory } from 'react-router-dom';
 import { useEffect, useReducer, useState, useContext } from 'react';
 import { UserContext } from 'src/context/userContext';
 import axios from 'axios';
@@ -110,15 +111,15 @@ const Dashboard = () => {
 
   /**
    * Gère l'affichage ou non des adresses proposées sous l'input "address" selon si l'input à le focus ou non.
-   * @param {*} e
+   * @param {*} event
    */
-  const handleOnFocusOnBlurInputAddress = (e) => {
-    if (e._reactName === 'onFocus') setDisplayAddressResults(true);
-    if (e._reactName === 'onBlur' && !isInAddressResultsZone) setDisplayAddressResults(false);
+  const handleOnFocusOnBlurInputAddress = (event) => {
+    if (event._reactName === 'onFocus') setDisplayAddressResults(true);
+    if (event._reactName === 'onBlur' && !isInAddressResultsZone) setDisplayAddressResults(false);
   };
 
-  const handleOnSubmitForm = async (e) => {
-    e.preventDefault();
+  const handleOnSubmitForm = (event) => {
+    event.preventDefault();
 
     const data = {
       firstname: newFirstname,
@@ -145,52 +146,76 @@ const Dashboard = () => {
       });
   };
 
+  const history = useHistory();
+
+  const onDeletedAccountRedirect = () => {
+    const url = '/';
+    history.push(url);
+  };
+
+  const handleAccountDeleteButton = () => {
+    axios.delete(`https://compostons.herokuapp.com/users/${id}`)
+      .then((response) => {
+        console.log('la suppression est OK');
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+
+    contextDispatch({
+      type: 'LOGOUT',
+    });
+    onDeletedAccountRedirect();
+  };
+
   return (
     <form onSubmit={handleOnSubmitForm} className="dashboard">
-      <div>
-        <label htmlFor="newFirstname">Prénom</label>
-        <input
-          id="newFirstname"
-          name="newFirstname"
-          type="text"
-          placeholder="Prénom"
-          value={newFirstname}
-          onChange={(e) => dispatch({
-            type: 'INPUTCHANGE',
-            name: e.target.name,
-            value: e.target.value,
-          })}
-        />
-      </div>
-      <div>
-        <label htmlFor="newLastname">Nom</label>
-        <input
-          id="newLastname"
-          name="newLastname"
-          type="text"
-          placeholder="Nom"
-          value={newLastname}
-          onChange={(e) => dispatch({
-            type: 'INPUTCHANGE',
-            name: e.target.name,
-            value: e.target.value,
-          })}
-        />
-      </div>
-      <div>
-        <label htmlFor="newUsername">Pseudo</label>
-        <input
-          id="newUsername"
-          name="newUsername"
-          type="text"
-          placeholder="Pseudo"
-          value={newUsername}
-          onChange={(e) => dispatch({
-            type: 'INPUTCHANGE',
-            name: e.target.name,
-            value: e.target.value,
-          })}
-        />
+      <div className="userInfos">
+        <div>
+          <label htmlFor="newFirstname">Prénom</label>
+          <input
+            id="newFirstname"
+            name="newFirstname"
+            type="text"
+            placeholder="Prénom"
+            value={newFirstname}
+            onChange={(e) => dispatch({
+              type: 'INPUTCHANGE',
+              name: e.target.name,
+              value: e.target.value,
+            })}
+          />
+        </div>
+        <div>
+          <label htmlFor="newLastname">Nom</label>
+          <input
+            id="newLastname"
+            name="newLastname"
+            type="text"
+            placeholder="Nom"
+            value={newLastname}
+            onChange={(e) => dispatch({
+              type: 'INPUTCHANGE',
+              name: e.target.name,
+              value: e.target.value,
+            })}
+          />
+        </div>
+        <div>
+          <label htmlFor="newUsername">Pseudo</label>
+          <input
+            id="newUsername"
+            name="newUsername"
+            type="text"
+            placeholder="Pseudo"
+            value={newUsername}
+            onChange={(e) => dispatch({
+              type: 'INPUTCHANGE',
+              name: e.target.name,
+              value: e.target.value,
+            })}
+          />
+        </div>
       </div>
       <div>
         <label htmlFor="newCompostType">Type de composteur</label>
@@ -245,6 +270,7 @@ const Dashboard = () => {
           })}
         </div>
       </div>
+      <button type="button" onClick={handleAccountDeleteButton}>Supprimer mon compte</button>
       <button type="submit">Enregistrer</button>
       {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
     </form>
