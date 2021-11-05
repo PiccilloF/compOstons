@@ -28,7 +28,7 @@ router
     .post('/login', authController.login)
     .delete('/logout', authController.logout)
     .get('/composts', compostController.getCompostAndUsername)
-    .post('/test', upload.single('image'), authController.uploadImage);
+    // .post('/test', upload.single('image'), authController.uploadImage);
 
 
 router

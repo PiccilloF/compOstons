@@ -1,15 +1,21 @@
-# GET http://localhost:4000/
+# GET https://compostons.herokuapp.com/
+POST http://localhost:4000/test
+content-type: application/image/png
 
-# DELETE http://localhost:3000/logout
+{
+    "image": "https://m.media-amazon.com/images/I/71IcQqjPDiL._AC_SL1500_.jpg"
+}
+
+# DELETE http://localhost:4000/users/123/logout
 
 #  GET http://localhost:4000/users
 
-# POST http://localhost:4000/register
+# POST https://compostons.herokuapp.com/register
 # content-type: application/json
 
 #  {
-#     "username": "Michelaffghghffff",
-#     "mail": "michel.blanc@tfffhgffgfhf.fr",
+#     "username": "Michelaffghghhffff",
+#     "mail": "michel.blanc@tfffhhgffgfhf.fr",
 #     "password": "jaimelecompost",
 #     "confirmedPassword": "jaimelecompost",
 #     "role": "proposeur"
@@ -24,20 +30,20 @@
         
 #  }
 
- POST http://localhost:4000/login
-content-type: application/json
+#  POST https://compostons.herokuapp.com/login
+# content-type: application/json
 
- {
-    "mail": "michel.blanc@yahoo.fr",
-    "password": "jaimelecompost"    
+#  {
+#     "mail": "michel.blanc@yahoo.fr",
+#     "password": "jaimelecompost"    
     
- }
+#  }
 
  
 
 # GET https://compostons.herokuapp.com/composts
 
-#  POST http://localhost:3000/users/25
+#  POST https://compostons.herokuapp.com/users/25
 #  content-type: application/json
 
 #  {
@@ -46,11 +52,11 @@ content-type: application/json
     
 #  }
 
-# DELETE http://localhost:3000/users/15
+# DELETE https://compostons.herokuapp.com/users/123/logout
 
 
 
-# PUT http://localhost:3000/users/51/update
+# PUT https://compostons.herokuapp.com/users/
 # content-type: application/json
 
 #  {
