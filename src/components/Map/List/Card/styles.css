@@ -1,4 +1,19 @@
 .list-card {
   border: 1px solid #33685e;
   border-radius: 10px ;
+  width: 300px;
+  margin: 0.2em;
+}
+.button-linking {
+  background-color: #33685e;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  margin: 0.02em 0;
+}
+@media (min-width:768px) {
+
+  .list-card {
+    width: 49%;
+  }
 }

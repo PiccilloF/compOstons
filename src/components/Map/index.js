@@ -66,6 +66,7 @@ const Map = () => {
       axios.get('https://compostons.herokuapp.com/composts')
         .then((response) => {
           setDataInfo(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -88,13 +89,31 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {dataInfo && (
-          dataInfo.map((marker) => (
-            <Marker key={marker.id} position={[marker.latitude, marker.longitude]}>
-              <Popup>
-                Accepte les déchets de type {marker.category}
-              </Popup>
-            </Marker>
-          ))
+          dataInfo.map((marker) => {
+            let messageAvailability = null;
+            switch (marker.category) {
+              case 'marron':
+                messageAvailability = 'Accepte les dechets de type brun';
+                break;
+              case 'vert':
+                messageAvailability = 'Accepte les dechets de type vert';
+                break;
+              case 'tous types':
+                messageAvailability = 'Accepte tous types de dechets compostable';
+                break;
+              default:
+                messageAvailability = 'N\'accepte pas de dechets pour le moment';
+                break;
+            }
+            return (
+              <Marker key={marker.id} position={[marker.latitude, marker.longitude]}>
+                <Popup>
+                  {marker.username} <br />
+                  {messageAvailability}
+                </Popup>
+              </Marker>
+            );
+          })
         )};
       </MapContainer>
       <List dataInfo={dataInfo} />
