@@ -38,8 +38,9 @@ class User extends CoreModel {
 
         try {
              // function postgresql to update data
-            await db.query(`SELECT update_user($1, $2)`, [dataUpdated, id]);
-            console.log('user is up to date')
+            const user = await db.query(`SELECT update_user($1, $2)`, [dataUpdated, id]);
+            return new User(data);
+            
 
         } catch (err) {
             console.trace(err)
