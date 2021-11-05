@@ -11,6 +11,32 @@ import { UserContext } from 'src/context/userContext';
 import axios from 'axios';
 import './styles.scss';
 
+const initialState = {
+  newFirstname: '',
+  newLastname: '',
+  newUsername: '',
+  newCompostType: '',
+  newAddress: '',
+  location: {},
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INPUTCHANGE':
+      return {
+        ...state,
+        [action.name]: action.value,
+      };
+    case 'INITIALVALUE':
+      return {
+        ...state,
+        ...action.initialValue,
+      };
+    default:
+      break;
+  }
+};
+
 const Dashboard = () => {
 
   const [addressResults, setAddressResults] = useState([]);
@@ -21,31 +47,23 @@ const Dashboard = () => {
   const [contextState, contextDispatch] = useContext(UserContext);
   const { id, username, firstname, lastname, address, compostType } = contextState;
 
-  const initialState = {
-    newFirstname: firstname,
-    newLastname: lastname,
-    newUsername: username,
-    newCompostType: compostType,
-    newAddress: address,
-    location: {},
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'INPUTCHANGE':
-        return {
-          ...state,
-          [action.name]: action.value,
-        };
-      default:
-        break;
-    }
-  };
-
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     newFirstname, newLastname, newUsername, newCompostType, newAddress, location,
   } = state;
+
+  useEffect(() => {
+    dispatch({
+      type: 'INITIALVALUE',
+      initialValue: {
+        newFirstname: firstname,
+        newLastname: lastname,
+        newUsername: username,
+        newCompostType: compostType,
+        newAddress: address,
+      },
+    });
+  }, [id, username, firstname, lastname, address, compostType]);
 
   /**
    * Récupère les propositions d'adresse depuis l'api "api-adresse.data.gouv.fr"
@@ -113,18 +131,18 @@ const Dashboard = () => {
     };
     console.log(data);
 
-    /*
-    const response = await axios.post(
-      'notreURL',
-      data,
-    );
-    */
-
-    // Faire condition : si la reponse retourne un status "ok" (code 200 ou 201) alors j'éxécute ceci :
-    setDisplayValidMessage(true);
-    setTimeout(() => {
-      setDisplayValidMessage(false);
-    }, 2000);
+    axios.put(`https://compostons.herokuapp.com/users/${id}`, data)
+      .then((response) => {
+        console.log(response);
+        // Faire condition : si la reponse retourne un status "ok" (code 200 ou 201) alors j'éxécute ceci :
+        setDisplayValidMessage(true);
+        setTimeout(() => {
+          setDisplayValidMessage(false);
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   };
 
   return (

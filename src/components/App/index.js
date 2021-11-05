@@ -4,7 +4,7 @@
 import Header from 'src/components/Header';
 import Map from 'src/components/Map';
 import Userprofil from 'src/components/Userprofil';
-import Dashboard from '../Dashboard';
+import Dashboard from 'src/components/Dashboard';
 
 // import background from 'src/assets/background.webp';
 import './styles.css';
@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Dashboard />
+      <Map />
     </div>
   );
 };
