@@ -39,9 +39,26 @@ const Login = ({ hide, setIsLogin }) => {
     })
       .then((response) => {
         console.log(response);
+
+        // Au cas ou on aurait des propriétés dans l'objet response.data qui seraient NULL(falsy),
+        // on remplace par une chaîne de caractère vide
+        const newData = {
+          id: response.data.id,
+          username: response.data.username ? response.data.username : '',
+          mail: response.data.mail ? response.data.mail : '',
+          firstname: response.data.firstname ? response.data.firstname : '',
+          lastname: response.data.lastname ? response.data.lastname : '',
+          address: response.data.address ? response.data.address : '',
+          compostType: response.data.compostType ? response.data.compostType : '',
+          role: response.data.role ? response.data.role : '',
+          image: response.data.image ? response.data.image : '',
+          created_at: response.data.created_at ? response.data.created_at : '',
+          updated_at: response.data.updated_at ? response.data.updated_at : '',
+        };
+
         dispatch({
           type: 'LOGIN',
-          payload: response.data,
+          payload: newData,
         });
         hide();
       })

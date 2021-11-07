@@ -50,6 +50,15 @@
     border-radius: 5px;
     margin: 1rem 0;
   }
+
+  .errorMessage {
+    background-color: #f93154;
+    padding: 1rem;
+    color: white;
+    margin: 1rem;
+    border-radius: .25rem;
+    text-align: center;
+  }
 }
 
 
@@ -71,7 +80,7 @@
     .radio-field {
       position: absolute;
       left: 259px;
-      bottom: 147px;
+      bottom: 140px;
 
       &__text {
         margin: 0.5rem 0;
