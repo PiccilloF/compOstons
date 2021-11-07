@@ -1,33 +1,185 @@
-.dashboard_searchLocation {
-  position: relative;
 
-  .dashboard_searchLocation_displayResults {
-    position: absolute;
-    left: 350px;
-    top: 35px;
-    z-index: 9999;
-    background-color: white;
-    border-radius: .25rem;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);
-    border: 1px solid #d4d4d5;
+.dashboard__container {
+  width: 80%;
+  margin: auto;
+  padding: var(--gutter);
+  border-radius: 5px;
+  background-color:white ;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+  opacity: 0.95;
 
-    .dashboard_searchLocation_displayResults_item {
-      font-size: .8rem;
-      font-weight: 600;
-      padding: 0.85rem;
-      border-bottom: 1px solid rgba(34,36,38,.1);
-      cursor: pointer;
+  h1 {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width:80%;
+    font-size: xx-large;
+    font-weight: bold;
+    color: var(--color-primary);
+    padding-bottom: var(--gutter);
+    border-bottom: 1px solid var(--color-primary);
+  }
 
-      &:hover {
-          background-color: #f9fafb;
+
+  .dashboard-form {
+    margin-bottom: var(--gutter);
+  }
+
+  .dashboard-fields__blocks {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    margin-bottom: var(--gutter);
+  }
+
+  /*.dashboard-fields__blocks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--gutter);
+  }*/
+ 
+ 
+  .userInfos__block {
+    padding: calc(var(--gutter)*3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    
+    .userInfos__input-element {
+      display: flex;
+      align-items: center;
+      padding: var(--gutter);
+      .input-field {
+        margin-left: var(--gutter);
+        padding: 0.3rem;
+        border-radius: 5px;
       }
     }
+    
+  }
+
+ 
+  
+    .compost-infos__block {
+      display: flex;
+      flex-direction: column;
+      padding: var(--gutter);
+      align-items: center;
+
+      .compost-infos__select {
+        padding: var(--gutter);
+        margin-bottom: calc(var(--gutter)*2.5);
+        #newCompostType {
+          padding: 0.3rem;
+          font-weight: 800;
+          border-radius: 5px;
+        }
+      }
+
+      .dashboard_searchLocation {
+        position: inherit;
+        padding: var(--gutter);
+
+        #newAddress {
+          padding: 0.3rem;
+          border-radius: 5px;
+        }
+
+      .dashboard_searchLocation_displayResults {
+        position: inherit;
+        left: 350px;
+        top: 35px;
+        z-index: 9999;
+        background-color: white;
+        border-radius: .25rem;
+        box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);
+        border: 1px solid #d4d4d5;
+    
+        .dashboard_searchLocation_displayResults_item {
+          font-size: .8rem;
+          font-weight: 600;
+          padding: 0.85rem;
+          border-bottom: 1px solid rgba(34,36,38,.1);
+          cursor: pointer;
+    
+          &:hover {
+              background-color: #f9fafb;
+          }
+        }
+      }
+    }
+    .dashboard_validMessage {
+      background-color: #00b74a;
+      padding: var(--gutter);
+      color: white;
+      margin: var(--gutter);
+      border-radius: .25rem;
+    }
+
+
+  }
+
+  .section-title {
+    width: 80%;
+    font-weight: 800;
+    font-size: x-large;
+    margin-bottom: calc(var(--gutter)*2);
+    padding-bottom: var(--gutter);
+    border-bottom: 1px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .input-label {
+    font-weight: 600;
+  }
+
+  .submit__button {
+    background-color: var(--color-primary);
+    font-size:var(--gutter);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right:var(--gutter);
+    padding: 0.35rem;
+  }
+
+  .delete__button {
+    background-color: #ff3860;
+    font-size: var(--gutter);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: var(--gutter);
+    padding: 0.35rem;
+  }
+
+  .buttons-block {
+    display: flex;
+    justify-content: space-around;
+    padding-left: var(--gutter);
+  }
+ 
+
+  
+}
+
+
+
+/*@media screen and (min-width:1200px){
+  .dashboard-fields__blocks {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    margin-bottom: var(--gutter);
   }
 }
-.dashboard_validMessage {
-  background-color: #00b74a;
-  padding: 1rem;
-  color: white;
-  margin: 1rem;
-  border-radius: .25rem;
-}
+
+@media screen and (min-width:800px) {
+  .dashboard-fields__blocks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--gutter);
+  }
+}*/

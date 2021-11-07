@@ -169,111 +169,141 @@ const Dashboard = () => {
   };
 
   return (
-    <form onSubmit={handleOnSubmitForm} className="dashboard">
-      <div className="userInfos">
-        <div>
-          <label htmlFor="newFirstname">Prénom</label>
-          <input
-            id="newFirstname"
-            name="newFirstname"
-            type="text"
-            placeholder="Prénom"
-            value={newFirstname}
-            onChange={(e) => dispatch({
-              type: 'INPUTCHANGE',
-              name: e.target.name,
-              value: e.target.value,
-            })}
-          />
-        </div>
-        <div>
-          <label htmlFor="newLastname">Nom</label>
-          <input
-            id="newLastname"
-            name="newLastname"
-            type="text"
-            placeholder="Nom"
-            value={newLastname}
-            onChange={(e) => dispatch({
-              type: 'INPUTCHANGE',
-              name: e.target.name,
-              value: e.target.value,
-            })}
-          />
-        </div>
-        <div>
-          <label htmlFor="newUsername">Pseudo</label>
-          <input
-            id="newUsername"
-            name="newUsername"
-            type="text"
-            placeholder="Pseudo"
-            value={newUsername}
-            onChange={(e) => dispatch({
-              type: 'INPUTCHANGE',
-              name: e.target.name,
-              value: e.target.value,
-            })}
-          />
+    <div className="dashboard__container">
+      <h1>Gestion du profil</h1>
+      <div className="picture-zone">
+        <div className="profil-picture__container">
+          <div className="profil-picture">mon image</div>
+          <input type="file" id="picture-input" />
         </div>
       </div>
-      <div>
-        <label htmlFor="newCompostType">Type de composteur</label>
-        <select
-          id="newCompostType"
-          name="newCompostType"
-          type="text"
-          value={newCompostType}
-          onChange={(e) => dispatch({
-            type: 'INPUTCHANGE',
-            name: e.target.name,
-            value: e.target.value,
-          })}
-        >
-          <option value="vert">Déchets verts</option>
-          <option value="marron">Déchets marron</option>
-          <option value="tous">Tous types de déchets compostables</option>
-          <option value="aucun">Indisponible</option>
-        </select>
-      </div>
-      <div className="dashboard_searchLocation">
-        <label htmlFor="newAddress">Adresse</label>
-        <input
-          id="newAddress"
-          name="newAddress"
-          type="text"
-          placeholder="Adresse"
-          value={newAddress}
-          onFocus={handleOnFocusOnBlurInputAddress}
-          onBlur={handleOnFocusOnBlurInputAddress}
-          onChange={(e) => dispatch({
-            type: 'INPUTCHANGE',
-            name: e.target.name,
-            value: e.target.value,
-          })}
-        />
-        <div
-          className="dashboard_searchLocation_displayResults"
-          onMouseEnter={() => setIsInAddressResultsZone(true)}
-          onMouseLeave={() => setIsInAddressResultsZone(false)}
-        >
-          {displayAddressResults && addressResults.length > 0 && addressResults.map((result) => {
-            return (
-              <div
-                key={result.key}
-                className="dashboard_searchLocation_displayResults_item"
-                onClick={() => handleOnClickResultItem(result)}
+      <form onSubmit={handleOnSubmitForm} className="dashboard-form">
+        <div className="dashboard-fields__blocks">
+          <div className="userInfos__block">
+            <h2 className="section-title"> Mes Informations </h2>
+            <div className="userInfos__input-element">
+              <label htmlFor="newFirstname" className="input-label">Prénom </label>
+              <input
+                className="input-field"
+                id="newFirstname"
+                name="newFirstname"
+                type="text"
+                value={newFirstname}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
+              />
+            </div>
+            <div className="userInfos__input-element">
+              <label htmlFor="newLastname" className="input-label">Nom </label>
+              <input
+                className="input-field"
+                id="newLastname"
+                name="newLastname"
+                type="text"
+                value={newLastname}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
+              />
+            </div>
+            <div className="userInfos__input-element">
+              <label htmlFor="newUsername" className="input-label">Pseudo </label>
+              <input
+                className="input-field"
+                id="newUsername"
+                name="newUsername"
+                type="text"
+                value={newUsername}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
+              />
+            </div>
+          </div>
+          <div className="compost-infos__block">
+            <h2 className="section-title"> Mon Compost </h2>
+            <div className="compost-infos__select">
+              <label htmlFor="newCompostType" className="input-label">Type de déchets acceptés </label>
+              <select
+                id="newCompostType"
+                name="newCompostType"
+                type="text"
+                value={newCompostType}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
               >
-                {result.title}
+                <option value="vert">Déchets verts</option>
+                <option value="marron">Déchets marron</option>
+                <option value="tous">Tous types de déchets compostables</option>
+                <option value="aucun">Indisponible</option>
+              </select>
+            </div>
+            <div className="dashboard_searchLocation">
+              <label htmlFor="newAddress" className="input-label">Localisation du compost </label>
+              <input
+                id="newAddress"
+                name="newAddress"
+                type="text"
+                placeholder="Saisissez votre Adresse"
+                value={newAddress}
+                onFocus={handleOnFocusOnBlurInputAddress}
+                onBlur={handleOnFocusOnBlurInputAddress}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
+              />
+              <div
+                className="dashboard_searchLocation_displayResults"
+                onMouseEnter={() => setIsInAddressResultsZone(true)}
+                onMouseLeave={() => setIsInAddressResultsZone(false)}
+              >
+                {displayAddressResults && addressResults.length > 0 && addressResults.map((result) => {
+                  return (
+                    <div
+                      key={result.key}
+                      className="dashboard_searchLocation_displayResults_item"
+                      onClick={() => handleOnClickResultItem(result)}
+                    >
+                      {result.title}
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
-      </div>
-      <button type="button" onClick={handleAccountDeleteButton}>Supprimer mon compte</button>
-      <button type="submit">Enregistrer</button>
-      {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
-    </form>
+        <div className="buttons-block">
+          <button
+            type="button"
+            className="delete__button"
+            onClick={handleAccountDeleteButton}
+          >
+            Je supprime mon compte
+          </button>
+          <button
+            className="delete__button"
+            type="button"
+            onClick={() => console.log('je supprime ce compost')}
+            id="delete-compost__button"
+          >Je supprime mon compost
+          </button>
+          <button type="submit" className="submit__button">Enregistrer mes informations</button>
+          {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
+        </div>
+      </form>
+    </div>
   );
 };
 
