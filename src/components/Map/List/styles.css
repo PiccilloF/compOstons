@@ -1,16 +1,21 @@
 .list {
-  height: 500px;
-  margin-left: 0.2em;
-  
+  max-height: 500px;
+  margin-bottom: auto;
+  background-color: rgba(255, 255, 255, 0.329);
+  color: #33685e;
+  text-shadow: 1px 1px 2px;
 }
 .list-title {
   font-size: 1.3em;
   margin: 0.3em 0;
 }
-
+h1 {
+  font-size: 1.5em;
+  font-weight: 800;
+}
 .list-marker {
   overflow: auto;
-  max-height: 500px;
+  max-height: 460px;
   width: 100%;
   border-radius: 10px;
   display: flex;

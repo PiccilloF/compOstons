@@ -9,6 +9,12 @@ import {
   Marker,
   Popup,
 } from 'react-leaflet';
+import {
+  greenIcon,
+  brownIcon,
+  redIcon,
+  lightGreenIcon,
+} from 'src/components/Icons';
 import { GeoSearchControl, MapBoxProvider } from 'leaflet-geosearch';
 import List from './List';
 
@@ -60,13 +66,13 @@ const Map = () => {
   // le useEffect pour executer la requete à la base de données
   useEffect(() => {
     if (coords.x) {
-      console.log(`x :  ${coords.x}`);
-      console.log(`y :  ${coords.y}`);
+      // console.log(`x :  ${coords.x}`);
+      // console.log(`y :  ${coords.y}`);
       // penser a repasser la requete en post et de passer l'objet {coords} après le test
       axios.get('https://compostons.herokuapp.com/composts')
         .then((response) => {
           setDataInfo(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -79,9 +85,9 @@ const Map = () => {
     <div className="map">
       <div className="map-leaflet">
         {!dataInfo && (
-        <h1 className="list-title">
+        <p className="map-title">
           Saisissez une adresse pour trouver les points de compost les plus proches
-        </h1>
+        </p>
         )}
         <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5}>
           <SearchField
@@ -97,22 +103,31 @@ const Map = () => {
           {dataInfo && (
             dataInfo.map((marker) => {
               let messageAvailability = null;
+              let iconType = null;
               switch (marker.category) {
                 case 'marron':
                   messageAvailability = 'Accepte les dechets de type brun';
+                  iconType = brownIcon;
                   break;
                 case 'vert':
                   messageAvailability = 'Accepte les dechets de type vert';
+                  iconType = lightGreenIcon;
                   break;
                 case 'tous types':
                   messageAvailability = 'Accepte tous types de dechets compostable';
+                  iconType = greenIcon;
                   break;
                 default:
                   messageAvailability = 'N\'accepte pas de dechets pour le moment';
+                  iconType = redIcon;
                   break;
               }
               return (
-                <Marker key={marker.id} position={[marker.latitude, marker.longitude]}>
+                <Marker
+                  key={marker.id}
+                  position={[marker.latitude, marker.longitude]}
+                  icon={iconType}
+                >
                   <Popup>
                     {marker.username} <br />
                     {messageAvailability}

@@ -3,12 +3,20 @@
   border-radius: 10px ;
   width: 300px;
   margin: 0.2em;
+  padding: 0.4em 0;
+  background-color: rgba(255, 255, 255, 0.589);
+  color: #33685e;
+}
+p, button{
+  padding: 0.1em 0;
 }
 .button-linking {
   background-color: #33685e;
   border: none;
   border-radius: 5px;
   color: #fff;
+  padding: 0.2em;
+  max-width: 90%;
   margin: 0.02em 0;
 }
 @media (min-width:768px) {

@@ -2,8 +2,16 @@
   display:flex;
   flex-wrap: wrap;
   margin: 1em 1em;
+  flex-direction: column-reverse;
 }
-
+.map-title {
+  font-size: 1.3em;
+  font-weight:500;
+  margin: 0.3em 0;
+  color: #33685e;
+  text-shadow: 1px 1px 2px #33685e;
+  background-color: rgba(255, 255, 255, 0.329);
+}
 .map-leaflet{
   width: 100%;
 }
@@ -23,5 +31,6 @@
   .map {
     width: 98%;
     flex-wrap: nowrap;
+    flex-direction:inherit;
   }
 }
