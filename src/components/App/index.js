@@ -24,7 +24,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route path="/" exact>
-          <Dashboard />
+          <Map />
         </Route>
         {
           isLogged

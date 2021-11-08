@@ -283,13 +283,16 @@ const Dashboard = () => {
                 })}
               </div>
             </div>
-            <button
-              className="delete__button"
-              type="button"
-              onClick={() => console.log('je supprime ce compost')}
-              id="delete-compost__button"
-            >Je supprime mon compost
-            </button>
+            <div className="compost-infos-footer">
+              <p>Je supprime mon point de compostage :</p>
+              <button
+                className="delete__button"
+                type="button"
+                onClick={() => console.log('je supprime ce compost')}
+                id="delete-compost__button"
+              >Supprimer
+              </button>
+            </div>
           </div>
         </div>
         <div className="button-block">
