@@ -97,7 +97,7 @@
           padding: 0.3rem;
           font-weight: 600;
           border-radius: 5px;
-          colorb: black;
+          color: black;
         }
 
         .option-value {
@@ -109,7 +109,6 @@
       .dashboard_searchLocation {
         display: flex;
         flex-direction: column;
-        position: inherit;
         padding: var(--gutter);
 
         .input-label {
@@ -131,6 +130,7 @@
         border: 1px solid #d4d4d5;
     
         .dashboard_searchLocation_displayResults_item {
+          position: relative;
           font-size: .8rem;
           font-weight: 600;
           padding: 0.85rem;
@@ -153,6 +153,8 @@
 
 
   }
+
+  /* Elements séparés*/
 
   .section-title {
     width: 80%;
