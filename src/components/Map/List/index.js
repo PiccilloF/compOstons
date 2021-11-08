@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import useModal from 'src/hooks/useModal';
 import Modal from 'src/components/Map/Modal';
+// Context
+import { UserContext } from 'src/context/userContext';
 import Card from './Card';
 
 import './styles.css';
 
 const List = ({ dataInfo }) => {
   const { isOpen, toggle } = useModal();
+  const [state] = useContext(UserContext);
+  const { isLogged } = state;
   const [pointOwner, setPointOwner] = useState({ pseudo: 'toto', userId: 123 });
   // si pas de coordonnées dans le hook alors on renvoi une phase
   // pour inviter l'utilisateur a se co
@@ -25,9 +29,15 @@ const List = ({ dataInfo }) => {
   return (
     <div className="list">
       {!dataInfo && (
-        <h1 className="list-title">
-          Saisissez une adresse pour trouver les points de compost les plus proches
-        </h1>
+        <div className="presentation">
+          <h1>Bienvenu sur CompOston !</h1>
+          <p>
+            Notre but est de facilité la mise en relation entre les personnes  qui
+            souhaitent proposer leur composte et les personnes qui souhaitent réduire leurs déchets
+            ménager.
+
+          </p>
+        </div>
       )}
       {dataInfo && (
         <>
@@ -59,8 +69,9 @@ const List = ({ dataInfo }) => {
                   pseudo={dataMarker.username}
                   message={messageAvailability}
                   userId={dataMarker.user_id}
-                  toggle={toggle}
+                  toggleLinking={toggle}
                   setOwnerPoint={setPointOwner}
+                  isLogged={isLogged}
                 />
               );
             })}
