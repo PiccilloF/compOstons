@@ -3,11 +3,12 @@ const express = require('express');
 const router = require('./router');
 const app = express();
 const cors = require('cors');
+const session = require("express-session");
 const MemoryStore = require('memorystore')(session)
 
 
 
-const session = require("express-session");
+
 
 // gestion of CORS Policy // refacto
         // app.use((req, res, next) => {
