@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('./router');
 const app = express();
 const cors = require('cors');
-var MemoryStore = require('memorystore')(session)
+const MemoryStore = require('memorystore')(session)
 
 
 
