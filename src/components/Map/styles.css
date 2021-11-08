@@ -4,17 +4,24 @@
   margin: 1em 1em;
 }
 
+.map-leaflet{
+  width: 100%;
+}
 .leaflet-container {
   height: 500px;
   width: 100%;
   border-radius: 10px;
 }
 
-@media (min-width:768px) {
+@media (min-width:769px) {
   .leaflet-container {
+    width: 100%;
+  }
+  .map-leaflet{
     width: 50%;
   }
   .map {
+    width: 98%;
     flex-wrap: nowrap;
   }
 }

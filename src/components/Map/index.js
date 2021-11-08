@@ -77,45 +77,52 @@ const Map = () => {
   console.log(dataInfo);
   return (
     <div className="map">
-      <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5}>
-        <SearchField
-          apiKey={apiKey}
-          onShowLocation={(e) => {
-            setCoords({ x: e.location.x, y: e.location.y });
-          }}
-        />
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {dataInfo && (
-          dataInfo.map((marker) => {
-            let messageAvailability = null;
-            switch (marker.category) {
-              case 'marron':
-                messageAvailability = 'Accepte les dechets de type brun';
-                break;
-              case 'vert':
-                messageAvailability = 'Accepte les dechets de type vert';
-                break;
-              case 'tous types':
-                messageAvailability = 'Accepte tous types de dechets compostable';
-                break;
-              default:
-                messageAvailability = 'N\'accepte pas de dechets pour le moment';
-                break;
-            }
-            return (
-              <Marker key={marker.id} position={[marker.latitude, marker.longitude]}>
-                <Popup>
-                  {marker.username} <br />
-                  {messageAvailability}
-                </Popup>
-              </Marker>
-            );
-          })
-        )};
-      </MapContainer>
+      <div className="map-leaflet">
+        {!dataInfo && (
+        <h1 className="list-title">
+          Saisissez une adresse pour trouver les points de compost les plus proches
+        </h1>
+        )}
+        <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5}>
+          <SearchField
+            apiKey={apiKey}
+            onShowLocation={(e) => {
+              setCoords({ x: e.location.x, y: e.location.y });
+            }}
+          />
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {dataInfo && (
+            dataInfo.map((marker) => {
+              let messageAvailability = null;
+              switch (marker.category) {
+                case 'marron':
+                  messageAvailability = 'Accepte les dechets de type brun';
+                  break;
+                case 'vert':
+                  messageAvailability = 'Accepte les dechets de type vert';
+                  break;
+                case 'tous types':
+                  messageAvailability = 'Accepte tous types de dechets compostable';
+                  break;
+                default:
+                  messageAvailability = 'N\'accepte pas de dechets pour le moment';
+                  break;
+              }
+              return (
+                <Marker key={marker.id} position={[marker.latitude, marker.longitude]}>
+                  <Popup>
+                    {marker.username} <br />
+                    {messageAvailability}
+                  </Popup>
+                </Marker>
+              );
+            })
+          )};
+        </MapContainer>
+      </div>
       <List dataInfo={dataInfo} />
     </div>
   );

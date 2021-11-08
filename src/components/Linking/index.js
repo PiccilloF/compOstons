@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 
 // Context
-// import { UserContext } from 'src/context/userContext';
+import { UserContext } from 'src/context/userContext';
 
 import PropTypes from 'prop-types';
 import './styles.scss';
@@ -11,17 +11,17 @@ const Linking = ({ hide, pointOwner }) => {
   // hook de controle de la saisie du textarea
   const [textValue, setTextValue] = useState();
 
-  // const [state] = useContext(UserContext);
-  // const { mail, username, id } = state;
+  const [state] = useContext(UserContext);
+  const { mail, id } = state;
   // fonction pour transmettre les infos pour l'envoi du mail => à finir
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(`https://compostons.herokuapp.com/users/2/mail`, {
-      to: 'florian.vallois17@gmail.com', // a ne pas passer, on le recup avec l'id du proposeur
-      replyTo: 'Loiclebackeu@gmail.com', // passer le mail du demandeur
-      text: 'coucou cest nous', // passer le contenu du textarea
-      html: 'coucou cest nous',
+    axios.post(`https://compostons.herokuapp.com/users/${id}/mail`, {
+      ownerId: pointOwner.userId,
+      replyTo: mail, // passer le mail du demandeur
+      text: textValue, // passer le contenu du textarea
+      html: textValue,
     })
       .then((response) => {
         console.log(response);
@@ -36,7 +36,7 @@ const Linking = ({ hide, pointOwner }) => {
     //   mail,
     //   username,
     // }
-    console.log(textValue, pointOwner.userId);
+    // console.log(textValue, pointOwner.userId);
   };
   return (
     <>

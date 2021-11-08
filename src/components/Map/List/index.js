@@ -25,9 +25,15 @@ const List = ({ dataInfo }) => {
   return (
     <div className="list">
       {!dataInfo && (
-        <h1 className="list-title">
-          Saisissez une adresse pour trouver les points de compost les plus proches
-        </h1>
+        <div className="presentation">
+          <h1>Bienvenu sur CompOston !</h1>
+          <p>
+            Notre but est de facilité la mise en relation entre les personnes  qui
+            souhaitent proposer leur composte et les personnes qui souhaitent réduire leurs déchets
+            ménager.
+
+          </p>
+        </div>
       )}
       {dataInfo && (
         <>
