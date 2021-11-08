@@ -16,6 +16,8 @@ import './style.scss';
 // Création du composant Modal, il prend en paramètre le booléen isOpen
 // qui conditionnera l'affichage de la modale, et la fonction hide pour la fermeture.
 const Modal = ({ isOpen, hide }) => {
+  // Par défaut c'est la modale de connexion ( login) qui s'affiche
+  // au clic sur le bouton s'inscrire c'est la modale d'inscription qui s'affiche à la place
   const [isLogin, setIsLogin] = useState(true);
   const target = document.getElementById('root');
 

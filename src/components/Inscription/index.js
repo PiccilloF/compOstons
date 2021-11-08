@@ -18,6 +18,8 @@ const Inscription = ({ hide, setIsLogin }) => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [radioValue, setRadioValue] = useState('proposeur');
+  const [displayValidMessage, setDisplayValidMessage] = useState(false);
+  const [displayErrorMessage, setDisplayErrorMessage] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -27,7 +29,9 @@ const Inscription = ({ hide, setIsLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     console.log('inscription');
+
     axios.post('https://compostons.herokuapp.com/register', {
       mail: emailValue,
       password: passwordValue,
@@ -37,9 +41,27 @@ const Inscription = ({ hide, setIsLogin }) => {
     })
       .then((response) => {
         console.log(response);
+
+        if (response.status === 201) {
+          setDisplayValidMessage(true);
+          setTimeout(() => {
+            setDisplayValidMessage(false);
+            setIsLogin(true);
+          }, 4000);
+        }
       })
       .catch((error) => {
         console.log('error', error);
+
+        if (error) {
+          setDisplayErrorMessage(true);
+          setTimeout(() => {
+            setDisplayErrorMessage(false);
+            setPseudoValue('');
+            setEmailValue('');
+            setPasswordValue('');
+          }, 4000);
+        }
       });
   };
 
@@ -120,6 +142,8 @@ const Inscription = ({ hide, setIsLogin }) => {
           >
             S'inscrire
           </button>
+          {displayValidMessage && <div className="dashboard_validMessage">Inscription réussie ! Vous pouvez maintenant vous connecter.</div>}
+          {displayErrorMessage && <div className="errorMessage">Pseudo ou Email déjà existant</div>}
         </form>
       </div>
     </>
