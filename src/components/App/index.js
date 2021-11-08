@@ -8,6 +8,7 @@ import { UserContext } from 'src/context/userContext';
 
 // Import des composants
 import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
 import Map from 'src/components/Map';
 import Dashboard from 'src/components/Dashboard';
 import Error from 'src/components/Error';
@@ -23,25 +24,28 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Switch>
-        <Route path="/" exact>
-          <Map />
-        </Route>
-        {
-          isLogged
-            ? (
-              <Route path="/profil">
-                <Dashboard />
-              </Route>
-            )
-            : (
-              <Redirect from="/profil" to="/" />
-            )
-        }
-        <Route>
-          <Error />
-        </Route>
-      </Switch>
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <Map />
+          </Route>
+          {
+            isLogged
+              ? (
+                <Route path="/profil">
+                  <Dashboard />
+                </Route>
+              )
+              : (
+                <Redirect from="/profil" to="/" />
+              )
+          }
+          <Route>
+            <Error />
+          </Route>
+        </Switch>
+      </main>
+      <Footer />
     </div>
   );
 };

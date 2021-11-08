@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 // Import du gestionnaire de d'état
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Import du composant Field
@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 // Import fichier scss
 import './style.scss';
 
-const Inscription = ({ hide, setIsLogin }) => {
+const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
   // console.log('test composant login');
   const [pseudoValue, setPseudoValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -26,6 +26,14 @@ const Inscription = ({ hide, setIsLogin }) => {
       setIsLogin(true);
     };
   }, []);
+
+  const handleClickCloseModal = () => {
+    setTimeout(() => {
+      hide();
+    }, 500);
+
+    ref.current.classList.add('close');
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -73,7 +81,7 @@ const Inscription = ({ hide, setIsLogin }) => {
           name="Fermeture"
           type="button"
           className="modal-close-button"
-          onClick={hide}
+          onClick={handleClickCloseModal}
         >
           <span>&times;</span>
         </button>
@@ -148,7 +156,7 @@ const Inscription = ({ hide, setIsLogin }) => {
       </div>
     </>
   );
-};
+});
 
 Inscription.propTypes = {
   hide: PropTypes.func.isRequired,

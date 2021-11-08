@@ -1,5 +1,5 @@
 // Import du gestionnaire de d'état
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
 // Context
@@ -23,12 +23,19 @@ import './style.scss';
 // child => un élément react dans ce cas
 // container => un élément du DOM, ici l'élément avec l'id root
 
-const Login = ({ hide, setIsLogin }) => {
-  // console.log('test composant login');
+const Login = React.forwardRef(({ hide, setIsLogin }, ref) => {
   const [state, dispatch] = useContext(UserContext);
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+
+  const handleClickCloseModal = () => {
+    setTimeout(() => {
+      hide();
+    }, 500);
+
+    ref.current.classList.add('close');
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,7 +67,7 @@ const Login = ({ hide, setIsLogin }) => {
           type: 'LOGIN',
           payload: newData,
         });
-        hide();
+        handleClickCloseModal();
       })
       .catch((error) => {
         console.log(error);
@@ -75,7 +82,7 @@ const Login = ({ hide, setIsLogin }) => {
           name="Fermeture"
           type="button"
           className="modal-close-button"
-          onClick={hide}
+          onClick={handleClickCloseModal}
         >
           <span>&times;</span>
         </button>
@@ -121,7 +128,7 @@ const Login = ({ hide, setIsLogin }) => {
       </div>
     </>
   );
-};
+});
 
 Login.propTypes = {
   hide: PropTypes.func.isRequired,

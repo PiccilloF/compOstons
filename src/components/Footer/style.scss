@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255,255,255,0.35);
+  margin-top: auto;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+
+  &_navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+    color: #33685e;
+    text-decoration: underline;
+  }
+
+  &_copyright {
+    font-weight: bold;
+  }
+}
