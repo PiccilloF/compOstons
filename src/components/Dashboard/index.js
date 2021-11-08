@@ -180,7 +180,7 @@ const Dashboard = () => {
       <form onSubmit={handleOnSubmitForm} className="dashboard-form">
         <div className="dashboard-fields__blocks">
           <div className="userInfos__block">
-            <h2 className="section-title"> Mes Informations </h2>
+            <h2 className="section-title"> Mes informations </h2>
             <div className="userInfos__input-element">
               <label htmlFor="newFirstname" className="input-label">Prénom </label>
               <input
@@ -228,7 +228,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="compost-infos__block">
-            <h2 className="section-title"> Mon Compost </h2>
+            <h2 className="section-title"> Mon compost </h2>
             <div className="compost-infos__select">
               <label htmlFor="newCompostType" className="input-label">Type de déchets acceptés </label>
               <select
@@ -242,11 +242,12 @@ const Dashboard = () => {
                   value: e.target.value,
                 })}
               >
-                <option value="vert">Déchets verts</option>
-                <option value="marron">Déchets marron</option>
-                <option value="tous">Tous types de déchets compostables</option>
-                <option value="aucun">Indisponible</option>
+                <option className="option-value" value="vert">Déchets verts</option>
+                <option className="option-value" value="marron">Déchets marron</option>
+                <option className="option-value" value="tous">Tous types de déchets compostables</option>
+                <option className="option-value" value="aucun">Indisponible</option>
               </select>
+
             </div>
             <div className="dashboard_searchLocation">
               <label htmlFor="newAddress" className="input-label">Localisation du compost </label>
@@ -282,25 +283,26 @@ const Dashboard = () => {
                 })}
               </div>
             </div>
+            <button
+              className="delete__button"
+              type="button"
+              onClick={() => console.log('je supprime ce compost')}
+              id="delete-compost__button"
+            >Je supprime mon compost
+            </button>
           </div>
         </div>
-        <div className="buttons-block">
+        <div className="button-block">
+          <button type="submit" className="submit__button">Enregistrer mes informations</button>
+          {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
           <button
-            type="button"
             className="delete__button"
+            type="button"
             onClick={handleAccountDeleteButton}
           >
             Je supprime mon compte
           </button>
-          <button
-            className="delete__button"
-            type="button"
-            onClick={() => console.log('je supprime ce compost')}
-            id="delete-compost__button"
-          >Je supprime mon compost
-          </button>
-          <button type="submit" className="submit__button">Enregistrer mes informations</button>
-          {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
+
         </div>
       </form>
     </div>

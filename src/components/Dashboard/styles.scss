@@ -4,9 +4,11 @@
   margin: auto;
   padding: var(--gutter);
   border-radius: 5px;
-  background-color:white ;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
-  opacity: 0.95;
+  background-color: rgba(255, 255, 255, 0.329);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  opacity: 1;
+  text-shadow:rgba(0, 0, 0, 0.171) 0px 5px 5px ;
+  font-style: italic;
 
   h1 {
     display: flex;
@@ -20,6 +22,10 @@
     border-bottom: 1px solid var(--color-primary);
   }
 
+  .picture-zone {
+    margin-top: var(--gutter);
+    display: block;
+  }
 
   .dashboard-form {
     margin-bottom: var(--gutter);
@@ -45,6 +51,19 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+
+    .header-block {
+      display: flex;
+      align-items: flex-start;
+
+      & .delete__button {
+        margin-left: 2rem;
+      }
+
+      & span {
+        font-weight:bold;
+      }
+    }
     
     .userInfos__input-element {
       display: flex;
@@ -66,14 +85,34 @@
       flex-direction: column;
       padding: var(--gutter);
       align-items: center;
+      background-color: rgba(255, 255, 255, 0.589);
+      border-radius: 5px;
+
+      .header-block {
+        display: flex;
+        align-items: flex-start;
+  
+        & .delete__button {
+          margin-left: 2rem;
+        }
+  
+        & span {
+          font-weight:bold;
+        }
+      }
 
       .compost-infos__select {
         padding: var(--gutter);
         margin-bottom: calc(var(--gutter)*2.5);
+
         #newCompostType {
           padding: 0.3rem;
-          font-weight: 800;
+          font-weight: 700;
           border-radius: 5px;
+        }
+
+        .option-value {
+          font-weight: 700;
         }
       }
 
@@ -132,6 +171,7 @@
 
   .input-label {
     font-weight: 600;
+    color: var(--color-primary);
   }
 
   .submit__button {
@@ -141,12 +181,12 @@
     border: none;
     border-radius: 5px;
     margin-right:var(--gutter);
-    padding: 0.35rem;
+    padding: calc(var(--gutter)/2);
   }
 
   .delete__button {
-    background-color: #ff3860;
-    font-size: var(--gutter);
+    background-color: var(--color-alert);
+    font-size: large;
     color: white;
     border: none;
     border-radius: 5px;
@@ -154,9 +194,9 @@
     padding: 0.35rem;
   }
 
-  .buttons-block {
+  .button-block {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-left: var(--gutter);
   }
  
@@ -165,8 +205,10 @@
 }
 
 
+/* Responsive */
 
-/*@media screen and (min-width:1200px){
+
+@media screen and (max-width:1200px){
   .dashboard-fields__blocks {
     display: flex;
     justify-content: space-evenly;
@@ -175,11 +217,66 @@
   }
 }
 
-@media screen and (min-width:800px) {
-  .dashboard-fields__blocks {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: var(--gutter);
+@media screen and (max-width:800px) {
+  .dashboard__container {
+    width:100%;
+
+    & h1 {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      width:70%;
+      font-size: x-large;
+      font-weight: bold;
+      color: var(--color-primary);
+      padding-bottom: var(--gutter);
+      border-bottom: 1px solid var(--color-primary);
+    }
+
+    .dashboard-fields__blocks {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: var(--gutter);
+    }
+    
+
+
+    .userInfos__input-element {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--gutter);
+      .input-field {
+        margin-left: var(--gutter);
+        padding: 0.3rem;
+        border-radius: 5px;
+      }
+    }
+
+    .compost-infos__select {
+      & option {
+        width: 80%;
+      }
+    }
+
+
+    .section-title {
+      width: 80%;
+      font-weight: 800;
+      font-size: large;
+      margin-bottom: calc(var(--gutter)*2);
+      padding-bottom: var(--gutter);
+      border-bottom: 1px solid var(--color-primary);
+      color: var(--color-primary);
+    }
   }
-}*/
+
+ 
+
+ 
+  
+ 
+}
+
