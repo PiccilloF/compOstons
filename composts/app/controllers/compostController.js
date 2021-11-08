@@ -4,6 +4,7 @@ const compostController = {
 
     homePage: (req, res) => {
         // homepage route, just checking if everything's fine
+        console.log(req.session)
         res.send('Ready to compost !!');
     },
 
@@ -29,6 +30,7 @@ const compostController = {
     // },
 
     getOneCompost: async (req, res) => {
+       
         try {
             const compost = await Compost.findOne(req.params.id);
             res.json(compost)

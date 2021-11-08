@@ -3,6 +3,7 @@ const express = require('express');
 const router = require('./router');
 const app = express();
 const cors = require('cors');
+var MemoryStore = require('memorystore')(session)
 
 
 
@@ -27,12 +28,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // creation of a session
 app.use(session({
-
+    name: 'sid',
     secret: 'jecompostetonmotdepasse', //string used for signing session
-    resave: true,//autosave at the end of the request
-    saveUninitialized: true, // save all sessions - even empties
+    resave: true,
+    saveUninitialized: false, 
+    store: new MemoryStore({
+        checkPeriod: 86400000 // prune expired entries every 24h
+      }), 
     cookie: {
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        secure: true
     }
 
 }));

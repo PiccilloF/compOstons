@@ -3,6 +3,7 @@ const compostController = require('./controllers/compostController');
 const userController = require('./controllers/userController');
 const authController  = require('./controllers/authController');
 const mailController  = require('./controllers/mailController');
+const checkSession = require('./middlewares/checkSession')
 // const multer = require('multer');
 
 // const storage = multer.diskStorage({
@@ -25,8 +26,7 @@ router
     .get('/', compostController.homePage)
     // .get('/test', userController.findProposeur)
     .post('/register',authController.register)
-    .post('/login', authController.login)
-    .delete('/logout', authController.logout)
+    .post('/login', authController.login)    
     .get('/composts', compostController.getCompostAndUsername)
     // .post('/test', upload.single('image'), authController.uploadImage);
 
@@ -34,20 +34,20 @@ router
 router
     .route('/composts/:id(\\d+)')
     .get(compostController.getOneCompost)
-    .delete(compostController.deleteOneCompost);
+    .delete(checkSession.control, compostController.deleteOneCompost);
 
 router
     .get('/users', userController.getAllUsers)
     // .post('/users', userController.createOneUser);
 router
     .route('/users/:id(\\d+)')
-    .get(userController.getOneUser)
-    .post(compostController.createOneCompost)    
-    .put(userController.updateInfo)
-    .delete(userController.deleteOneUSer);
+    .get(checkSession.control, userController.getOneUser)
+    .post(checkSession.control, compostController.createOneCompost)    
+    .put(checkSession.control, userController.updateInfo)
+    .delete(checkSession.control, userController.deleteOneUSer);
 
-router.delete('/users/:id(\\d+)/logout', authController.logout);
-router.post('/users/:id(\\d+)/mail', mailController.sendMail);
+router.delete('/users/:id(\\d+)/logout', checkSession.control, authController.logout);
+router.post('/users/:id(\\d+)/mail',checkSession.control, mailController.sendMail);
 // router.put('/users/:id(\\d+)/update', compostController.updateCompost);
 
 

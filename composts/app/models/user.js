@@ -40,8 +40,9 @@ class User extends CoreModel {
         const latitude = data.latitude || formerCompost.latitude;
         const category = data.category || formerCompost.category;
         const address = data.address || formerCompost.address;
+        const user_id = data.user_id || formerCompost.user_id;
 
-       const dataUpdated = {firstname, lastname, username, mail, password, role, image, longitude, latitude, category, address};
+       const dataUpdated = {firstname, lastname, username, mail, password, role, image, longitude, latitude, category, address, user_id};
 
         try {
              // function postgresql to update data

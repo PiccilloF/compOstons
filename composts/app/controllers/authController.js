@@ -69,6 +69,9 @@ const authController = {
                 return;
             }
             delete user.password;
+            req.session.auth = req.session.id;
+            req.session.userid = user.id;
+            console.log(req.session);
             res.send(user);
 
         } catch (err) {
@@ -84,7 +87,7 @@ const authController = {
             if (err) {
                 res.status(400).send("Error while logout")
             } else {
-                req.headers.cookie = null;
+                // req.headers.cookie = null;
                 // req.session.login = null;
                 res.send("User is now logout");
             }
