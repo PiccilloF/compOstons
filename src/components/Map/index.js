@@ -84,11 +84,19 @@ const Map = () => {
   return (
     <div className="map">
       <div className="map-leaflet">
-        {!dataInfo && (
-        <p className="map-title">
-          Saisissez une adresse pour trouver les points de compost les plus proches
-        </p>
-        )}
+        <div className="map-title">
+          <h1>Bienvenue sur CompOstons</h1>
+          <p>
+            Notre but est de faciliter la mise en relation entre les personnes  qui
+            souhaitent proposer leur composte et les personnes qui souhaitent réduire leurs
+            déchets ménager.
+          </p>
+          <p className="map-use">
+            Trouvez dès maintenant les points de compost les plus proches de chez vous en
+            saisissant votre adresse.
+          </p>
+        </div>
+
         <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5}>
           <SearchField
             apiKey={apiKey}
