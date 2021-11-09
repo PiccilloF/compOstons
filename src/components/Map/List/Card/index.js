@@ -20,7 +20,7 @@ const Card = ({
   const handleClickConnection = () => {
     toggle();
   };
-  const connected = (isLogged ? <button name={userId} type="button" className="button-linking" onClick={handleClick}>Envoyer un message à {pseudo}</button> : <button type="button" onClick={handleClickConnection}>Se connecter pour contacter {pseudo}</button>);
+  const connected = (isLogged ? <button name={userId} type="button" className="button-linking" onClick={handleClick}>Envoyer un message à {pseudo}</button> : <button type="button" onClick={handleClickConnection} className="button-linking">Se connecter pour contacter {pseudo}</button>);
   return (
     <>
       <div className="list-card">

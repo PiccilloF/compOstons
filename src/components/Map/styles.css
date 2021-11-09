@@ -3,7 +3,24 @@
   flex-wrap: wrap;
   margin: 1em 1em;
 }
-
+.map-title {
+  font-size: 1.1em;
+  font-weight:500;
+  margin-bottom: 0.3em;
+  color: #33685e;
+  text-shadow: 1px 1px 2px #33685e;
+  background-color: rgba(255, 255, 255, 0.589);
+  border-radius: 10px;
+}
+h1 {
+  font-size: 1.4em;
+  font-weight: 800;
+  padding: 0.3em 0;
+}
+.map-use{
+  font-size: 1em;
+  padding: 0.4em 0;
+}
 .map-leaflet{
   width: 100%;
 }
@@ -23,5 +40,6 @@
   .map {
     width: 98%;
     flex-wrap: nowrap;
+    flex-direction:inherit;
   }
 }
