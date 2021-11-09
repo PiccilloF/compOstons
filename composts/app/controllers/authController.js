@@ -69,9 +69,9 @@ const authController = {
                 return;
             }
             delete user.password;
-            req.session.auth = req.session.id;
-            req.session.userid = user.id;
-            console.log(req.session);
+            // req.session.auth = req.session.id;
+            // req.session.userid = user.id;
+            // console.log(req.session);
             res.send(user);
 
         } catch (err) {

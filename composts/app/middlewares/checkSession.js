@@ -20,4 +20,4 @@ const checkSession = {
     }
 }
 
-module.exports = checkSession;
+// module.exports = checkSession;

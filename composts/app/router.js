@@ -3,7 +3,7 @@ const compostController = require('./controllers/compostController');
 const userController = require('./controllers/userController');
 const authController  = require('./controllers/authController');
 const mailController  = require('./controllers/mailController');
-const checkSession = require('./middlewares/checkSession')
+// const checkSession = require('./middlewares/checkSession')
 // const multer = require('multer');
 
 // const storage = multer.diskStorage({
@@ -34,20 +34,20 @@ router
 router
     .route('/composts/:id(\\d+)')
     .get(compostController.getOneCompost)
-    .delete(checkSession.control, compostController.deleteOneCompost);
+    .delete(compostController.deleteOneCompost);
 
 router
     .get('/users', userController.getAllUsers)
     // .post('/users', userController.createOneUser);
 router
     .route('/users/:id(\\d+)')
-    .get(checkSession.control, userController.getOneUser)
-    .post(checkSession.control, compostController.createOneCompost)    
-    .put(checkSession.control, userController.updateInfo)
-    .delete(checkSession.control, userController.deleteOneUSer);
+    .get( userController.getOneUser)
+    .post( compostController.createOneCompost)    
+    .put( userController.updateInfo)
+    .delete( userController.deleteOneUSer);
 
-router.delete('/users/:id(\\d+)/logout', checkSession.control, authController.logout);
-router.post('/users/:id(\\d+)/mail',checkSession.control, mailController.sendMail);
+router.delete('/users/:id(\\d+)/logout',  authController.logout);
+router.post('/users/:id(\\d+)/mail', mailController.sendMail);
 // router.put('/users/:id(\\d+)/update', compostController.updateCompost);
 
 
