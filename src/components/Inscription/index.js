@@ -55,7 +55,7 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
           setTimeout(() => {
             setDisplayValidMessage(false);
             setIsLogin(true);
-          }, 4000);
+          }, 2500);
         }
       })
       .catch((error) => {

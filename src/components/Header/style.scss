@@ -116,6 +116,7 @@
     
         &_text {
           padding: 0.2rem;
+          font-size: 0.9rem;
         }
       }
 
@@ -127,13 +128,13 @@
           }
 
           &_button {
-            padding: 0.5rem;
+            padding: 0.3rem;
           }
         }
       
         .login {
           &_icon {
-            font-size: 2.3rem;
+            font-size: 2rem;
           }
         }
       }

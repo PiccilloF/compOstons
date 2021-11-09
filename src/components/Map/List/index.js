@@ -40,16 +40,16 @@ const List = ({ dataInfo }) => {
               let messageAvailability = null;
               switch (dataMarker.category) {
                 case 'marron':
-                  messageAvailability = 'Accepte les dechets de type brun';
+                  messageAvailability = 'Accepte les déchets de type brun';
                   break;
                 case 'vert':
-                  messageAvailability = 'Accepte les dechets de type vert';
+                  messageAvailability = 'Accepte les déchets de type vert';
                   break;
                 case 'tous types':
-                  messageAvailability = 'Accepte tous types de dechets compostable';
+                  messageAvailability = 'Accepte tous types de déchets compostable';
                   break;
                 default:
-                  messageAvailability = 'N\'accepte pas de dechets pour le moment';
+                  messageAvailability = 'N\'accepte pas de déchets pour le moment';
                   break;
               }
               return (
