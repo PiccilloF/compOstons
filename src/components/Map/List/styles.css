@@ -32,9 +32,10 @@ h1 {
     width: 50%;
     margin-left: 0.4em;
     margin-top: 0;
+    max-height: 620px;
   }
   .list-marker{
-    max-height: 580px;
+    max-height: 570px;
   }
 }
 
