@@ -17,7 +17,7 @@ const Linking = ({ hide, pointOwner }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLinkingMessage('Envoi en cours');
-    axios.post(`https://compostons.herokuapp.com/users/${id}/maile`, {
+    axios.post(`https://compostons.herokuapp.com/users/${id}/mail`, {
       ownerId: pointOwner.userId,
       replyTo: mail, // passer le mail du demandeur
       text: textValue, // passer le contenu du textarea
