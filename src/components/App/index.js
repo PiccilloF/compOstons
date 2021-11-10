@@ -33,6 +33,7 @@ const App = () => {
           backgroundRepeat: 'no-repeat',
         }
       }
+
     >
       <Header />
       <main>
