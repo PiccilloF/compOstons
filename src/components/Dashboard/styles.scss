@@ -205,7 +205,10 @@
 /* Responsive */
 
 
-@media screen and (max-width:1200px){
+@media screen and (max-width:1024px){
+  .dashboard__container{
+    width: 95%;
+  }
   .dashboard-fields__blocks {
     display: flex;
     justify-content: space-evenly;
@@ -214,10 +217,14 @@
   }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:769px) {
   .dashboard__container {
     width:100%;
     border-radius: 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     & h1 {
       display: flex;
