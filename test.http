@@ -6,9 +6,9 @@
 #     "image": "https://m.media-amazon.com/images/I/71IcQqjPDiL._AC_SL1500_.jpg"
 # }
 
-# DELETE http://localhost:4000/users/123/logout
+# DELETE http://localhost:4000/users/100/logout
 
-#  GET http://localhost:4000/users
+
 
 # POST https://compostons.herokuapp.com/register
 # content-type: application/json
@@ -22,23 +22,27 @@
         
 #  }
 
- POST http://localhost:4000/users/174/mail
-content-type: application/json
+#  POST http://localhost:4000/users/174/mail
+# content-type: application/json
 
- {
-    "ownerId": "123",
-    "mail": "florian.vallois17@gmail.com",
-    "text": "coucou c'est nous",
-    "html": "coucou c'est nous"
+#  {
+#     "ownerId": "123",
+#     "mail": "florian.vallois17@gmail.com",
+#     "text": "coucou c'est nous",
+#     "html": "coucou c'est nous"
 
         
- }
+#  }
+# GET http://localhost:4000/
+
+
+# GET http://localhost:4000/users/123
 
 # POST http://localhost:4000/login
 # content-type: application/json
 
 #  {
-#     "mail": "michel.blanc@yahoo.fr",
+#     "mail": "loicfort@free.fr",
 #     "password": "jaimelecompost"
 #  }
 
