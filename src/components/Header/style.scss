@@ -1,5 +1,4 @@
 .header {
-  margin-bottom: 1.5em;
   &-top {
     display: flex;
     justify-content: space-between;
@@ -105,6 +104,7 @@
 
 @media screen and (max-width: 575px) {
   .header {
+    margin-top: 1rem;
     &-top {
       
       .header_title {
@@ -116,6 +116,18 @@
     
         &_text {
           padding: 0.2rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      .hello-user-container {
+        position: absolute;
+        width: 100%;
+        font-size: 0.9em;
+        top: 12px;
+
+        .hello-user-text {
+          margin: 0 auto;
         }
       }
 
@@ -127,26 +139,29 @@
           }
 
           &_button {
-            padding: 0.5rem;
+            padding: 0.3rem;
           }
         }
       
         .login {
           &_icon {
-            font-size: 2.3rem;
+            font-size: 2rem;
           }
         }
       }
     }
 
     &-bottom {
-      margin: 0 1em;
+      margin-left: 1.5rem;
+      margin-right: .9rem;
+      font-size: 0.9rem
     }
   }
 };
 
 @media screen and (min-width: 576px) and (max-width: 1199px) {
   .header {
+    margin-top: 0.5rem;
     &-top {
   
       .header_title {
@@ -161,7 +176,19 @@
           padding: 0.5rem;
         }
       }
-  
+      
+      .hello-user-container {
+        position: absolute;
+        width: 100%;
+        font-size: 1em;
+        top: 10px;
+
+        .hello-user-text {
+          margin-left: auto;
+          padding-right: 1.6rem;
+        }
+      }
+
       .nav-login {
       
         .nav {      

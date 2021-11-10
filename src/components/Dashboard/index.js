@@ -20,7 +20,7 @@ const initialState = {
   newFirstname: '',
   newLastname: '',
   newUsername: '',
-  newCompostType: '',
+  newCategory: '',
   newAddress: '',
   location: {},
 };
@@ -145,7 +145,7 @@ const Dashboard = () => {
         setDisplayValidMessage(true);
         setTimeout(() => {
           setDisplayValidMessage(false);
-        }, 2000);
+        }, 2500);
       })
       .catch((error) => {
         console.log('error', error);

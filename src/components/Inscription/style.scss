@@ -51,25 +51,40 @@
     margin: 1rem 0;
   }
 
-  .errorMessage {
-    background-color: #f93154;
-    padding: 1rem;
+  .validMessage {
+    background-color: #00b74a;
     color: white;
     margin: 1rem;
     border-radius: .25rem;
     text-align: center;
+    position: absolute;
+    width: 94%;
+  }
+
+  .errorMessage {
+    background-color: #f93154;
+    color: white;
+    margin: 1rem;
+    border-radius: .25rem;
+    text-align: center;
+    position: absolute;
+    width: 94%;
   }
 }
 
-
-/* @media screen and (max-width: 575px) {
-  .inscription-form {
-    .input-field {
-      min-width: 300px;
-      width: 450px;
-    }
+@media screen and (max-width: 575px) {
+  .validMessage {
+    padding: 0.8rem;
+    bottom: -7px;
+    left: -7px;
   }
-} */
+
+  .errorMessage {
+    padding: 1.8rem;
+    bottom: -7px;
+    left: -7px;
+  }
+}
 
 @media screen and (min-width: 576px) {
   .inscription-form {
@@ -90,5 +105,17 @@
         margin-bottom: 0.5rem;
       }
     }
+  }
+
+  .validMessage {
+    padding: 1rem;
+    bottom: 9px;
+    left: 0px;
+  }
+
+  .errorMessage {
+    padding: 1rem;
+    bottom: 9px;
+    left: 0px;
   }
 }
