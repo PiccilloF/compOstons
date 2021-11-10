@@ -44,7 +44,7 @@ const Header = () => {
           {
             isLogged && (
               <div className="hello-user-container">
-                <p className="hello-user-text">ヽ(^-^)丿 Bonjour {username} ! \(^-^)/</p>
+                <p className="hello-user-text">Bonjour {username} !</p>
               </div>
             )
           }

@@ -16,7 +16,7 @@ const initialState = {
   newFirstname: '',
   newLastname: '',
   newUsername: '',
-  newCompostType: '',
+  newCategory: '',
   newAddress: '',
   location: {},
 };
@@ -46,11 +46,11 @@ const Dashboard = () => {
   const [displayValidMessage, setDisplayValidMessage] = useState(false);
 
   const [contextState, contextDispatch] = useContext(UserContext);
-  const { id, username, firstname, lastname, address, compostType } = contextState;
+  const { id, username, firstname, lastname, address, category } = contextState;
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
-    newFirstname, newLastname, newUsername, newCompostType, newAddress, location,
+    newFirstname, newLastname, newUsername, newCategory, newAddress, location,
   } = state;
 
   useEffect(() => {
@@ -60,11 +60,11 @@ const Dashboard = () => {
         newFirstname: firstname,
         newLastname: lastname,
         newUsername: username,
-        newCompostType: compostType,
+        newCategory: category,
         newAddress: address,
       },
     });
-  }, [id, username, firstname, lastname, address, compostType]);
+  }, [id, username, firstname, lastname, address, category]);
 
   /**
    * Récupère les propositions d'adresse depuis l'api "api-adresse.data.gouv.fr"
@@ -126,7 +126,7 @@ const Dashboard = () => {
       lastname: newLastname,
       username: newUsername,
       address: newAddress,
-      compostType: newCompostType,
+      category: newCategory,
       longitude: location.lon,
       latitude: location.lat,
     };
@@ -156,7 +156,7 @@ const Dashboard = () => {
   const handleAccountDeleteButton = () => {
     axios.delete(`https://compostons.herokuapp.com/users/${id}`)
       .then((response) => {
-        console.log('la suppression est OK');
+        console.log('la suppression est OK', response);
       })
       .catch((error) => {
         console.log('error', error);
@@ -235,7 +235,7 @@ const Dashboard = () => {
                 id="newCompostType"
                 name="newCompostType"
                 type="text"
-                value={newCompostType}
+                value={newCategory}
                 onChange={(e) => dispatch({
                   type: 'INPUTCHANGE',
                   name: e.target.name,

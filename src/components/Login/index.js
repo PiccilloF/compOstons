@@ -56,7 +56,7 @@ const Login = React.forwardRef(({ hide, setIsLogin }, ref) => {
           firstname: response.data.firstname ? response.data.firstname : '',
           lastname: response.data.lastname ? response.data.lastname : '',
           address: response.data.address ? response.data.address : '',
-          compostType: response.data.compostType ? response.data.compostType : '',
+          category: response.data.category ? response.data.category : '',
           role: response.data.role ? response.data.role : '',
           image: response.data.image ? response.data.image : '',
           created_at: response.data.created_at ? response.data.created_at : '',

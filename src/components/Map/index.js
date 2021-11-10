@@ -71,23 +71,9 @@ const Map = () => {
   const [coords, setCoords] = useState({ x: null, y: null });
   const [dataInfo, setDataInfo] = useState([]);
   const [newDataInfo, setNewDataInfo] = useState([]);
+  const [selectedId, setSelectedId] = useState('');
 
-/*   // le useEffect pour executer la requete à la base de données
-  useEffect(() => {
-    if (coords.x) {
-      // console.log(`x :  ${coords.x}`);
-      // console.log(`y :  ${coords.y}`);
-      // penser a repasser la requete en post et de passer l'objet {coords} après le test
-      axios.get('https://compostons.herokuapp.com/composts')
-        .then((response) => {
-          setDataInfo(response.data);
-          // console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [coords]); */
+  // Au premier montage du composant =>
 
   useEffect(() => {
     axios.get('https://compostons.herokuapp.com/composts')
@@ -100,6 +86,8 @@ const Map = () => {
       });
   }, []);
 
+  // si l'user rentre une adresse dans la searchBar cet useEffect est éxécuté =>
+
   useEffect(() => {
     // dataInfo est un tableau d'objet avec cette structure :
     // [{category, id, latitude, longitude, user_id, username}, ...]
@@ -107,17 +95,27 @@ const Map = () => {
     // si le tableau n'est pas vide alors on peut lancer la méthode isPointWithinRadius de géolib
     // Cette méthode vérifie si un un point gps et dans un périmètre(radius) donné autour d'un point gps de référence
     // isPointWithinRadius(point, centerPoint, radius)
+    // elle renvoie True ou False
     if (dataInfo.length) {
+      // d'abord on vide newDataInfo, dans l'hypothèse que l'user ai déjà fait une recherche, cela évite d'avoir des doublons
+      // et donc des problèmes de key identiques dans notre liste de résultats
       setNewDataInfo([]);
       dataInfo.forEach((element) => {
         const isInPerimeter = isPointWithinRadius({ latitude: element.latitude, longitude: element.longitude }, { latitude: coords.y, longitude: coords.x }, 150000);
+
+        // si le résultat est true alors j'insère l'élèment en cours dans newDataInfo grâce à setNewDataInfo
         if (isInPerimeter) {
+          // on ne peut pas simplement insérer l'élement(objet), sans aussi déverser ce qu'il y avait au préalable dans ce tableau
+          // si on insère simplement l'élement(objet) en cours alors il n'y aurait toujours qu'un seul élement(objet)
+          // dans newDataInfo
           setNewDataInfo((prevState) => [...prevState, element]);
         }
       });
     }
   }, [coords]);
 
+  // Factorisation pour l'affichage des marqueurs
+  // Fonction qui prend un argument un tableau
   const displayMarker = (data) => data.map((marker) => {
     let messageAvailability = null;
     let iconType = null;
@@ -146,6 +144,11 @@ const Map = () => {
         key={marker.id}
         position={[marker.latitude, marker.longitude]}
         icon={iconType}
+        eventHandlers={{
+          click: () => {
+            setSelectedId(marker.id);
+          },
+        }}
       >
         <Popup>
           {marker.username} <br />
@@ -183,6 +186,8 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {
+            // si la length de newDataInfo est supérieur à 0 on passe en argument newDataInfo
+            // si newDataInfo est inférieur a 0 on passe dataInfo en argument à la fonction displayMarker
             newDataInfo.length > 0
               ? displayMarker(newDataInfo)
               : displayMarker(dataInfo)
@@ -190,6 +195,8 @@ const Map = () => {
         </MapContainer>
       </div>
       {
+        // si la length de newDataInfo est supérieur à 0 on passe newDataInfo en props au composant List
+        // si newDataInfo est inférieur à 0 on passe dataInfo en props au composant List
         newDataInfo.length > 0
           ? <List dataInfo={newDataInfo} />
           : <List dataInfo={dataInfo} />
