@@ -22,7 +22,18 @@ const App = () => {
   const { isLogged } = state;
 
   return (
-    <div className="app">
+    <div
+      className="app"
+      style={
+        {
+          backgroundImage: 'url(/background.webp)',
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'right',
+          backgroundRepeat: 'no-repeat',
+        }
+      }
+    >
       <Header />
       <main>
         <Switch>

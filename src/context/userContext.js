@@ -11,7 +11,7 @@ const initialState = {
   firstname: '',
   lastname: '',
   address: '',
-  compostType: '',
+  category: '',
   role: '',
   image: '',
   created_at: '',

@@ -55,7 +55,7 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
           setTimeout(() => {
             setDisplayValidMessage(false);
             setIsLogin(true);
-          }, 4000);
+          }, 3000);
         }
       })
       .catch((error) => {
@@ -68,7 +68,7 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
             setPseudoValue('');
             setEmailValue('');
             setPasswordValue('');
-          }, 4000);
+          }, 2500);
         }
       });
   };
@@ -150,7 +150,7 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
           >
             S'inscrire
           </button>
-          {displayValidMessage && <div className="dashboard_validMessage">Inscription réussie ! Vous pouvez maintenant vous connecter.</div>}
+          {displayValidMessage && <div className="validMessage">Inscription réussie ! Vous pouvez maintenant vous connecter.</div>}
           {displayErrorMessage && <div className="errorMessage">Pseudo ou Email déjà existant</div>}
         </form>
       </div>
