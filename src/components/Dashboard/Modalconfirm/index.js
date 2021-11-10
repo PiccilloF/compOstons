@@ -16,7 +16,7 @@ const Modal = ({ isOpen, hide }) => {
         // il le sort de son conteneur.
         <div className="modal-overlay">
           <div className="modal-wrapper">
-            <div className="modal">
+            <div className="modal-confirm">
               <Confirm hide={hide} />
             </div>
           </div>
