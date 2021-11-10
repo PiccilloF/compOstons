@@ -126,7 +126,7 @@ const Dashboard = () => {
       lastname: newLastname,
       username: newUsername,
       address: newAddress,
-      compostType: newCompostType,
+      category: newCompostType,
       longitude: location.lon,
       latitude: location.lat,
     };
@@ -139,7 +139,7 @@ const Dashboard = () => {
         setDisplayValidMessage(true);
         setTimeout(() => {
           setDisplayValidMessage(false);
-        }, 2000);
+        }, 2500);
       })
       .catch((error) => {
         console.log('error', error);
