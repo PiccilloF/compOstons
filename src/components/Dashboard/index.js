@@ -66,7 +66,7 @@ const Dashboard = () => {
         newFirstname: firstname,
         newLastname: lastname,
         newUsername: username,
-        newCompostType: category,
+        newCategory: category,
         newAddress: address,
       },
     });
