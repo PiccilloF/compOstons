@@ -1,12 +1,12 @@
 @use 'reset';
 @use 'vars';
-
+@import url('https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
 html {
   height: 100%;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Livvic', sans-serif;
   background-size: cover;
   background-attachment: fixed;
   background-position: right;
@@ -18,15 +18,3 @@ body {
     min-height: 100%;
   }
 }
-
-/* 
-  // or you can import your own font
-  @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf');
-  }
-
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-*/
