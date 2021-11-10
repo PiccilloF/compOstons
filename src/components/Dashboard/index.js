@@ -5,11 +5,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable arrow-body-style */
 /* eslint-disable padded-blocks */
-
-import { useHistory } from 'react-router-dom';
 import { useEffect, useReducer, useState, useContext } from 'react';
 import { UserContext } from 'src/context/userContext';
+// Import d'axios pour les requêtes
 import axios from 'axios';
+// J'importe le hook useModal pour générer ma modal de confirmation
+// de suppression d'utilisateur.
+import useModal from 'src/hooks/useModal';
+import Modalconfirm from './Modalconfirm';
+
 import './styles.scss';
 
 const initialState = {
@@ -39,12 +43,14 @@ const reducer = (state, action) => {
 };
 
 const Dashboard = () => {
-
+  const { isOpen, toggle } = useModal();
+  // Gestion des états:
   const [addressResults, setAddressResults] = useState([]);
   const [displayAddressResults, setDisplayAddressResults] = useState(false);
   const [isInAddressResultsZone, setIsInAddressResultsZone] = useState(false);
   const [displayValidMessage, setDisplayValidMessage] = useState(false);
 
+  // On récupère le context et l'initialState
   const [contextState, contextDispatch] = useContext(UserContext);
   const { id, username, firstname, lastname, address, compostType } = contextState;
 
@@ -144,28 +150,6 @@ const Dashboard = () => {
       .catch((error) => {
         console.log('error', error);
       });
-  };
-
-  const history = useHistory();
-
-  const onDeletedAccountRedirect = () => {
-    const url = '/';
-    history.push(url);
-  };
-
-  const handleAccountDeleteButton = () => {
-    axios.delete(`https://compostons.herokuapp.com/users/${id}`)
-      .then((response) => {
-        console.log('la suppression est OK');
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
-
-    contextDispatch({
-      type: 'LOGOUT',
-    });
-    onDeletedAccountRedirect();
   };
 
   return (
@@ -301,11 +285,11 @@ const Dashboard = () => {
           <button
             className="delete__button"
             type="button"
-            onClick={handleAccountDeleteButton}
+            onClick={toggle}
           >
             Je supprime mon compte
           </button>
-
+          <Modalconfirm isOpen={isOpen} hide={toggle} />
         </div>
       </form>
     </div>
