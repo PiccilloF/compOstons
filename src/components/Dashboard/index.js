@@ -139,7 +139,7 @@ const Dashboard = () => {
         setDisplayValidMessage(true);
         setTimeout(() => {
           setDisplayValidMessage(false);
-        }, 2000);
+        }, 2500);
       })
       .catch((error) => {
         console.log('error', error);

@@ -24,10 +24,10 @@ const Card = ({
   return (
     <>
       <div className="list-card">
-        <p>
+        <p className="list-card-pseudo">
           {pseudo}
         </p>
-        <p>
+        <p className="list-card-message">
           {message}
         </p>
         {connected}
