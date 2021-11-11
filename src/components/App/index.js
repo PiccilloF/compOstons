@@ -12,6 +12,7 @@ import Footer from 'src/components/Footer';
 import Map from 'src/components/Map';
 import Dashboard from 'src/components/Dashboard';
 import Error from 'src/components/Error';
+import Staff from 'src/components/Staff';
 
 import './styles.css';
 
@@ -52,6 +53,9 @@ const App = () => {
                 <Redirect from="/profil" to="/" />
               )
           }
+          <Route path="/team">
+            <Staff />
+          </Route>
           <Route>
             <Error />
           </Route>
