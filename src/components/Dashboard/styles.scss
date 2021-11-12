@@ -2,6 +2,7 @@
 .dashboard__container {
   width: 70%;
   margin: auto;
+  margin-top: calc(var(--gutter)*1.5);
   padding: var(--gutter);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.329);
