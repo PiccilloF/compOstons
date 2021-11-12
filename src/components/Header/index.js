@@ -41,13 +41,13 @@ const Header = () => {
               <h1 className="header_title_text">CompOstons</h1>
             </div>
           </Link>
-          {/* {
+          {
             isLogged && (
               <div className="hello-user-container">
                 <p className="hello-user-text">Bonjour {username} !</p>
               </div>
             )
-          } */}
+          }
           <div className="nav-login">
             <nav className="nav">
               <Link to="/">

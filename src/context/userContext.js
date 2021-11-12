@@ -16,6 +16,7 @@ const initialState = {
   image: '',
   created_at: '',
   updated_at: '',
+  jwtToken: '',
 };
 
 const userReducer = (state, action) => {
@@ -29,6 +30,11 @@ const userReducer = (state, action) => {
     case 'LOGOUT':
       return {
         ...initialState,
+      };
+    case 'UPDATE':
+      return {
+        ...state,
+        ...action.payload,
       };
     default: return state;
   }

@@ -76,7 +76,7 @@ const Map = () => {
   // Au premier montage du composant =>
 
   useEffect(() => {
-    axios.get('https://compostons.herokuapp.com/composts')
+    axios.get('http://loic-fort.vpnuser.lan:5000/composts')
       .then((response) => {
         setDataInfo(response.data);
         // console.log(response.data);
@@ -174,7 +174,7 @@ const Map = () => {
           </p>
         </div>
 
-        <MapContainer center={[47.8249046208979, 2.61878695312962]} zoom={5.5}>
+        <MapContainer center={[46.9, 2.61878695312962]} zoom={5.5}>
           <SearchField
             apiKey={apiKey}
             onShowLocation={(e) => {

@@ -40,7 +40,7 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
 
     console.log('inscription');
 
-    axios.post('https://compostons.herokuapp.com/register', {
+    axios.post('http://loic-fort.vpnuser.lan:4000/register', {
       mail: emailValue,
       password: passwordValue,
       // confirmedPassword: passwordValue,

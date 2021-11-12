@@ -52,7 +52,7 @@ const Dashboard = () => {
 
   // On récupère le context et l'initialState
   const [contextState, contextDispatch] = useContext(UserContext);
-  const { id, username, firstname, lastname, address, category } = contextState;
+  const { id, username, firstname, lastname, address, category, jwtToken } = contextState;
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -126,7 +126,9 @@ const Dashboard = () => {
 
   const handleOnSubmitForm = (event) => {
     event.preventDefault();
-
+    const token = {
+      headers: { authorization: `Bearer ${jwtToken}` },
+    };
     const data = {
       firstname: newFirstname,
       lastname: newLastname,
@@ -138,14 +140,50 @@ const Dashboard = () => {
     };
     console.log(data);
 
-    axios.put(`https://compostons.herokuapp.com/users/${id}`, data)
+    axios.put(`http://loic-fort.vpnuser.lan:5000/users/${id}`, data, token)
       .then((response) => {
         console.log(response);
+
+        const newData = {
+          username: response.data.username ? response.data.username : '',
+          firstname: response.data.firstname ? response.data.firstname : '',
+          lastname: response.data.lastname ? response.data.lastname : '',
+          address: response.data.address ? response.data.address : '',
+          category: response.data.category ? response.data.category : '',
+          updated_at: response.data.updated_at ? response.data.updated_at : '',
+        };
+
+        contextDispatch({
+          type: 'UPDATE',
+          payload: newData,
+        });
+
         // Faire condition : si la reponse retourne un status "ok" (code 200 ou 201) alors j'éxécute ceci :
         setDisplayValidMessage(true);
         setTimeout(() => {
           setDisplayValidMessage(false);
         }, 2500);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+
+  const handleDeleteCompost = () => {
+    console.log('test suppression compost');
+    axios.delete(`http://loic-fort.vpnuser.lan:5000/composts/${id}`)
+      .then((response) => {
+        const newData = {
+          address: '',
+          category: '',
+        };
+
+        contextDispatch({
+          type: 'UPDATE',
+          payload: newData,
+        });
+        console.log(response);
+        console.log('compost supprimé');
       })
       .catch((error) => {
         console.log('error', error);
@@ -214,10 +252,10 @@ const Dashboard = () => {
           <div className="compost-infos__block">
             <h2 className="section-title"> Mon compost </h2>
             <div className="compost-infos__select">
-              <label htmlFor="newCompostType" className="input-label">Type de déchets acceptés </label>
+              <label htmlFor="newCategory" className="input-label">Type de déchets acceptés </label>
               <select
-                id="newCompostType"
-                name="newCompostType"
+                id="newCategory"
+                name="newCategory"
                 type="text"
                 value={newCategory}
                 onChange={(e) => dispatch({
@@ -228,7 +266,7 @@ const Dashboard = () => {
               >
                 <option className="option-value" value="vert">Déchets verts</option>
                 <option className="option-value" value="marron">Déchets marron</option>
-                <option className="option-value" value="tous">Tous types de déchets compostables</option>
+                <option className="option-value" value="tous types">Tous types de déchets compostables</option>
                 <option className="option-value" value="aucun">Indisponible</option>
               </select>
 
@@ -272,7 +310,7 @@ const Dashboard = () => {
               <button
                 className="delete__button"
                 type="button"
-                onClick={() => console.log('je supprime ce compost')}
+                onClick={handleDeleteCompost}
                 id="delete-compost__button"
               >Supprimer
               </button>
