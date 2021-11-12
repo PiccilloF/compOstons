@@ -47,7 +47,8 @@ const userController = {
 
     updateInfo: async (req, res) => {
         try {
-            await User.update(req.body, req.params.id);
+            
+            await User.update(req.body, req.params.id);            
             const user = await User.compostAndUserinfo(req.params.id);
             res.status(201).json(user);
 

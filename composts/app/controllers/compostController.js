@@ -1,4 +1,5 @@
 const Compost = require('../models/compost');
+const User = require('../models/user');
 
 const compostController = {
 
@@ -52,8 +53,9 @@ const compostController = {
 
     deleteOneCompost: async (req, res) => {
         try {
-            await Compost.delete(req.params.id);
-            res.send('compost delete');
+            
+            await Compost.deleteCompost(req.params.id);
+            res.status(200).send('compost delete');
 
         } catch (err) {
             res.status(500).send(err);

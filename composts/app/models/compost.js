@@ -12,7 +12,7 @@ class Compost extends CoreModel {
             text: `INSERT INTO compost ("category", "longitude", "latitude", "user_id") VALUES ($1, $2, $3, $4);`,
             values: [data.category, data.longitude, data.latitude, id]
         }
-       
+
         try {
             await db.query(query);
 
@@ -22,30 +22,45 @@ class Compost extends CoreModel {
 
     }
 
-    
-    static async allCompostJoinUser () {
+
+    static async allCompostJoinUser() {
         try {
             // function postgresql to update data - lighter code / making each row an instance of Compost;
-           return (await db.query(`SELECT * FROM porposeur`)).rows.map(row => new this(row));
-     
+            return (await db.query(`SELECT * FROM porposeur`)).rows.map(row => new this(row));
+
         } catch (err) {
             console.trace(err)
         }
     }
 
     static async find(user_id) {
-      
+
         try {
-           const data = await CoreModel.fetchOne(`Select * FROM compost WHERE user_id = $1`, [user_id]);
-           return new Compost(data);
-           
-  
+            const data = await CoreModel.fetchOne(`Select * FROM compost WHERE user_id = $1`, [user_id]);
+            return new Compost(data);
+
+
 
         } catch (err) {
             console.trace(err)
-        }        
-        
+        }
+
     }
+
+    static async deleteCompost(user_id) {
+        try {
+            return await db.query(`DELETE FROM compost WHERE user_id = $1`, [user_id]);
+
+        } catch (err) {
+            console.trace(err)
+        }
+    }
+
+
+
+
+
+
 }
 
 

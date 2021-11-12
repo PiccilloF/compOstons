@@ -1,6 +1,7 @@
 const User = require('../models/user');
 // const session = require("express-session"); usefull
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const saltRounds = 6;
 
 
@@ -67,12 +68,27 @@ const authController = {
             if (!clearPassword) {
                 res.status(400).send("erreur lors de la saisie du mot de passe ");
                 return;
+            } 
+
+            function generateAccessToken(user) {
+                return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15m"}) 
             }
+
+            let refreshTokens = [];
+            
+            function generateRefreshToken(user) {
+                const refreshToken =  jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "20m"});
+                refreshTokens.push(refreshToken);
+                return refreshToken
+                }
+            
+            const accessToken = generateAccessToken ({user: user.username});            
+            const refreshToken = generateRefreshToken ({user: user.username});
+                      
             delete user.password;
-            // req.session.auth = req.session.id;
-            // req.session.userid = user.id;
-            // console.log(req.session);
-            res.send(user);
+          
+            console.log('ok')
+            res.json({user: user, accessToken: accessToken, refreshToken: refreshToken});
 
         } catch (err) {
 
@@ -80,6 +96,10 @@ const authController = {
             res.status(400).send("erreur lors de la saisie de votre email et/ou mot de passe");
         }
     },
+
+   
+
+    
 
     logout: (req, res) => {
         // when logout, we suprress the user session
