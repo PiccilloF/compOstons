@@ -2,7 +2,6 @@
 .dashboard__container {
   width: 70%;
   margin: auto;
-  margin-top: calc(var(--gutter)*1.5);
   padding: var(--gutter);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.329);
@@ -94,7 +93,7 @@
         padding: var(--gutter);
         margin-bottom: calc(var(--gutter)*2.5);
 
-        #newCompostType {
+        #newCategory {
           padding: 0.3rem;
           font-weight: 600;
           border-radius: 5px;
@@ -144,13 +143,7 @@
         }
       }
     }
-    .dashboard_validMessage {
-      background-color: #00b74a;
-      padding: var(--gutter);
-      color: white;
-      margin: var(--gutter);
-      border-radius: .25rem;
-    }
+    
 
 
   }
@@ -196,6 +189,14 @@
     display: flex;
     justify-content: space-evenly;
     padding-left: var(--gutter);
+
+    .dashboard_validMessage {
+      background-color: #00b74a;
+      padding: var(--gutter);
+      color: white;
+      margin: var(--gutter);
+      border-radius: .25rem;
+    }
   }
  
 

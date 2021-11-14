@@ -124,6 +124,9 @@ const Dashboard = () => {
     if (event._reactName === 'onBlur' && !isInAddressResultsZone) setDisplayAddressResults(false);
   };
 
+  // Soumission du formulaire de validation des données de profil utilisateur
+  // Envoi de la requête et mise à jour de la BDD.
+  // Affichage d'un message de confirmation.
   const handleOnSubmitForm = (event) => {
     event.preventDefault();
 
@@ -146,6 +149,29 @@ const Dashboard = () => {
         setTimeout(() => {
           setDisplayValidMessage(false);
         }, 2500);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+
+  // Suppression d'un point de compostage utilisateur
+  // Met à jour le state et vide les infos dans la page profil
+  const handleDeleteCompost = () => {
+    console.log('test suppression compost');
+    axios.delete(`https://compostons.herokuapp.com/composts/${id}`)
+      .then((response) => {
+        const newData = {
+          address: '',
+          category: '',
+        };
+
+        contextDispatch({
+          type: 'UPDATE',
+          payload: newData,
+        });
+        console.log(response);
+        console.log('compost supprimé');
       })
       .catch((error) => {
         console.log('error', error);
@@ -214,10 +240,10 @@ const Dashboard = () => {
           <div className="compost-infos__block">
             <h2 className="section-title"> Mon compost </h2>
             <div className="compost-infos__select">
-              <label htmlFor="newCompostType" className="input-label">Type de déchets acceptés </label>
+              <label htmlFor="newCategory" className="input-label">Type de déchets acceptés </label>
               <select
-                id="newCompostType"
-                name="newCompostType"
+                id="newCategory"
+                name="newCategory"
                 type="text"
                 value={newCategory}
                 onChange={(e) => dispatch({
@@ -272,7 +298,7 @@ const Dashboard = () => {
               <button
                 className="delete__button"
                 type="button"
-                onClick={() => console.log('je supprime ce compost')}
+                onClick={handleDeleteCompost}
                 id="delete-compost__button"
               >Supprimer
               </button>

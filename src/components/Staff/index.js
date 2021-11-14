@@ -15,7 +15,7 @@ const dudes = [
     id: 1,
     lastname: 'Delphine',
     infos: 'https://github.com/Delphine-EM',
-    job: 'Référente Tech, front',
+    job: 'Référent Tech',
     picture: `${mandarin}`,
     alt: 'dessin d\'un avocat',
   },
@@ -57,13 +57,17 @@ const dudes = [
 export default function Staff() {
   return (
     <div className="team-container">
-      {dudes.map((dude) => (
-        <Dude
-          key={dude.id}
-          gitlogo={gitLogo}
-          {...dude}
-        />
-      ))}
+      <h1 className="team-container-title"> La Compost Team </h1>
+      <div className="team-cards">
+        {dudes.map((dude) => (
+          <Dude
+            key={dude.id}
+            gitlogo={gitLogo}
+            {...dude}
+          />
+        ))}
+      </div>
     </div>
+
   );
 }

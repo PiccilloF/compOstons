@@ -45,22 +45,23 @@ const Login = React.forwardRef(({ hide, setIsLogin }, ref) => {
       password: passwordValue,
     })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
 
         // Au cas ou on aurait des propriétés dans l'objet response.data qui seraient NULL(falsy),
         // on remplace par une chaîne de caractère vide
         const newData = {
-          id: response.data.id,
-          username: response.data.username ? response.data.username : '',
-          mail: response.data.mail ? response.data.mail : '',
-          firstname: response.data.firstname ? response.data.firstname : '',
-          lastname: response.data.lastname ? response.data.lastname : '',
-          address: response.data.address ? response.data.address : '',
-          category: response.data.category ? response.data.category : '',
-          role: response.data.role ? response.data.role : '',
-          image: response.data.image ? response.data.image : '',
-          created_at: response.data.created_at ? response.data.created_at : '',
-          updated_at: response.data.updated_at ? response.data.updated_at : '',
+          id: response.data.user.id,
+          username: response.data.user.username ? response.data.user.username : '',
+          mail: response.data.user.mail ? response.data.user.mail : '',
+          firstname: response.data.user.firstname ? response.data.user.firstname : '',
+          lastname: response.data.user.lastname ? response.data.user.lastname : '',
+          address: response.data.user.address ? response.data.user.address : '',
+          category: response.data.user.category ? response.data.user.category : '',
+          role: response.data.user.role ? response.data.user.role : '',
+          image: response.data.user.image ? response.data.user.image : '',
+          created_at: response.data.user.created_at ? response.data.user.created_at : '',
+          updated_at: response.data.user.updated_at ? response.data.user.updated_at : '',
+          jwtToken: response.data.accessToken ? response.data.accessToken : '',
         };
 
         dispatch({

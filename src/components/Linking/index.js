@@ -12,17 +12,21 @@ const Linking = ({ hide, pointOwner }) => {
   const [textValue, setTextValue] = useState();
   const [linkingMessage, setLinkingMessage] = useState('');
   const [state] = useContext(UserContext);
-  const { mail, id } = state;
+  const { mail, id, jwtToken } = state;
   // fonction pour transmettre les infos pour l'envoi du mail => à finir
   const handleSubmit = (e) => {
     e.preventDefault();
+    const token = {
+      headers: { authorization: `Bearer ${jwtToken}` },
+    };
+
     setLinkingMessage('Envoi en cours');
     axios.post(`https://compostons.herokuapp.com/users/${id}/mail`, {
       ownerId: pointOwner.userId,
       replyTo: mail, // passer le mail du demandeur
       text: textValue, // passer le contenu du textarea
       html: textValue,
-    })
+    }, token)
       .then((response) => {
         setLinkingMessage('Mail envoyé');
         setTimeout(() => {
