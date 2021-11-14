@@ -37,8 +37,6 @@ router
 router.delete('/users/:id(\\d+)/logout', validateToken, authController.logout);
 router.post('/users/:id(\\d+)/mail', validateToken, mailController.sendMail);
 
-router.get('/test/:id', compostController.findUser)
-
 
 
 module.exports = router;
