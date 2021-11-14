@@ -51,7 +51,7 @@ const userController = {
             
             
             const user = await User.update(req.body, req.params.id);                  
-            // const compost = await Compost.findUser(req.params.id);
+            const compost = await Compost.findUser(req.params.id);
             
           
             if (!compost.id) {

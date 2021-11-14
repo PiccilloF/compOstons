@@ -54,9 +54,8 @@ const compostController = {
     deleteOneCompost: async (req, res) => {
         try {
             
-            const user = await Compost.deleteCompost(req.params.id);
-            
-            res.status(200).send({log : 'compost delete',  user  });
+            const user = await Compost.deleteCompost(req.params.id);            
+            res.status(200).send("compost deleted");
 
         } catch (err) {
             console.trace(err)
