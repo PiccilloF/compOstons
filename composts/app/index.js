@@ -12,7 +12,8 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.TOKEN_SERVER_PORT || 3000;
+const PORT = process.env.PORT || 3000;
+console.log(process.env.PORT)
 
 app.use(router);
 

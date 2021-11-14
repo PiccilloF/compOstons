@@ -5,7 +5,7 @@ const compostController = {
 
     homePage: (req, res) => {
         // homepage route, just checking if everything's fine
-        console.log(req.session)
+        
         res.send('Ready to compost !!');
     },
 
