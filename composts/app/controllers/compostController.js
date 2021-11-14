@@ -54,13 +54,20 @@ const compostController = {
     deleteOneCompost: async (req, res) => {
         try {
             
-            await Compost.deleteCompost(req.params.id);
-            res.status(200).send('compost delete');
+            const user = await Compost.deleteCompost(req.params.id);
+            
+            res.status(200).send({log : 'compost delete',  user  });
 
         } catch (err) {
+            console.trace(err)
             res.status(500).send(err);
         }
     },
+
+    findUser: async (req, res) => {
+        const user = await Compost.findUser(req.params.id);
+        res.send(user)
+    }
 
     // updateCompost: async (req, res) => {
     //     try {

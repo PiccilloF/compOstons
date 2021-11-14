@@ -1,4 +1,7 @@
 # GET https://compostons.herokuapp.com/
+
+# GET https://www.google.fr
+
 # POST http://localhost:4000/test
 # content-type: application/text/html
 
@@ -38,7 +41,9 @@
 
 # GET http://localhost:4000/users/123
 
-# POST http://localhost:4000/login
+
+
+# POST http://localhost:5000/login
 # content-type: application/json
 
 #  {
@@ -63,11 +68,11 @@
 
 
 
-# PUT http://localhost:4000/users/100
+# PUT http://localhost:5000/users/100
 # content-type: application/json
 
 #  {
-#     "address": "10 rue du pleutre"   
+#     "username": "totututo"   
     
 # }
 

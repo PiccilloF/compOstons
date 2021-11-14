@@ -25,17 +25,19 @@ router
     .delete(compostController.deleteOneCompost);
 
 router
-// .get('/users', userController.getAllUsers)
-// .post('/users', userController.createOneUser);
+.get('/users', userController.getAllUsers)
+.post('/users', userController.createOneUser);
 router
     .route('/users/:id(\\d+)')
-    // .get( userController.getOneUser)
-    .post( compostController.createOneCompost)
-    .put(validateToken, userController.updateInfo)
+    .get( userController.getOneUser)
+    .post(compostController.createOneCompost)
+    .put(userController.updateInfo)
     .delete(validateToken, userController.deleteOneUSer);
 
 router.delete('/users/:id(\\d+)/logout', validateToken, authController.logout);
 router.post('/users/:id(\\d+)/mail', validateToken, mailController.sendMail);
+
+router.get('/test/:id', compostController.findUser)
 // router.put('/users/:id(\\d+)/update', compostController.updateCompost);
 
 

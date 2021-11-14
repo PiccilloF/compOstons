@@ -1,3 +1,4 @@
+const Compost = require('../models/compost');
 const User = require('../models/user')
 
 const userController = {
@@ -48,19 +49,27 @@ const userController = {
     updateInfo: async (req, res) => {
         try {
             
-            await User.update(req.body, req.params.id);            
-            const user = await User.compostAndUserinfo(req.params.id);
-            res.status(201).json(user);
-
+            
+            const user = await User.update(req.body, req.params.id);                  
+            // const compost = await Compost.findUser(req.params.id);
+            
+          
+            if (!compost.id) {
+                console.log('pas de compost')
+                const user = await User.findOne(req.params.id);
+                res.status(201).json(user);
+            } else {
+                console.log('y a compost')
+                const compostAndUserinfo = await User.compostAndUserinfo(req.params.id);
+                res.status(201).json(compostAndUserinfo);
+        }
         } catch (err) {
+            console.trace(err)
             res.status(500).send(err);
         }
     },
 
-    // findProposeur: async (req, res) => {
-    //     const data =await User.findProposeur();
-    //     res.send(data);
-    // }
+    
 };
 
 

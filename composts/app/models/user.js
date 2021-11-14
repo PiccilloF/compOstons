@@ -18,14 +18,15 @@ class User extends CoreModel {
         } catch (err) {
             console.error(err)
         }
-
+        
 
     }
 
     static async update(data, id) {
         // we recover data in database
+        
         const formerUser = await User.findOne(id);
-        const formerCompost = await Compost.find(id)
+        const formerCompost = await Compost.findUser(id);
         
 
         // if we have a new value we record it in the variable otherwise we let the actual data
@@ -46,9 +47,8 @@ class User extends CoreModel {
 
         try {
              // function postgresql to update data
-            return await db.query(`SELECT update_info($1, $2)`, [dataUpdated, id]);
-            
-            
+            console.log("données enregistrées")
+            return await db.query(`SELECT update_info($1, $2)`, [dataUpdated, id]); 
 
         } catch (err) {
             console.trace(err)

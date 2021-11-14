@@ -1,5 +1,6 @@
 const db = require('../database');
 const CoreModel = require('./coreModel');
+const User = require('./user');
 
 
 class Compost extends CoreModel {
@@ -33,13 +34,11 @@ class Compost extends CoreModel {
         }
     }
 
-    static async find(user_id) {
-
+    static async findUser(user_id) {
         try {
+            
             const data = await CoreModel.fetchOne(`Select * FROM compost WHERE user_id = $1`, [user_id]);
             return new Compost(data);
-
-
 
         } catch (err) {
             console.trace(err)
@@ -49,19 +48,15 @@ class Compost extends CoreModel {
 
     static async deleteCompost(user_id) {
         try {
-            return await db.query(`DELETE FROM compost WHERE user_id = $1`, [user_id]);
-
+            await db.query(`DELETE FROM compost WHERE user_id = $1`, [user_id]);
+            return await User.findOne(user_id);
+            
+            
         } catch (err) {
             console.trace(err)
         }
     }
-
-
-
-
-
-
-}
+};
 
 
 
