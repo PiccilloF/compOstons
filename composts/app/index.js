@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const router = require('./router');
 const jwt = require('jsonwebtoken');
@@ -17,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.TOKEN_SERVER_PORT || 3000;
+
 
 
 app.use(router);
