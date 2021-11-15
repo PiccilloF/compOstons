@@ -17,7 +17,7 @@ const userController = {
     },
 
     getOneUser: async (req, res) => {
-        
+
         try {
             const user = await User.findOne(req.params.id);
             res.json(user);
@@ -48,31 +48,33 @@ const userController = {
 
     updateInfo: async (req, res) => {
         try {
-            
-            
+
+
             const user = await User.update(req.body, req.params.id);
-            delete user.password;                  
+            delete user.password;
             const compost = await Compost.findUser(req.params.id);
-            
-          
+
+
             if (!compost.id) {
                 console.log('pas de compost');
                 const compost = await Compost.create(req.body, req.params.id);
                 const user = await User.findOne(req.params.id);
-               
-                res.status(201).json({...user, ...compost});
+                Object.assign(user, compost);
+                const data = Object.assign({}, user, compost);
+
+                res.status(201).json(data);
             } else {
                 console.log('y a compost')
                 const compostAndUserinfo = await User.compostAndUserinfo(req.params.id);
                 res.status(201).json(compostAndUserinfo);
-        }
+            }
         } catch (err) {
             console.trace(err)
             res.status(500).send(err);
         }
     },
 
-    
+
 };
 
 
