@@ -10,8 +10,6 @@
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.329);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  text-shadow:rgba(0, 0, 0, 0.171) 0px 5px 5px ;
-  font-style: italic;
 
   .dashboard__container-title {
     display: flex;
@@ -124,7 +122,7 @@
          margin-bottom: 1rem;
         }
 
-        #newAddress {
+       .dashboard_searchLocation-input {
           padding: 0.3rem;
           border-radius: 5px;
           width: 300px;
@@ -214,6 +212,7 @@
 
 
 @media screen and (max-width:1200px){
+
   .dashboard__container{
     width: 95%;
   }
@@ -225,8 +224,50 @@
   }
 }
 
+@media screen and (min-width: 576px) and (max-width: 1199px){
+
+    .dashboard-fields__blocks{  
+      .userInfos__block {
+        align-items: center;
+        padding: var(--gutter);
+
+      .userInfos__input-element {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
+    .compost-infos__block {
+      width: 50%;
+      margin: auto;
+      
+      #newCategory {
+        max-width: 200px;
+      }
+
+      .dashboard_searchLocation {
+        .dashboard_searchLocation-input{
+          padding: 0.3rem;
+          border-radius: 5px;
+          max-width: 200px;
+        }
+        .dashboard_searchLocation_displayResults {
+          max-width: 200px;
+        }
+      }
+    }
+  }
+}
+
+
+
 @media screen and (max-width:575px) {
   .dashboard__container {
+    .input-label {
+      margin-bottom: 1em;
+    }
+
     width:100%;
     border-radius: 10px ;
     display: flex;
@@ -243,46 +284,59 @@
     }
 
     .dashboard-form {
+
       margin-bottom: var(--gutter);
       .dashboard-fields__blocks {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: var(--gutter);
-  
-        .userInfos__input-element {
+
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: var(--gutter);
-          .input-field {
-            margin-left: var(--gutter);
-            padding: 0.3rem;
-            border-radius: 5px;
+          margin-bottom: var(--gutter);
+          
+          .userInfos__block {
+            align-items: center;
+          .userInfos__input-element {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--gutter);
           }
-        }
-  
-        .compost-infos__block {
-          width: 80%;
-          margin: auto;
-          .compost-infos__select {
-            & option {
-              width: 80%;
+          }
+          .compost-infos__block {
+            width: 90%;
+            margin: auto;
+            .compost-infos__select{
+
             }
-  
+            
+            #newCategory {
+              max-width: 200px;
+            
+            }
           }
-        }
+        
       }
   
     }
     
-
+    .dashboard_searchLocation {
+      .dashboard_searchLocation-input{
+        padding: 0.3rem;
+        border-radius: 5px;
+        max-width: 200px;
+      }
+      .dashboard_searchLocation_displayResults {
+        max-width: 200px;
+      }
+    }
 
     .section-title {
       width: 80%;
       font-weight: 800;
       font-size: 1em;
     }
+
+   
   }
 
  

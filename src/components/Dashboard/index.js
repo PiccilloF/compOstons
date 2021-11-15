@@ -301,6 +301,7 @@ const Dashboard = () => {
               <div className="dashboard_searchLocation">
                 <label htmlFor="newAddress" className="input-label">Localisation du compost </label>
                 <input
+                  className="dashboard_searchLocation-input"
                   id="newAddress"
                   name="newAddress"
                   type="text"
