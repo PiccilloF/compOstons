@@ -56,9 +56,10 @@ const userController = {
             
           
             if (!compost.id) {
-                console.log('pas de compost')
+                console.log('pas de compost');
+                const compost = await Compost.create(req.body);
                 const user = await User.findOne(req.params.id);
-                res.status(201).json(user);
+                res.status(201).json({user : user , compost : compost});
             } else {
                 console.log('y a compost')
                 const compostAndUserinfo = await User.compostAndUserinfo(req.params.id);
