@@ -17,7 +17,7 @@ const authController = {
             // }
 
             // check if user already exists - if null return an error in console "no data in your query"
-            const user = await User.find(req.body.mail);          
+            const user = await User.find(req.body.mail);
 
 
             if (user.mail || user.username) {
@@ -30,26 +30,26 @@ const authController = {
             //     res.status(400).send("mot de passe et confirmation de mot de passe ne sont pas identiques");
             //     return;
             // }
-            
+
             // change req.body.password with encrypted password
             req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
-                        
+
 
             const newUser = await User.create(req.body);
-            if(newUser) {
+            if (newUser) {
                 console.log('ok4')
                 // deleting password from user's object
-               delete newUser.password;
-            res.status(201).json(newUser)
+                delete newUser.password;
+                res.status(201).json(newUser)
             } else {
                 res.status(400).send('error while registering newUser, check body values')
-            }          
+            }
 
 
         } catch (err) {
             console.trace(err)
             res.status(500).send(err);
-            
+
         }
     },
 
@@ -69,41 +69,38 @@ const authController = {
             if (!clearPassword) {
                 res.status(400).send("erreur lors de la saisie du mot de passe ");
                 return;
-            } 
+            }
 
             function generateAccessToken(user) {
-                return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15m"}) 
+                return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" })
             }
 
             let refreshTokens = [];
-            
+
             function generateRefreshToken(user) {
-                const refreshToken =  jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "20m"});
+                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "20m" });
                 refreshTokens.push(refreshToken);
                 return refreshToken
-                }
-            
-            const accessToken = generateAccessToken ({user: user.username});            
-            const refreshToken = generateRefreshToken ({user: user.username});
+            }
+
+            const accessToken = generateAccessToken({ user: user.username });
+            const refreshToken = generateRefreshToken({ user: user.username });
 
             const compost = await Compost.findUser(req.params.id);
 
             if (!compost.id) {
-                console.log('pas de compost'); 
-                delete user.password; 
-                res.json({user: user, accessToken: accessToken, refreshToken: refreshToken});
-                
+                console.log('pas de compost');
+                delete user.password;
+                res.json({ user: user, accessToken: accessToken, refreshToken: refreshToken });
+
             } else {
                 console.log('y a compost')
-                const compostAndUserinfo = await User.compostAndUserinfo(user.id);
-                delete compostAndUserinfo.password;
-                res.status(201).json(compostAndUserinfo);
+                const compost = await Compost.findUser(user.id);
+                delete user.paswword;
+                res.status(201).json({ user: user, compost: compost,  accessToken: accessToken, refreshToken: refreshToken });
             }
-                      
-            delete user.password;
-          
-            console.log('ok')
-            res.json({user: user, accessToken: accessToken, refreshToken: refreshToken});
+
+
 
         } catch (err) {
 
@@ -112,9 +109,9 @@ const authController = {
         }
     },
 
-   
 
-    
+
+
 
     logout: (req, res) => {
         // when logout, we suprress the user session
@@ -135,7 +132,7 @@ const authController = {
         } catch (error) {
             console.log(error)
         }
-        
+
     }
 };
 

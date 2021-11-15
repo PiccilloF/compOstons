@@ -59,14 +59,14 @@ const userController = {
                 console.log('pas de compost');
                 const compost = await Compost.create(req.body, req.params.id);
                 const user = await User.findOne(req.params.id);
-                delete user.password;      
-
+                delete user.password;
                 res.status(201).json({user:user, compost:compost});
             } else {
                 console.log('y a compost')
-                const compostAndUserinfo = await User.compostAndUserinfo(req.params.id);
-                delete compostAndUserinfo.password;
-                res.status(201).json(compostAndUserinfo);
+                const user = await User.findOne(req.params.id);
+                delete user.password;
+                const compost = await Compost.findUser(req.params.id);
+                res.status(201).json({user : user, compost: compost});
             }
         } catch (err) {
             console.trace(err)
