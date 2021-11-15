@@ -50,7 +50,8 @@ const userController = {
         try {
             
             
-            const user = await User.update(req.body, req.params.id);                  
+            const user = await User.update(req.body, req.params.id);
+            delete user.password;                  
             const compost = await Compost.findUser(req.params.id);
             
           
