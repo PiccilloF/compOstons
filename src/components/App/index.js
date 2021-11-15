@@ -54,7 +54,10 @@ const App = () => {
                 <Redirect from="/profil" to="/" />
               )
           }
-          <Route path="/articles">
+          <Route path="/articles" exact>
+            <Articles />
+          </Route>
+          <Route path="/articles/:slug">
             <Article />
           </Route>
           <Route>

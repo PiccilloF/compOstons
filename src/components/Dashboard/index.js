@@ -171,7 +171,7 @@ const Dashboard = () => {
 
   const handleDeleteCompost = () => {
     console.log('test suppression compost');
-    axios.delete(`http://loic-fort.vpnuser.lan:5000/composts/${id}`)
+    axios.delete(`https://compostons.herokuapp.com/composts/${id}`)
       .then((response) => {
         const newData = {
           address: '',
