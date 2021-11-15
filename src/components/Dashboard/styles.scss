@@ -76,7 +76,8 @@
         padding: var(--gutter);
         margin-bottom: calc(var(--gutter)*2.5);
 
-        #newCompostType {
+        #newCategory {
+          margin-top: 1em;
           padding: 0.3rem;
           font-weight: 600;
           border-radius: 5px;
@@ -226,18 +227,14 @@
 
 @media screen and (min-width: 576px) and (max-width: 1199px){
 
-    .dashboard-fields__blocks{  
+    .dashboard-fields__blocks{ 
       .userInfos__block {
-        align-items: center;
-        padding: var(--gutter);
-
-      .userInfos__input-element {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction:column ;
+        align-items:center;
+        width: 50%;
+        margin: auto;
       }
-    }
-
     .compost-infos__block {
       width: 50%;
       margin: auto;
