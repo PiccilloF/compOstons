@@ -1,3 +1,7 @@
+.container {
+ display: flex;
+ margin-top: calc(var(--gutter)*2);
+}
 
 .dashboard__container {
   width: 70%;
@@ -6,17 +10,16 @@
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.329);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  opacity: 1;
   text-shadow:rgba(0, 0, 0, 0.171) 0px 5px 5px ;
   font-style: italic;
 
-  h1 {
+  .dashboard__container-title {
     display: flex;
     justify-content: center;
     margin: auto;
     width:80%;
-    font-size: xx-large;
-    font-weight: bold;
+    font-size: 2em;
+    font-weight: 700;
     color: var(--color-primary);
     padding-bottom: var(--gutter);
     border-bottom: 1px solid var(--color-primary);
@@ -39,25 +42,7 @@
   
   }
 
-  .compost-infos-footer {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-
-    & p {
-      margin-right: 1em;
-    }
-
-    .delete__button {
-      background-color: var(--color-alert);
-      font-size: medium;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      margin-right: var(--gutter);
-      padding: 0.3rem;
-    }
-  }
+ 
  
   .userInfos__block {
     padding: calc(var(--gutter)*3);
@@ -86,7 +71,7 @@
       padding: var(--gutter);
       align-items: center;
       background-color: rgba(255, 255, 255, 0.589);
-      border-radius: 5px;
+      border-radius: 10px;
 
 
       .compost-infos__select {
@@ -103,6 +88,29 @@
         .option-value {
           font-weight: 600;
           border: 1px solid black;
+        }
+
+       
+      }
+
+      .compost-infos-footer {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+    
+        .delete-paragraph {
+          margin-right: 1em;
+          font-weight: 500;
+        }
+    
+        .delete__button {
+          background-color: var(--color-alert);
+          font-size: medium;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          margin-right: var(--gutter);
+          padding: 0.3rem;
         }
       }
 
@@ -143,14 +151,6 @@
         }
       }
     }
-    .dashboard_validMessage {
-      background-color: #00b74a;
-      padding: var(--gutter);
-      color: white;
-      margin: var(--gutter);
-      border-radius: .25rem;
-    }
-
 
   }
 
@@ -195,6 +195,14 @@
     display: flex;
     justify-content: space-evenly;
     padding-left: var(--gutter);
+    .dashboard_validMessage {
+      background-color: #00b74a;
+      padding: var(--gutter);
+      color: white;
+      margin: var(--gutter);
+      border-radius: .25rem;
+    }
+
   }
  
 
@@ -205,81 +213,75 @@
 /* Responsive */
 
 
-@media screen and (max-width:1024px){
+@media screen and (max-width:1200px){
   .dashboard__container{
     width: 95%;
   }
   .dashboard-fields__blocks {
     display: flex;
-    justify-content: space-evenly;
+    /*justify-content: space-evenly;*/
     align-items: baseline;
     margin-bottom: var(--gutter);
   }
 }
 
-@media screen and (max-width:769px) {
+@media screen and (max-width:575px) {
   .dashboard__container {
     width:100%;
-    border-radius: 0 ;
+    border-radius: 10px ;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
-    & h1 {
+     .dashboard__container-title {
       display: flex;
       justify-content: center;
       margin: auto;
       width:70%;
-      font-size: x-large;
-      font-weight: bold;
-      color: var(--color-primary);
-      padding-bottom: var(--gutter);
-      border-bottom: 1px solid var(--color-primary);
+      font-size: 1.5em;
+      font-weight: 700;
     }
 
-    .dashboard-fields__blocks {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .dashboard-form {
       margin-bottom: var(--gutter);
-    }
-    
-
-
-    .userInfos__input-element {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: var(--gutter);
-      .input-field {
-        margin-left: var(--gutter);
-        padding: 0.3rem;
-        border-radius: 5px;
-      }
-    }
-
-    .compost-infos__block {
-      width: 100%;
-      .compost-infos__select {
-        & option {
+      .dashboard-fields__blocks {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: var(--gutter);
+  
+        .userInfos__input-element {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: var(--gutter);
+          .input-field {
+            margin-left: var(--gutter);
+            padding: 0.3rem;
+            border-radius: 5px;
+          }
+        }
+  
+        .compost-infos__block {
           width: 80%;
+          margin: auto;
+          .compost-infos__select {
+            & option {
+              width: 80%;
+            }
+  
+          }
         }
       }
+  
     }
-
     
 
 
     .section-title {
       width: 80%;
       font-weight: 800;
-      font-size: large;
-      margin-bottom: calc(var(--gutter)*2);
-      padding-bottom: var(--gutter);
-      border-bottom: 1px solid var(--color-primary);
-      color: var(--color-primary);
+      font-size: 1em;
     }
   }
 
