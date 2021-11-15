@@ -51,7 +51,7 @@ const userController = {
 
 
             const user = await User.update(req.body, req.params.id);
-            delete user.password;
+            
             const compost = await Compost.findUser(req.params.id);
 
 
@@ -59,13 +59,13 @@ const userController = {
                 console.log('pas de compost');
                 const compost = await Compost.create(req.body, req.params.id);
                 const user = await User.findOne(req.params.id);
-                Object.assign(user, compost);
-                const data = Object.assign({}, user, compost);
+                delete user.password;      
 
-                res.status(201).json(data);
+                res.status(201).json({user:user, compost:compost});
             } else {
                 console.log('y a compost')
                 const compostAndUserinfo = await User.compostAndUserinfo(req.params.id);
+                delete compostAndUserinfo.password;
                 res.status(201).json(compostAndUserinfo);
             }
         } catch (err) {
