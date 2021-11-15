@@ -15,7 +15,8 @@ class Compost extends CoreModel {
         }
 
         try {
-            return await db.query(query);
+            const data =  await db.query(query);
+            return new Compost(data);
 
         } catch (err) {
             console.trace(err);
