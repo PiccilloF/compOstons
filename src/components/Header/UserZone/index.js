@@ -12,16 +12,19 @@ import { Link } from 'react-router-dom';
 
 const UserZone = ({ setIsShowing }) => {
   const [state, dispatch] = useContext(UserContext);
-  const { id } = state;
+  const { id, jwtToken } = state;
 
   const handleLogoutButton = () => {
-    axios.delete(`https://compostons.herokuapp.com/users/${id}/logout`)
-      .then((response) => {
-        console.log('response :', response);
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
+    // const token = {
+    //   headers: { authorization: `Bearer ${jwtToken}` },
+    // };
+    // axios.delete(`https://compostons.herokuapp.com/users/${id}/logout`, token)
+    //   .then((response) => {
+    //     console.log('response :', response);
+    //   })
+    //   .catch((error) => {
+    //     console.log('error', error);
+    //   });
 
     dispatch({
       type: 'LOGOUT',

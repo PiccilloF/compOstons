@@ -36,7 +36,7 @@ const App = () => {
 
     >
       <Header />
-      <main>
+      <main className="main">
         <Switch>
           <Route path="/" exact>
             <Map />

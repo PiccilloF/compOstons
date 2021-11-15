@@ -140,7 +140,7 @@ const Dashboard = () => {
     };
     console.log(data);
 
-    axios.put(`http://loic-fort.vpnuser.lan:5000/users/${id}`, data, token)
+    axios.put(`https://compostons.herokuapp.com/users/${id}`, data, token)
       .then((response) => {
         console.log(response);
 

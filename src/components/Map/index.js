@@ -76,7 +76,7 @@ const Map = () => {
   // Au premier montage du composant =>
 
   useEffect(() => {
-    axios.get('http://loic-fort.vpnuser.lan:5000/composts')
+    axios.get('https://compostons.herokuapp.com/composts')
       .then((response) => {
         setDataInfo(response.data);
         // console.log(response.data);
