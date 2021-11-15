@@ -202,23 +202,23 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container">
-      <div className="dashboard__container">
-        <h1 className="dashboard__container-title">Gestion du profil</h1>
-        <div className="picture-zone">
-          <div className="profil-picture__container">
-            <div className="profil-picture">mon image</div>
-            <input type="file" id="picture-input" />
-          </div>
+    <div className="dashboard_container">
+      <h1 className="dashboard_container-title">Gestion du profil</h1>
+      <div className="picture-zone_container">
+        <div className="profil-picture-zone">
+          <div className="profil-picture">mon image</div>
+          <input type="file" id="picture-input" />
         </div>
-        <form onSubmit={handleOnSubmitForm} className="dashboard-form">
-          <div className="dashboard-fields__blocks">
-            <div className="userInfos__block">
-              <h2 className="section-title"> Mes informations </h2>
-              <div className="userInfos__input-element">
-                <label htmlFor="newFirstname" className="input-label">Prénom </label>
+      </div>
+      <form onSubmit={handleOnSubmitForm} className="dashboard_form_container">
+        <div className="dashboard_form-blocks">
+          <div className="user_infos">
+            <h2 className="section_title"> Mes informations </h2>
+            <div className="user_infos-inputs">
+              <div className="user_infos-input_element">
+                <label htmlFor="newFirstname" className="input_label">Prénom </label>
                 <input
-                  className="input-field"
+                  className="input_field"
                   id="newFirstname"
                   name="newFirstname"
                   type="text"
@@ -230,10 +230,10 @@ const Dashboard = () => {
                   })}
                 />
               </div>
-              <div className="userInfos__input-element">
-                <label htmlFor="newLastname" className="input-label">Nom </label>
+              <div className="user_infos-input_element">
+                <label htmlFor="newLastname" className="input_label">Nom </label>
                 <input
-                  className="input-field"
+                  className="input_field"
                   id="newLastname"
                   name="newLastname"
                   type="text"
@@ -245,10 +245,10 @@ const Dashboard = () => {
                   })}
                 />
               </div>
-              <div className="userInfos__input-element">
-                <label htmlFor="newUsername" className="input-label">Pseudo </label>
+              <div className="user_infos-input_element">
+                <label htmlFor="newUsername" className="input_label">Pseudo </label>
                 <input
-                  className="input-field"
+                  className="input_field"
                   id="newUsername"
                   name="newUsername"
                   type="text"
@@ -260,10 +260,10 @@ const Dashboard = () => {
                   })}
                 />
               </div>
-              <div className="userInfos__input-element">
-                <label htmlFor="newMail" className="input-label">Email </label>
+              <div className="user_infos-input_element">
+                <label htmlFor="newMail" className="input_label">Email </label>
                 <input
-                  className="input-field"
+                  className="input_field"
                   id="newMail"
                   name="newMail"
                   type="email"
@@ -276,89 +276,89 @@ const Dashboard = () => {
                 />
               </div>
             </div>
-            <div className="compost-infos__block">
-              <h2 className="section-title"> Mon compost </h2>
-              <div className="compost-infos__select">
-                <label htmlFor="newCategory" className="input-label">Type de déchets acceptés </label>
-                <select
-                  id="newCategory"
-                  name="newCategory"
-                  type="text"
-                  value={newCategory}
-                  onChange={(e) => dispatch({
-                    type: 'INPUTCHANGE',
-                    name: e.target.name,
-                    value: e.target.value,
-                  })}
-                >
-                  <option className="option-value" value="vert">Déchets verts</option>
-                  <option className="option-value" value="marron">Déchets marron</option>
-                  <option className="option-value" value="tous types">Tous types de déchets compostables</option>
-                  <option className="option-value" value="aucun">Indisponible</option>
-                </select>
+          </div>
+          <div className="compost_infos">
+            <h2 className="section_title"> Mon compost </h2>
+            <div className="compost_infos-select">
+              <label htmlFor="newCategory" className="input_label">Type de déchets acceptés </label>
+              <select
+                id="newCategory"
+                name="newCategory"
+                type="text"
+                value={newCategory}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
+              >
+                <option className="compost_infos-select-option" value="vert">Déchets verts</option>
+                <option className="compost_infos-select-option" value="marron">Déchets marron</option>
+                <option className="compost_infos-select-option" value="tous types">Tous types de déchets compostables</option>
+                <option className="compost_infos-select-option" value="aucun">Indisponible</option>
+              </select>
 
-              </div>
-              <div className="dashboard_searchLocation">
-                <label htmlFor="newAddress" className="input-label">Localisation du compost </label>
-                <input
-                  className="dashboard_searchLocation-input"
-                  id="newAddress"
-                  name="newAddress"
-                  type="text"
-                  placeholder="Saisissez votre Adresse"
-                  value={newAddress}
-                  onFocus={handleOnFocusOnBlurInputAddress}
-                  onBlur={handleOnFocusOnBlurInputAddress}
-                  onChange={(e) => dispatch({
-                    type: 'INPUTCHANGE',
-                    name: e.target.name,
-                    value: e.target.value,
-                  })}
-                />
-                <div
-                  className="dashboard_searchLocation_displayResults"
-                  onMouseEnter={() => setIsInAddressResultsZone(true)}
-                  onMouseLeave={() => setIsInAddressResultsZone(false)}
-                >
-                  {displayAddressResults && addressResults.length > 0 && addressResults.map((result) => {
-                    return (
-                      <div
-                        key={result.key}
-                        className="dashboard_searchLocation_displayResults_item"
-                        onClick={() => handleOnClickResultItem(result)}
-                      >
-                        {result.title}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="compost-infos-footer">
-                <p className="delete-paragraph">Je supprime mon point de compostage :</p>
-                <button
-                  className="delete__button"
-                  type="button"
-                  onClick={handleDeleteCompost}
-                  id="delete-compost__button"
-                >Supprimer
-                </button>
+            </div>
+            <div className="dashboard_searchLocation">
+              <label htmlFor="newAddress" className="input_label">Localisation du compost </label>
+              <input
+                className="dashboard_searchLocation-input"
+                id="newAddress"
+                name="newAddress"
+                type="text"
+                placeholder="Saisissez votre Adresse"
+                value={newAddress}
+                onFocus={handleOnFocusOnBlurInputAddress}
+                onBlur={handleOnFocusOnBlurInputAddress}
+                onChange={(e) => dispatch({
+                  type: 'INPUTCHANGE',
+                  name: e.target.name,
+                  value: e.target.value,
+                })}
+              />
+              <div
+                className="dashboard_searchLocation_displayResults"
+                onMouseEnter={() => setIsInAddressResultsZone(true)}
+                onMouseLeave={() => setIsInAddressResultsZone(false)}
+              >
+                {displayAddressResults && addressResults.length > 0 && addressResults.map((result) => {
+                  return (
+                    <div
+                      key={result.key}
+                      className="dashboard_searchLocation_displayResults_item"
+                      onClick={() => handleOnClickResultItem(result)}
+                    >
+                      {result.title}
+                    </div>
+                  );
+                })}
               </div>
             </div>
+            <div className="compost_infos-footer">
+              <p className="delete-paragraph">Je supprime mon point de compostage :</p>
+              <button
+                className="delete__button"
+                type="button"
+                onClick={handleDeleteCompost}
+                id="delete-compost__button"
+              >Supprimer
+              </button>
+            </div>
           </div>
-          <div className="button-block">
-            <button type="submit" className="submit__button">Enregistrer mes informations</button>
-            {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
-            <button
-              className="delete__button"
-              type="button"
-              onClick={toggle}
-            >
-              Je supprime mon compte
-            </button>
-            <Modalconfirm isOpen={isOpen} hide={toggle} />
-          </div>
-        </form>
-      </div>
+        </div>
+        <div className="button-block">
+          <button type="submit" className="submit__button">Enregistrer mes informations</button>
+          {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
+          <button
+            className="delete__button"
+            type="button"
+            onClick={toggle}
+          >
+            Je supprime mon compte
+          </button>
+          <Modalconfirm isOpen={isOpen} hide={toggle} />
+        </div>
+      </form>
     </div>
   );
 };

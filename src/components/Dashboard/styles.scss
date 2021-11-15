@@ -1,9 +1,4 @@
-.container {
- display: flex;
- margin-top: calc(var(--gutter)*2);
-}
-
-.dashboard__container {
+.dashboard_container {
   width: 70%;
   margin: auto;
   padding: var(--gutter);
@@ -11,7 +6,7 @@
   background-color: rgba(255, 255, 255, 0.329);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-  .dashboard__container-title {
+  &-title {
     display: flex;
     justify-content: center;
     margin: auto;
@@ -23,15 +18,15 @@
     border-bottom: 1px solid var(--color-primary);
   }
 
-  .picture-zone {
+  .picture-zone_container {
     margin-top: var(--gutter);
     display: none;
   }
 
-  .dashboard-form {
+  .dashboard_form_container {
     margin-bottom: var(--gutter);
 
-    .dashboard-fields__blocks {
+    .dashboard_form-blocks {
       display: flex;
       justify-content: space-evenly;
       align-items: baseline;
@@ -42,28 +37,29 @@
 
  
  
-  .userInfos__block {
+  .user_infos {
     padding: calc(var(--gutter)*3);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     
-    .userInfos__input-element {
+    &-inputs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    &-input_element {
       display: flex;
       align-items: center;
       padding: var(--gutter);
-      .input-field {
-        margin-left: var(--gutter);
-        padding: 0.3rem;
-        border-radius: 5px;
-      }
     }
     
   }
 
  
   
-    .compost-infos__block {
+    .compost_infos {
       display: flex;
       flex-direction: column;
       padding: var(--gutter);
@@ -72,7 +68,7 @@
       border-radius: 10px;
 
 
-      .compost-infos__select {
+      &-select {
         padding: var(--gutter);
         margin-bottom: calc(var(--gutter)*2.5);
 
@@ -84,7 +80,7 @@
           color: black;
         }
 
-        .option-value {
+        &-option {
           font-weight: 600;
           border: 1px solid black;
         }
@@ -92,7 +88,7 @@
        
       }
 
-      .compost-infos-footer {
+      .compost_infos-footer {
         display: flex;
         align-items: center;
         margin-top: 1rem;
@@ -118,7 +114,7 @@
         flex-direction: column;
         padding: var(--gutter);
 
-        .input-label {
+        .input_label {
          text-align: left;
          margin-bottom: 1rem;
         }
@@ -155,19 +151,25 @@
 
   /* Elements séparés*/
 
-  .section-title {
+  .section_title {
     width: 80%;
     font-weight: 800;
-    font-size: x-large;
+    font-size: 1.3em ;
     margin-bottom: calc(var(--gutter)*2);
     padding-bottom: var(--gutter);
     border-bottom: 1px solid var(--color-primary);
     color: var(--color-primary);
   }
 
-  .input-label {
+  .input_label {
     font-weight: 600;
     color: var(--color-primary);
+  }
+
+  .input_field {
+    margin-left: var(--gutter);
+    padding: 0.3rem;
+    border-radius: 5px;
   }
 
   .submit__button {
@@ -214,10 +216,10 @@
 
 @media screen and (max-width:1200px){
 
-  .dashboard__container{
+  .dashboard_container{
     width: 95%;
   }
-  .dashboard-fields__blocks {
+  .dashboard_form-blocks {
     display: flex;
     /*justify-content: space-evenly;*/
     align-items: baseline;
@@ -227,41 +229,60 @@
 
 @media screen and (min-width: 576px) and (max-width: 1199px){
 
-    .dashboard-fields__blocks{ 
-      .userInfos__block {
+    .input_field {
+      width: 150px;
+    }
+
+    .delete__button {
+      width: 30%;
+    }
+
+    .submit__button {
+      width: 30%;
+    }
+
+    .dashboard_form-blocks {
+      margin-top: var(--gutter); 
+      .user_infos {
         display: flex;
         flex-direction:column ;
-        align-items:center;
+        align-items: center;
+        width: 50%;
+        padding: 1rem;
+
+        &-inputs{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+      }
+      .compost_infos {
         width: 50%;
         margin: auto;
-      }
-    .compost-infos__block {
-      width: 50%;
-      margin: auto;
-      
-      #newCategory {
-        max-width: 200px;
-      }
+          
+        #newCategory {
+          max-width: 200px;
+        }
 
-      .dashboard_searchLocation {
-        .dashboard_searchLocation-input{
-          padding: 0.3rem;
-          border-radius: 5px;
-          max-width: 200px;
-        }
-        .dashboard_searchLocation_displayResults {
-          max-width: 200px;
+        .dashboard_searchLocation {
+          &-input{
+            padding: 0.3rem;
+            border-radius: 5px;
+            max-width: 200px;
+          }
+          .dashboard_searchLocation_displayResults {
+            max-width: 200px;
+          }
         }
       }
-    }
   }
 }
 
 
 
 @media screen and (max-width:575px) {
-  .dashboard__container {
-    .input-label {
+  .dashboard_container {
+    .input_label {
       margin-bottom: 1em;
     }
 
@@ -271,7 +292,7 @@
     flex-direction: column;
     align-items: center;
 
-     .dashboard__container-title {
+     &-title {
       display: flex;
       justify-content: center;
       margin: auto;
@@ -280,31 +301,28 @@
       font-weight: 700;
     }
 
-    .dashboard-form {
+    .dashboard_form_container {
 
       margin-bottom: var(--gutter);
-      .dashboard-fields__blocks {
+      .dashboard_form-blocks {
 
           display: flex;
           flex-direction: column;
           justify-content: center;
           margin-bottom: var(--gutter);
           
-          .userInfos__block {
+          .user_infos {
             align-items: center;
-          .userInfos__input-element {
+            &-input_element {
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: var(--gutter);
           }
           }
-          .compost-infos__block {
+          .compost_infos {
             width: 90%;
             margin: auto;
-            .compost-infos__select{
-
-            }
             
             #newCategory {
               max-width: 200px;
@@ -317,7 +335,7 @@
     }
     
     .dashboard_searchLocation {
-      .dashboard_searchLocation-input{
+      &-input{
         padding: 0.3rem;
         border-radius: 5px;
         max-width: 200px;
