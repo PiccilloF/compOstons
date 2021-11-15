@@ -1,5 +1,6 @@
 const User = require('../models/user');
 // const session = require("express-session"); usefull
+const Compost = require('../models/compost');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const saltRounds = 6;
@@ -84,6 +85,20 @@ const authController = {
             
             const accessToken = generateAccessToken ({user: user.username});            
             const refreshToken = generateRefreshToken ({user: user.username});
+
+            const compost = await Compost.findUser(req.params.id);
+
+            if (!compost.id) {
+                console.log('pas de compost'); 
+                delete user.password; 
+                res.json({user: user, accessToken: accessToken, refreshToken: refreshToken});
+                
+            } else {
+                console.log('y a compost')
+                const compostAndUserinfo = await User.compostAndUserinfo(user.id);
+                delete compostAndUserinfo.password;
+                res.status(201).json(compostAndUserinfo);
+            }
                       
             delete user.password;
           
