@@ -86,7 +86,8 @@ const authController = {
             const accessToken = generateAccessToken({ user: user.username });
             const refreshToken = generateRefreshToken({ user: user.username });
 
-            const compost = await Compost.findUser(req.params.id);
+            const compost = await Compost.findUser(user.id);
+            
 
             if (!compost.id) {
                 console.log('pas de compost');
