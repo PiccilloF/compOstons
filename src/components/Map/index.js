@@ -71,7 +71,7 @@ const Map = () => {
   const [coords, setCoords] = useState({ x: null, y: null });
   const [dataInfo, setDataInfo] = useState([]);
   const [newDataInfo, setNewDataInfo] = useState([]);
-  const [selectedId, setSelectedId] = useState('');
+  const [selectedId, setSelectedId] = useState(null);
 
   // Au premier montage du composant =>
 
@@ -145,7 +145,7 @@ const Map = () => {
         icon={iconType}
         eventHandlers={{
           click: () => {
-            setSelectedId(marker.id);
+            setSelectedId(marker.user_id);
           },
         }}
       >
@@ -197,8 +197,8 @@ const Map = () => {
           // si la length de newDataInfo est supérieur à 0 on passe newDataInfo en props au composant List
           // si newDataInfo est inférieur à 0 on passe dataInfo en props au composant List
           newDataInfo.length > 0
-            ? <List dataInfo={newDataInfo} />
-            : <List dataInfo={dataInfo} />
+            ? <List dataInfo={newDataInfo} selectedId={selectedId} />
+            : <List dataInfo={dataInfo} selectedId={selectedId} />
         }
       </div>
     </div>

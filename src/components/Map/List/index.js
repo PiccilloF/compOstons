@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useModal from 'src/hooks/useModal';
 import Modal from 'src/components/Map/Modal';
@@ -8,11 +8,26 @@ import Card from './Card';
 
 import './styles.scss';
 
-const List = ({ dataInfo }) => {
+const List = ({ dataInfo, selectedId }) => {
   const { isOpen, toggle } = useModal();
   const [state] = useContext(UserContext);
   const { isLogged } = state;
   const [pointOwner, setPointOwner] = useState({ pseudo: 'toto', userId: 123 });
+
+  const listZone = useRef(null);
+  const cardItem = useRef(null);
+
+  useEffect(() => {
+    if (cardItem.current) {
+      const heightToSkip = listZone.current.childNodes[0].offsetTop;
+      listZone.current.scrollTo({
+        top: (cardItem.current.offsetTop - heightToSkip),
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, [cardItem, selectedId]);
+
   // si pas de coordonnées dans le hook alors on renvoi une phase
   // pour inviter l'utilisateur a se co
   const counterTitle = (length) => {
@@ -33,7 +48,7 @@ const List = ({ dataInfo }) => {
           <h1 className="list-title">
             {counterTitle(dataInfo.length)}
           </h1>
-          <div className="list-marker">
+          <div className="list-marker" ref={listZone}>
             {dataInfo.map((dataMarker) => {
               // en fonction de la donnée dans category je veux pouvoir faire
               // varier le message afficher dans ma card et son style
@@ -61,6 +76,8 @@ const List = ({ dataInfo }) => {
                   toggleLinking={toggle}
                   setOwnerPoint={setPointOwner}
                   isLogged={isLogged}
+                  selectedId={selectedId}
+                  ref={cardItem}
                 />
               );
             })}
@@ -74,10 +91,12 @@ const List = ({ dataInfo }) => {
 
 List.propTypes = {
   dataInfo: PropTypes.array,
+  selectedId: PropTypes.number,
 };
 
 List.defaultProps = {
   dataInfo: null,
+  selectedId: null,
 };
 
 export default List;
