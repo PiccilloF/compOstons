@@ -23,7 +23,7 @@ import {
 import { GeoSearchControl, MapBoxProvider } from 'leaflet-geosearch';
 import List from './List';
 
-import './styles.css';
+import './styles.scss';
 
 // == Composant
 // il faudrat rendre dynamique le center en fonction de la valeur saisie par l'utilisateur
@@ -160,47 +160,48 @@ const Map = () => {
 
   return (
     <div className="map">
-      <div className="map-leaflet">
-        <div className="map-title">
-          <h1 className="welcome-title">Bienvenue sur CompOstons</h1>
-          <p className="intro">
-            Notre but est de faciliter la mise en relation entre les personnes  qui
-            souhaitent proposer leur composte et les personnes qui souhaitent réduire leurs
-            déchets ménager.
-          </p>
-          <p className="map-use">
-            Trouvez dès maintenant les points de compost les plus proches de chez vous en
-            saisissant votre adresse.
-          </p>
-        </div>
-
-        <MapContainer center={[46.9, 2.61878695312962]} zoom={5.5}>
-          <SearchField
-            apiKey={apiKey}
-            onShowLocation={(e) => {
-              setCoords({ x: e.location.x, y: e.location.y });
-            }}
-          />
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {
-            // si la length de newDataInfo est supérieur à 0 on passe en argument newDataInfo
-            // si newDataInfo est inférieur a 0 on passe dataInfo en argument à la fonction displayMarker
-            newDataInfo.length > 0
-              ? displayMarker(newDataInfo)
-              : displayMarker(dataInfo)
-          }
-        </MapContainer>
+      <div className="map-title">
+        <h1 className="welcome-title">Bienvenue sur CompOstons</h1>
+        <p className="intro">
+          Notre but est de faciliter la mise en relation entre les personnes  qui
+          souhaitent proposer leur compost et les personnes qui souhaitent réduire leurs
+          déchets ménagers.
+        </p>
+        <p className="map-use">
+          Trouvez dès maintenant les points de compost les plus proches de chez vous en
+          saisissant votre adresse.
+        </p>
       </div>
-      {
-        // si la length de newDataInfo est supérieur à 0 on passe newDataInfo en props au composant List
-        // si newDataInfo est inférieur à 0 on passe dataInfo en props au composant List
-        newDataInfo.length > 0
-          ? <List dataInfo={newDataInfo} />
-          : <List dataInfo={dataInfo} />
-      }
+      <div className="map-list-container">
+        <div className="map-leaflet">
+          <MapContainer center={[46.9, 2.61878695312962]} zoom={5.5}>
+            <SearchField
+              apiKey={apiKey}
+              onShowLocation={(e) => {
+                setCoords({ x: e.location.x, y: e.location.y });
+              }}
+            />
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {
+              // si la length de newDataInfo est supérieur à 0 on passe en argument newDataInfo
+              // si newDataInfo est inférieur a 0 on passe dataInfo en argument à la fonction displayMarker
+              newDataInfo.length > 0
+                ? displayMarker(newDataInfo)
+                : displayMarker(dataInfo)
+            }
+          </MapContainer>
+        </div>
+        {
+          // si la length de newDataInfo est supérieur à 0 on passe newDataInfo en props au composant List
+          // si newDataInfo est inférieur à 0 on passe dataInfo en props au composant List
+          newDataInfo.length > 0
+            ? <List dataInfo={newDataInfo} />
+            : <List dataInfo={dataInfo} />
+        }
+      </div>
     </div>
   );
 };

@@ -15,7 +15,7 @@ import Articles from 'src/components/Articles';
 import Article from 'src/components/Article';
 import Error from 'src/components/Error';
 
-import './styles.css';
+import './styles.scss';
 
 // == Composant
 

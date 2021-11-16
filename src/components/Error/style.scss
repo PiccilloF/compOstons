@@ -1,20 +1,38 @@
 .error {
   margin: auto;
-  width: 70%;
+  width: 98%;
   background-color: rgba(51, 104, 94, 0.8);
   padding: 1.5rem;
   border-radius: 10px;
+  margin-bottom: 1rem;
 
   .error-message {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: bold;
     color: white;
   }
+}
 
+.image-container {
+  margin: auto;
+  width: 98%;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+  
   .error-image {
-    position: absolute;
-      top: 280px;
-      left: 300px;
+    width: 100%;
+    max-width: 500px;
   }
 }
 
+@media screen and (min-width: 576px) and (max-width: 1199px) {
+  .image-container {
+    height: 620px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+   .image-container {
+    height: 620px;
+  }
+}
