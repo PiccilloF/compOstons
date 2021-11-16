@@ -13,7 +13,7 @@ import Map from 'src/components/Map';
 import Dashboard from 'src/components/Dashboard';
 import Error from 'src/components/Error';
 
-import './styles.css';
+import './styles.scss';
 
 // == Composant
 

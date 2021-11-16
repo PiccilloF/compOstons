@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import useModal from 'src/hooks/useModal';
 import Modal from 'src/components/Modal';
 
-import './styles.css';
+import './styles.scss';
 
 const Card = ({
   pseudo,
@@ -20,7 +20,7 @@ const Card = ({
   const handleClickConnection = () => {
     toggle();
   };
-  const connected = (isLogged ? <button name={userId} type="button" className="button-linking" onClick={handleClick}>Envoyer un message à {pseudo}</button> : <button type="button" onClick={handleClickConnection} className="button-linking">Se connecter pour contacter {pseudo}</button>);
+  const connected = (isLogged ? <button name={userId} type="button" className="button-linking" onClick={handleClick}>Envoyer un message</button> : <button type="button" onClick={handleClickConnection} className="button-linking">Se connecter pour le (la) contacter</button>);
   return (
     <>
       <div className="list-card">

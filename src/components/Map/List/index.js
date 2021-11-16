@@ -6,7 +6,7 @@ import Modal from 'src/components/Map/Modal';
 import { UserContext } from 'src/context/userContext';
 import Card from './Card';
 
-import './styles.css';
+import './styles.scss';
 
 const List = ({ dataInfo }) => {
   const { isOpen, toggle } = useModal();
