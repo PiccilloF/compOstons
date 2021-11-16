@@ -12,6 +12,7 @@
   font-size: 1.2em;
   padding: 0.5em;
   text-decoration: underline;
+  font-weight: 500;
   }
   &-image{
     border-radius: 10px;
@@ -22,6 +23,7 @@
     &-title{
       font-size: 1.5em;
       padding-bottom: 0.5em;
+      font-weight: 600;
     }
     &-intro{
       font-size: 1.1em;
@@ -30,29 +32,63 @@
 }
 
 
-@media (min-width:769px) {
+
+@media screen and (min-width:1200px) {
+  .card {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 75%;
+    &-description {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1199px) {
   .card{
-    width: 70%;
+    width: 75%;
+    flex-direction: column;
     align-items: center;
     flex-wrap: nowrap;
-    position: relative;
+    background-color: rgba(255, 255, 255, 0.600);
+    /*position: relative;*/
     &-image{
       border-radius: 10px;
       max-width: 500px;
+      margin-top: 1em;
     }
     &-link{
-      position: absolute;
-      right: 5px;
-      bottom: 5px;
-      font-size: 1.5em;
+      position:inherit;
     }
     &-description{
       &-title{
-        font-size: 2em;
+        font-size: 1.7em;
+        padding: 0.5em;
       }
       &-intro{
         font-size: 1.3em;
+        padding: 1em;
+        padding-bottom: 2rem;
       }
+    }
+  }
+}
+
+@media screen and (max-width:575px) {
+  .card {
+    &-description {
+      &-title {
+        padding: 0.5em;
+      }
+      &-intro {
+        margin-bottom: 1em;
+      }
+     
+    }
+    &-link {
+
     }
   }
 }

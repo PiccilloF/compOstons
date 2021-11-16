@@ -15,8 +15,8 @@ const CardArticle = ({
     <div className="card-description">
       <h2 className="card-description-title">{title}</h2>
       <p className="card-description-intro">{intro}</p>
+      <Link to={`/articles/${slug}`} className="card-link">Lire la suite</Link>
     </div>
-    <Link to={`/articles/${slug}`} className="card-link">Lire la suite</Link>
   </div>
 );
 
