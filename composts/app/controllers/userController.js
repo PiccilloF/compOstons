@@ -52,7 +52,6 @@ const userController = {
 
 
             const user = await User.update(req.body, req.params.id);
-            
             const compost = await Compost.findUser(req.params.id);
 
 
@@ -61,13 +60,13 @@ const userController = {
                 const compost = await Compost.create(req.body, req.params.id);
                 const user = await User.findOne(req.params.id);
                 delete user.password;
-                res.status(201).json({user:user, compost:compost});
+                res.status(201).json({ user: user, compost: compost });
             } else {
                 console.log('y a compost')
                 const user = await User.findOne(req.params.id);
                 delete user.password;
                 const compost = await Compost.findUser(req.params.id);
-                res.status(201).json({user : user, compost: compost});
+                res.status(201).json({ user: user, compost: compost });
             }
         } catch (err) {
             console.trace(err)

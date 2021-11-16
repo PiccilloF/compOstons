@@ -10,8 +10,8 @@ class Compost extends CoreModel {
 
     static async create(data, id) {
         const query = {
-            text: `INSERT INTO compost ("category", "longitude", "latitude", "user_id") VALUES ($1, $2, $3, $4);`,
-            values: [data.category, data.longitude, data.latitude, id]
+            text: `INSERT INTO compost ("category", "longitude", "latitude", "address", "user_id") VALUES ($1, $2, $3, $4, $5);`,
+            values: [data.category, data.longitude, data.latitude, data.address, id]
         }
 
         try {

@@ -25,7 +25,7 @@ router
 router
     .route('/users/:id(\\d+)')
     .get(userController.getOneUser)
-    .post(compostController.createOneCompost)
+    // .post(compostController.createOneCompost)
     .put(validateToken, userController.updateInfo)
     .delete(validateToken, userController.deleteOneUSer);
 
