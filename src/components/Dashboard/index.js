@@ -348,7 +348,6 @@ const Dashboard = () => {
         </div>
         <div className="button-block">
           <button type="submit" className="submit__button">Enregistrer mes informations</button>
-          {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
           <button
             className="delete__button"
             type="button"
@@ -358,6 +357,7 @@ const Dashboard = () => {
           </button>
           <Modalconfirm isOpen={isOpen} hide={toggle} />
         </div>
+        {displayValidMessage && <div className="dashboard_validMessage">Modifications enregistrées avec succès !</div>}
       </form>
     </div>
   );
