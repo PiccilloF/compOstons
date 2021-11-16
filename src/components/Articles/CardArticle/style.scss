@@ -59,12 +59,22 @@
 }*/
 
 @media screen and (min-width:1200px) {
-  .card {width: 70%;}
+  .card {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 75%;
+    &-description {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 @media screen and (min-width: 576px) and (max-width: 1199px) {
   .card{
-    width: 70%;
+    width: 75%;
+    flex-direction: column;
     align-items: center;
     flex-wrap: nowrap;
     background-color: rgba(255, 255, 255, 0.600);
@@ -74,10 +84,7 @@
       max-width: 500px;
     }
     &-link{
-      position: absolute;
-      right: 5px;
-      bottom: 5px;
-      font-size: 1.5em;
+      position:inherit;
     }
     &-description{
       &-title{
@@ -90,6 +97,3 @@
   }
 }
 
-@media screen and (max-width:575px) {
-
-}
