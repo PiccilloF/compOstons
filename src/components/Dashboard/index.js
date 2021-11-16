@@ -22,6 +22,7 @@ const initialState = {
   newUsername: '',
   newCategory: '',
   newAddress: '',
+  newMail: '',
   location: {},
 };
 
@@ -52,11 +53,11 @@ const Dashboard = () => {
 
   // On récupère le context et l'initialState
   const [contextState, contextDispatch] = useContext(UserContext);
-  const { id, username, firstname, lastname, address, category, jwtToken } = contextState;
+  const { id, username, firstname, lastname, address, category, jwtToken, mail } = contextState;
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
-    newFirstname, newLastname, newUsername, newCategory, newAddress, location,
+    newFirstname, newLastname, newUsername, newCategory, newAddress, location, newMail,
   } = state;
 
   useEffect(() => {
@@ -68,6 +69,7 @@ const Dashboard = () => {
         newUsername: username,
         newCategory: category,
         newAddress: address,
+        newMail: mail,
       },
     });
   }, [id, username, firstname, lastname, address, category]);
@@ -124,6 +126,10 @@ const Dashboard = () => {
     if (event._reactName === 'onBlur' && !isInAddressResultsZone) setDisplayAddressResults(false);
   };
 
+  // Soumission du formulaire de mise à jour des données de profil
+  // Envoi du token pour vérification de l'autorisation et mise à jour
+  // des states via l'action UPDATE.
+  // Affiche un message de confirmation pour l'enregistrement.
   const handleOnSubmitForm = (event) => {
     event.preventDefault();
     const token = {
@@ -135,6 +141,7 @@ const Dashboard = () => {
       username: newUsername,
       address: newAddress,
       category: newCategory,
+      mail: newMail,
       longitude: location.lon,
       latitude: location.lat,
     };
@@ -150,6 +157,7 @@ const Dashboard = () => {
           lastname: response.data.lastname ? response.data.lastname : '',
           address: response.data.address ? response.data.address : '',
           category: response.data.category ? response.data.category : '',
+          mail: response.data.mail ? response.data.mail : '',
           updated_at: response.data.updated_at ? response.data.updated_at : '',
         };
 
@@ -169,6 +177,9 @@ const Dashboard = () => {
       });
   };
 
+  // Requête axios pour la suppression d'un point de compostage utilisateur
+  // vide les datas address et category dans la base.
+  // Dispatch l'action UPDATE et vide les champs address et category
   const handleDeleteCompost = () => {
     console.log('test suppression compost');
     axios.delete(`https://compostons.herokuapp.com/composts/${id}`)
@@ -191,68 +202,85 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard__container">
-      <h1>Gestion du profil</h1>
-      <div className="picture-zone">
-        <div className="profil-picture__container">
+    <div className="dashboard_container">
+      <h1 className="dashboard_container-title">Gestion du profil</h1>
+      <div className="picture-zone_container">
+        <div className="profil-picture-zone">
           <div className="profil-picture">mon image</div>
           <input type="file" id="picture-input" />
         </div>
       </div>
-      <form onSubmit={handleOnSubmitForm} className="dashboard-form">
-        <div className="dashboard-fields__blocks">
-          <div className="userInfos__block">
-            <h2 className="section-title"> Mes informations </h2>
-            <div className="userInfos__input-element">
-              <label htmlFor="newFirstname" className="input-label">Prénom </label>
-              <input
-                className="input-field"
-                id="newFirstname"
-                name="newFirstname"
-                type="text"
-                value={newFirstname}
-                onChange={(e) => dispatch({
-                  type: 'INPUTCHANGE',
-                  name: e.target.name,
-                  value: e.target.value,
-                })}
-              />
-            </div>
-            <div className="userInfos__input-element">
-              <label htmlFor="newLastname" className="input-label">Nom </label>
-              <input
-                className="input-field"
-                id="newLastname"
-                name="newLastname"
-                type="text"
-                value={newLastname}
-                onChange={(e) => dispatch({
-                  type: 'INPUTCHANGE',
-                  name: e.target.name,
-                  value: e.target.value,
-                })}
-              />
-            </div>
-            <div className="userInfos__input-element">
-              <label htmlFor="newUsername" className="input-label">Pseudo </label>
-              <input
-                className="input-field"
-                id="newUsername"
-                name="newUsername"
-                type="text"
-                value={newUsername}
-                onChange={(e) => dispatch({
-                  type: 'INPUTCHANGE',
-                  name: e.target.name,
-                  value: e.target.value,
-                })}
-              />
+      <form onSubmit={handleOnSubmitForm} className="dashboard_form_container">
+        <div className="dashboard_form-blocks">
+          <div className="user_infos">
+            <h2 className="section_title"> Mes informations </h2>
+            <div className="user_infos-inputs">
+              <div className="user_infos-input_element">
+                <label htmlFor="newFirstname" className="input_label">Prénom </label>
+                <input
+                  className="input_field"
+                  id="newFirstname"
+                  name="newFirstname"
+                  type="text"
+                  value={newFirstname}
+                  onChange={(e) => dispatch({
+                    type: 'INPUTCHANGE',
+                    name: e.target.name,
+                    value: e.target.value,
+                  })}
+                />
+              </div>
+              <div className="user_infos-input_element">
+                <label htmlFor="newLastname" className="input_label">Nom </label>
+                <input
+                  className="input_field"
+                  id="newLastname"
+                  name="newLastname"
+                  type="text"
+                  value={newLastname}
+                  onChange={(e) => dispatch({
+                    type: 'INPUTCHANGE',
+                    name: e.target.name,
+                    value: e.target.value,
+                  })}
+                />
+              </div>
+              <div className="user_infos-input_element">
+                <label htmlFor="newUsername" className="input_label">Pseudo </label>
+                <input
+                  className="input_field"
+                  id="newUsername"
+                  name="newUsername"
+                  type="text"
+                  value={newUsername}
+                  onChange={(e) => dispatch({
+                    type: 'INPUTCHANGE',
+                    name: e.target.name,
+                    value: e.target.value,
+                  })}
+                />
+              </div>
+              <div className="user_infos-input_element">
+                <label htmlFor="newMail" className="input_label">Email </label>
+                <input
+                  className="input_field"
+                  id="newMail"
+                  name="newMail"
+                  type="email"
+                  value={newMail}
+                  onChange={(e) => dispatch({
+                    type: 'INPUTCHANGE',
+                    name: e.target.name,
+                    value: e.target.value,
+                  })}
+                />
+              </div>
             </div>
           </div>
-          <div className="compost-infos__block">
-            <h2 className="section-title"> Mon compost </h2>
-            <div className="compost-infos__select">
-              <label htmlFor="newCategory" className="input-label">Type de déchets acceptés </label>
+          <div className="compost_infos">
+            <h2 className="section_title"> Mon compost </h2>
+            <div className="compost_infos-select">
+              <label htmlFor="newCategory" className="input_label">Type de déchets acceptés </label>
               <select
                 id="newCategory"
                 name="newCategory"
@@ -264,16 +292,17 @@ const Dashboard = () => {
                   value: e.target.value,
                 })}
               >
-                <option className="option-value" value="vert">Déchets verts</option>
-                <option className="option-value" value="marron">Déchets marron</option>
-                <option className="option-value" value="tous types">Tous types de déchets compostables</option>
-                <option className="option-value" value="aucun">Indisponible</option>
+                <option className="compost_infos-select-option" value="vert">Déchets verts</option>
+                <option className="compost_infos-select-option" value="marron">Déchets marron</option>
+                <option className="compost_infos-select-option" value="tous types">Tous types de déchets compostables</option>
+                <option className="compost_infos-select-option" value="aucun">Indisponible</option>
               </select>
 
             </div>
             <div className="dashboard_searchLocation">
-              <label htmlFor="newAddress" className="input-label">Localisation du compost </label>
+              <label htmlFor="newAddress" className="input_label">Localisation du compost </label>
               <input
+                className="dashboard_searchLocation-input"
                 id="newAddress"
                 name="newAddress"
                 type="text"
@@ -305,8 +334,8 @@ const Dashboard = () => {
                 })}
               </div>
             </div>
-            <div className="compost-infos-footer">
-              <p>Je supprime mon point de compostage :</p>
+            <div className="compost_infos-footer">
+              <p className="delete-paragraph">Je supprime mon point de compostage :</p>
               <button
                 className="delete__button"
                 type="button"
