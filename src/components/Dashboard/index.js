@@ -152,13 +152,14 @@ const Dashboard = () => {
         console.log(response);
 
         const newData = {
-          username: response.data.username ? response.data.username : '',
-          firstname: response.data.firstname ? response.data.firstname : '',
-          lastname: response.data.lastname ? response.data.lastname : '',
-          address: response.data.address ? response.data.address : '',
-          category: response.data.category ? response.data.category : '',
-          mail: response.data.mail ? response.data.mail : '',
-          updated_at: response.data.updated_at ? response.data.updated_at : '',
+          username: response.data.user.username ? response.data.user.username : '',
+          firstname: response.data.user.firstname ? response.data.user.firstname : '',
+          lastname: response.data.user.lastname ? response.data.user.lastname : '',
+          address: response.data.compost.address ? response.data.compost.address : '',
+          compostId: response.data.compost.id ? response.data.compost.id : 0,
+          category: response.data.compost.category ? response.data.compost.category : '',
+          mail: response.data.user.mail ? response.data.user.mail : '',
+          updated_at: response.data.user.updated_at ? response.data.user.updated_at : '',
         };
 
         contextDispatch({

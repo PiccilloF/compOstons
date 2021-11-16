@@ -12,6 +12,7 @@ const initialState = {
   lastname: '',
   address: '',
   category: '',
+  compostId: 0,
   role: '',
   image: '',
   created_at: '',

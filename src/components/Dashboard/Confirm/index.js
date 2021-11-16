@@ -14,7 +14,7 @@ export default function Confirm({ hide }) {
 
   const [State, Dispatch] = useContext(UserContext);
 
-  const { id } = State;
+  const { id, jwtToken } = State;
 
   // Redirection sur la page d'accueil à la soumission du formaulaire
   const onDeletedAccountRedirect = () => {
@@ -24,9 +24,12 @@ export default function Confirm({ hide }) {
 
   // Soumission du formulaire et requête pour supprimer  un compte utilisateur
   const handleAccountDeleteButton = () => {
-    axios.delete(`https://compostons.herokuapp.com/users/${id}`)
+    const token = {
+      headers: { authorization: `Bearer ${jwtToken}` },
+    };
+    axios.delete(`https://compostons.herokuapp.com/users/${id}`, token)
       .then((response) => {
-        console.log('la suppression est OK');
+        console.log('la suppression est OK', response);
       })
       .catch((error) => {
         console.log('error', error);

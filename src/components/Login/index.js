@@ -49,21 +49,39 @@ const Login = React.forwardRef(({ hide, setIsLogin }, ref) => {
 
         // Au cas ou on aurait des propriétés dans l'objet response.data qui seraient NULL(falsy),
         // on remplace par une chaîne de caractère vide
-        const newData = {
-          id: response.data.user.id,
-          username: response.data.user.username ? response.data.user.username : '',
-          mail: response.data.user.mail ? response.data.user.mail : '',
-          firstname: response.data.user.firstname ? response.data.user.firstname : '',
-          lastname: response.data.user.lastname ? response.data.user.lastname : '',
-          address: response.data.user.address ? response.data.user.address : '',
-          category: response.data.user.category ? response.data.user.category : '',
-          role: response.data.user.role ? response.data.user.role : '',
-          image: response.data.user.image ? response.data.user.image : '',
-          created_at: response.data.user.created_at ? response.data.user.created_at : '',
-          updated_at: response.data.user.updated_at ? response.data.user.updated_at : '',
-          jwtToken: response.data.accessToken ? response.data.accessToken : '',
-        };
 
+        let newData = {};
+        if (response.data.compost) {
+          newData = {
+            id: response.data.user.id,
+            username: response.data.user.username ? response.data.user.username : '',
+            mail: response.data.user.mail ? response.data.user.mail : '',
+            firstname: response.data.user.firstname ? response.data.user.firstname : '',
+            lastname: response.data.user.lastname ? response.data.user.lastname : '',
+            address: response.data.compost.address ? response.data.compost.address : '',
+            compostId: response.data.compost.id ? response.data.compost.id : 0,
+            category: response.data.compost.category ? response.data.compost.category : '',
+            role: response.data.user.role ? response.data.user.role : '',
+            image: response.data.user.image ? response.data.user.image : '',
+            created_at: response.data.user.created_at ? response.data.user.created_at : '',
+            updated_at: response.data.user.updated_at ? response.data.user.updated_at : '',
+            jwtToken: response.data.accessToken ? response.data.accessToken : '',
+          };
+        }
+        else {
+          newData = {
+            id: response.data.user.id,
+            username: response.data.user.username ? response.data.user.username : '',
+            mail: response.data.user.mail ? response.data.user.mail : '',
+            firstname: response.data.user.firstname ? response.data.user.firstname : '',
+            lastname: response.data.user.lastname ? response.data.user.lastname : '',
+            role: response.data.user.role ? response.data.user.role : '',
+            image: response.data.user.image ? response.data.user.image : '',
+            created_at: response.data.user.created_at ? response.data.user.created_at : '',
+            updated_at: response.data.user.updated_at ? response.data.user.updated_at : '',
+            jwtToken: response.data.accessToken ? response.data.accessToken : '',
+          };
+        }
         dispatch({
           type: 'LOGIN',
           payload: newData,
