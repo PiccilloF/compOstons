@@ -78,22 +78,42 @@
     align-items: center;
     flex-wrap: nowrap;
     background-color: rgba(255, 255, 255, 0.600);
-    position: relative;
+    /*position: relative;*/
     &-image{
       border-radius: 10px;
       max-width: 500px;
+      margin-top: 1em;
     }
     &-link{
       position:inherit;
     }
     &-description{
       &-title{
-        font-size: 2em;
+        font-size: 1.7em;
+        padding: 0.5em;
       }
       &-intro{
         font-size: 1.3em;
+        padding: 1em;
+        padding-bottom: 2rem;
       }
     }
   }
 }
 
+@media screen and (max-width:575px) {
+  .card {
+    &-description {
+      &-title {
+        padding: 0.5em;
+      }
+      &-intro {
+        margin-bottom: 1em;
+      }
+     
+    }
+    &-link {
+
+    }
+  }
+}
