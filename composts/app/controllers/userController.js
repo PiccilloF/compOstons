@@ -38,8 +38,9 @@ const userController = {
 
     deleteOneUSer: async (req, res) => {
         try {
-            const data = await User.delete(req.params.id);
-            res.json(data);
+            await User.delete(req.params.id);
+            await Compost.deleteCompost(req.params.id);
+            res.status(200).send("uzer and compost deleted")
 
         } catch (err) {
             res.status(404).send(err);

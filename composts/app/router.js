@@ -16,7 +16,7 @@ router
 router
     .route('/composts/:id(\\d+)')
     .get(compostController.getOneCompost)
-    .delete(compostController.deleteOneCompost);
+    .delete(validateToken, compostController.deleteOneCompost);
 
 router
 .get('/users', userController.getAllUsers)

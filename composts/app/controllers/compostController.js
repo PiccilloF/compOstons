@@ -13,7 +13,7 @@ const compostController = {
     getCompostAndUsername: async (req, res) => {
         try {
             const composts = await Compost.allCompostJoinUser();
-            res.json(composts)
+            res.status(201).json(composts)
         } catch (err) {
             console.trace(err)
             res.status(500).send("erreur de récupérations des données")
