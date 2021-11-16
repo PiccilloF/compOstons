@@ -38,8 +38,6 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('inscription');
-
     axios.post('https://compostons.herokuapp.com/register', {
       mail: emailValue,
       password: passwordValue,
@@ -48,8 +46,6 @@ const Inscription = React.forwardRef(({ hide, setIsLogin }, ref) => {
       role: radioValue,
     })
       .then((response) => {
-        console.log(response);
-
         if (response.status === 201) {
           setDisplayValidMessage(true);
           setTimeout(() => {

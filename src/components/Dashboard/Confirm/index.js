@@ -29,7 +29,7 @@ export default function Confirm({ hide }) {
     };
     axios.delete(`https://compostons.herokuapp.com/users/${id}`, token)
       .then((response) => {
-        console.log('la suppression est OK', response);
+        console.log('la suppression est OK');
       })
       .catch((error) => {
         console.log('error', error);

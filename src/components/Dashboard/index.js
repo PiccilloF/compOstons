@@ -145,11 +145,9 @@ const Dashboard = () => {
       longitude: location.lon,
       latitude: location.lat,
     };
-    console.log(data);
 
     axios.put(`https://compostons.herokuapp.com/users/${id}`, data, token)
       .then((response) => {
-        console.log(response);
 
         const newData = {
           username: response.data.user.username ? response.data.user.username : '',
@@ -182,8 +180,11 @@ const Dashboard = () => {
   // vide les datas address et category dans la base.
   // Dispatch l'action UPDATE et vide les champs address et category
   const handleDeleteCompost = () => {
-    console.log('test suppression compost');
-    axios.delete(`https://compostons.herokuapp.com/composts/${id}`)
+    const token = {
+      headers: { authorization: `Bearer ${jwtToken}` },
+    };
+
+    axios.delete(`https://compostons.herokuapp.com/composts/${id}`, token)
       .then((response) => {
         const newData = {
           address: '',
@@ -194,8 +195,6 @@ const Dashboard = () => {
           type: 'UPDATE',
           payload: newData,
         });
-        console.log(response);
-        console.log('compost supprimé');
       })
       .catch((error) => {
         console.log('error', error);

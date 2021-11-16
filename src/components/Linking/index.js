@@ -35,7 +35,6 @@ const Linking = ({ hide, pointOwner }) => {
         // en cas de retour valide du serveur, je veux afficher un message
         // positif dans la fenetre de l'utilisateur pendant 3 sec et fermé
         // la modale au bout de 3 sec
-        console.log(response);
       })
       .catch((error) => {
         // sinon indiquer qu'une erreur est survenue et inviter la personne

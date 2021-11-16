@@ -45,8 +45,6 @@ const Login = React.forwardRef(({ hide, setIsLogin }, ref) => {
       password: passwordValue,
     })
       .then((response) => {
-        console.log(response);
-
         // Au cas ou on aurait des propriétés dans l'objet response.data qui seraient NULL(falsy),
         // on remplace par une chaîne de caractère vide
 

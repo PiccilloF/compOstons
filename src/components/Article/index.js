@@ -6,7 +6,6 @@ import './style.scss';
 const Article = () => {
   const { slug } = useParams();
   const article = Data.find((item) => item.slug === slug);
-  console.log(article);
 
   if (!article) {
     return <Redirect to="/error" />;

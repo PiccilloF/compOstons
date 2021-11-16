@@ -79,7 +79,6 @@ const Map = () => {
     axios.get('https://compostons.herokuapp.com/composts')
       .then((response) => {
         setDataInfo(response.data);
-        // console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -101,7 +100,7 @@ const Map = () => {
       // et donc des problèmes de key identiques dans notre liste de résultats
       setNewDataInfo([]);
       dataInfo.forEach((element) => {
-        const isInPerimeter = isPointWithinRadius({ latitude: element.latitude, longitude: element.longitude }, { latitude: coords.y, longitude: coords.x }, 150000);
+        const isInPerimeter = isPointWithinRadius({ latitude: element.latitude, longitude: element.longitude }, { latitude: coords.y, longitude: coords.x }, 2000);
 
         // si le résultat est true alors j'insère l'élèment en cours dans newDataInfo grâce à setNewDataInfo
         if (isInPerimeter) {
