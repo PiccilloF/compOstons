@@ -6,7 +6,7 @@ import './style.scss';
 const Footer = () => (
   <footer className="footer">
     <div className="footer_navigation">
-      <Link to="#">
+      <Link to="/sitemap">
         <p>Plan du site</p>
       </Link>
       <p>|</p>
