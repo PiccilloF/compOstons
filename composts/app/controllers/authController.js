@@ -97,7 +97,7 @@ const authController = {
             } else {
                 console.log('y a compost')
                 const compost = await Compost.findUser(user.id);
-                delete user.paswword;
+                delete user.password;
                 res.status(201).json({ user: user, compost: compost,  accessToken: accessToken, refreshToken: refreshToken });
             }
 
