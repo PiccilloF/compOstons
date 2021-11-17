@@ -17,6 +17,10 @@ const Footer = () => (
       <Link to="#">
         <p>Cookies</p>
       </Link>
+      <p>|</p>
+      <Link to="/team">
+        <p>L'équipe</p>
+      </Link>
     </div>
     <div className="footer_copyright">
       <p>CompostOns 2021 &copy; Tous droits réservés</p>
