@@ -57,7 +57,7 @@ const Header = () => {
               </Link>
               <Link to="/articles">
                 <button name="Articles" type="button" className="nav_button">
-                  Articles
+                  Ressources
                 </button>
               </Link>
             </nav>

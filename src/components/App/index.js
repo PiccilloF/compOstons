@@ -14,6 +14,7 @@ import Dashboard from 'src/components/Dashboard';
 import Articles from 'src/components/Articles';
 import Article from 'src/components/Article';
 import Error from 'src/components/Error';
+import Staff from 'src/components/Staff';
 
 import './styles.scss';
 
@@ -59,6 +60,9 @@ const App = () => {
           </Route>
           <Route path="/articles/:slug">
             <Article />
+          </Route>
+          <Route path="/team">
+            <Staff />
           </Route>
           <Route>
             <Error />
