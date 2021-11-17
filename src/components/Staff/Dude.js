@@ -11,7 +11,9 @@ export default function Dude({
         className="dude-picture"
       > <img src={dude.picture} alt={dude.alt} />
       </div>
-      <div className="dude-job">{dude.job}</div>
+      <div className="dude-job">
+        {dude.job}
+      </div>
       <div className="dude-infos">
         <a href={dude.infos}>
           <img
@@ -30,6 +32,7 @@ Dude.propTypes = {
     picture: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
     job: PropTypes.string.isRequired,
+    techno: PropTypes.string.isRequired,
     infos: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
   })),
