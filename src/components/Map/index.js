@@ -14,6 +14,10 @@ import {
   Marker,
   Popup,
 } from 'react-leaflet';
+
+// Gestion des dispositions de markers par clusters.
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+
 import {
   greenIcon,
   brownIcon,
@@ -184,13 +188,17 @@ const Map = () => {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {
+            <MarkerClusterGroup
+              maxClusterRadius={70}
+            >
+              {
               // si la length de newDataInfo est supérieur à 0 on passe en argument newDataInfo
               // si newDataInfo est inférieur a 0 on passe dataInfo en argument à la fonction displayMarker
               newDataInfo.length > 0
                 ? displayMarker(newDataInfo)
                 : displayMarker(dataInfo)
             }
+            </MarkerClusterGroup>
           </MapContainer>
         </div>
         {
